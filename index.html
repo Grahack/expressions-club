@@ -11,12 +11,19 @@
   <div id="jsx"></div>
   <script type="text/jsx">
   var InterExpr = React.createClass({
+    getInitialState: function() {
+      return {
+        text: ""
+      };
+    },
     handleChange: function(event) {
-      console.log("Textarea changed!");
+      this.setState({ text: event.target.value });
     },
     render: function() {
       return (
         <div className="well clearfix">
+          {this.state.text}
+          <br/>
           <textarea className="form-control"
                     onChange={this.handleChange}></textarea>
           <br/>
