@@ -11,10 +11,14 @@
   <div id="jsx"></div>
   <script type="text/jsx">
   var InterExpr = React.createClass({
+    handleChange: function(event) {
+      console.log("Textarea changed!");
+    },
     render: function() {
       return (
         <div className="well clearfix">
-          <textarea className="form-control"></textarea>
+          <textarea className="form-control"
+                    onChange={this.handleChange}></textarea>
           <br/>
           <button className="btn btn-primary pull-right" disabled>OK</button>
         </div>
