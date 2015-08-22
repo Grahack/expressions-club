@@ -23,12 +23,15 @@
     render: function() {
       return (
         <div className="well clearfix">
-          {this.state.text}
+          <span>{this.state.text.length === 0 ?
+                 "Tapez votre expression" :
+                 this.state.text}</span>
           <br/>
           <textarea className="form-control"
                     onChange={this.handleChange}></textarea>
           <br/>
-          <button className="btn btn-primary pull-right" disabled>OK</button>
+          <button className="btn btn-primary pull-right"
+                  disabled={this.state.text.length === 0}>OK</button>
         </div>
       );
     }
