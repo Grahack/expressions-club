@@ -2,6 +2,8 @@
 <html>
 <!-- Thx to http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/ -->
 <head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="jquery.min.js"><\/script>')</script>
   <script src="react/react.min.js"></script>
   <script src="react/JSXTransformer.js"></script>
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -24,6 +26,8 @@
   <script src="int.js" type="text/javascript"></script>
   <script src="emulisp_core.js" type="text/javascript"></script>
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <script src="parenedit/parenedit.js" type="text/javascript"></script>
+  <link type="text/css" href="parenedit/parenedit.css" rel="stylesheet" />
   <meta charset="utf-8">
   <title>Expressions interactives</title>
 </head>
@@ -69,6 +73,8 @@
     document.getElementById('jsx')
   );
   MathPreview.Init("math-input", "math-preview", "math-buffer", "lisp-error");
+  createRichInput("#math-input");
+  $("#math-input").focus();
   </script>
 </body>
 </html>
