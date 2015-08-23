@@ -5,6 +5,22 @@
   <script src="react/react.min.js"></script>
   <script src="react/JSXTransformer.js"></script>
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      extensions: ["tex2jax.js","fp.js"],
+      MathMenu: {
+          showLocale: false,
+      },
+      jax: ["input/TeX","output/HTML-CSS"],
+      tex2jax: {
+          inlineMath: [['$','$']],
+          displayMath: [['$$','$$']],
+          }
+      });
+  </script>
+  <script type="text/javascript" src="mathjax/MathJax.js?locale=fr"></script>
+  <script type="text/javascript" src="mathjax-preview/mathjax-preview.js"></script>
+  <link href="mathjax-preview/mathjax-preview.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
   <title>Expressions interactives</title>
 </head>
@@ -19,15 +35,20 @@
     },
     handleChange: function(event) {
       this.setState({ text: event.target.value });
+      MathPreview.Update();
     },
     render: function() {
       return (
         <div className="well clearfix">
+          <div id="math">
+            <span id="math-preview"></span>
+            <span id="math-buffer"></span>
+          </div>
           <span>{this.state.text.length === 0 ?
-                 "Tapez votre expression" :
-                 this.state.text}</span>
+                 "Tapez votre expression ci-dessous :" :
+                 " "}</span>
           <br/>
-          <textarea className="form-control"
+          <textarea className="form-control" id="math-input"
                     onChange={this.handleChange}></textarea>
           <br/>
           <button className="btn btn-primary pull-right"
@@ -40,6 +61,7 @@
     <InterExpr />,
     document.getElementById('jsx')
   );
+  MathPreview.Init("math-input", "math-preview", "math-buffer");
   </script>
 </body>
 </html>

@@ -1,0 +1,6 @@
+#math {
+  height: 150px;
+}
+#math-preview, #math-buffer {
+  width:100%;
+}
