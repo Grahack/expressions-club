@@ -3,14 +3,16 @@ MathPreview = {
   delay: 150,        // delay after keystroke before updating
   preview: null,     // filled in by Init below
   buffer: null,      // filled in by Init below
+  error: null,       // filled in by Init below
   timeout: null,     // store setTimout id
   mjRunning: false,  // true when MathJax is processing
   oldText: null,     // used to check if an update is needed
 
-  Init: function (math_input, preview_id, buffer_id) {
+  Init: function (math_input, preview_id, buffer_id, error_id) {
     this.math_input = document.getElementById(math_input);
     this.preview = document.getElementById(preview_id);
     this.buffer = document.getElementById(buffer_id);
+    this.error = document.getElementById(error_id);
   },
   SwapBuffers: function () {
     var buffer = this.preview, preview = this.buffer;
@@ -25,7 +27,22 @@ MathPreview = {
   CreatePreview: function () {
     if (MathPreview !== undefined) MathPreview.timeout = null;
     if (this.mjRunning) return;
-    var text = '$$' + this.math_input.value + ' $$'; // space avoids escaping $
+    var latex = ''
+    try {
+        latex = EMULISP_CORE.eval(this.math_input.value).toString();
+        this.error.innerHTML = '&nbsp;';
+    } catch(e) {
+        latex = "";
+        this.error.innerHTML = e.toString();
+    }
+    // Do not display NIL.
+    if (latex == "NIL") latex = "";
+    // If surrounded with ", remove these.
+    if (latex.match(/^".*"$/)) latex = latex.slice(1, -1);
+    // Work around PicoLisp transients.
+    latex = latex.replace(/\\\\/g, "\\");
+    latex = latex.replace(/\\\^/g, "^");
+    var text = '$$' + latex + ' $$'; // space avoids escaping $
     if (text === this.oldtext) return;
     this.buffer.innerHTML = this.oldtext = text;
     this.mjRunning = true;

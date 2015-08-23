@@ -21,11 +21,18 @@
   <script type="text/javascript" src="mathjax/MathJax.js?locale=fr"></script>
   <script type="text/javascript" src="mathjax-preview/mathjax-preview.js"></script>
   <link href="mathjax-preview/mathjax-preview.css" rel="stylesheet" type="text/css" />
+  <script src="int.js" type="text/javascript"></script>
+  <script src="emulisp_core.js" type="text/javascript"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
   <meta charset="utf-8">
   <title>Expressions interactives</title>
 </head>
 <body>
   <div id="jsx"></div>
+  <script>
+    EMULISP_CORE.loadLisp("picolisp.l");
+    EMULISP_CORE.loadLisp("interexpr.l");
+  </script>
   <script type="text/jsx">
   var InterExpr = React.createClass({
     getInitialState: function() {
@@ -47,7 +54,7 @@
           <span>{this.state.text.length === 0 ?
                  "Tapez votre expression ci-dessous, puis validez avec OK." :
                  " "}</span>
-          <br/>
+          <div id="lisp-error"></div>
           <textarea className="form-control" id="math-input"
                     onChange={this.handleChange}></textarea>
           <br/>
@@ -61,7 +68,7 @@
     <InterExpr />,
     document.getElementById('jsx')
   );
-  MathPreview.Init("math-input", "math-preview", "math-buffer");
+  MathPreview.Init("math-input", "math-preview", "math-buffer", "lisp-error");
   </script>
 </body>
 </html>
