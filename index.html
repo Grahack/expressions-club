@@ -38,11 +38,24 @@
     EMULISP_CORE.loadLisp("interexpr.l");
   </script>
   <script type="text/jsx">
+  var series_id = '';
+  // Only allow alphanum chars, - and _ and non empty strings.
+  if (!series_id.match(/^[a-z0-9-_]+$/i)) {
+      series_id = 'default';
+  }
   var InterExpr = React.createClass({
     getInitialState: function() {
       return {
-        text: ""
+        text: "",
+        series: {}
       };
+    },
+    componentDidMount: function() {
+      $.get('series/' + series_id + '.json', function(result) {
+        if (this.isMounted()) {
+          this.setState({series: result});
+        }
+      }.bind(this));
     },
     handleChange: function(event) {
       this.setState({ text: event.target.value });
@@ -51,6 +64,7 @@
     render: function() {
       return (
         <div className="well clearfix">
+          <h1>{this.state.series.title}</h1>
           <div id="math">
             <span id="math-preview"></span>
             <span id="math-buffer"></span>
