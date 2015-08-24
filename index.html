@@ -84,6 +84,13 @@
       this.setState({ text: event.target.value });
       MathPreview.Update();
     },
+    handleKeyDown: function(event) {
+      if (event.ctrlKey) {
+        if (event.keyCode == 10 || event.keyCode == 13) {
+          this.checkExpr();
+        }
+      }
+    },
     checkExpr: function() {
       var expected_input = this.state.series.exprs[this.state.expr_id].expr;
       var normalized_input =
@@ -123,7 +130,8 @@
                  " "}</span>
           <div id="lisp-error"></div>
           <textarea className="form-control" id="math-input"
-                    onChange={this.handleChange}></textarea>
+                    onChange={this.handleChange}
+                    onKeyDown={this.handleKeyDown}></textarea>
           <br/>
           <button className="btn btn-primary pull-right"
                   disabled={this.state.text.length === 0}
