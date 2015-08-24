@@ -60,6 +60,7 @@
     getInitialState: function() {
       return {
         text: "",
+        score: undefined,
         series: false,
         expr_id: 0
       };
@@ -67,18 +68,30 @@
     componentDidMount: function() {
       $.get('series/' + series_id + '.json', function(result) {
         if (this.isMounted()) {
-          this.setState({series: result});
+          this.setState({
+              series: result,
+              score: result.config.initial_score
+              });
+          this.timer = setInterval(this.tick,
+                                   this.state.series.config.point_duration * 1000);
         }
       }.bind(this));
+    },
+    componentWillUnmount: function(){
+      clearInterval(this.timer);
     },
     handleChange: function(event) {
       this.setState({ text: event.target.value });
       MathPreview.Update();
     },
+    tick: function() {
+        this.setState({score: this.state.score - 1});
+    },
     render: function() {
       return (
         <div className="well clearfix">
           <h1>{this.state.series.title}</h1>
+          <div id="score" className="pull-right">{this.state.score} points</div>
           <div id="target">$${this.state.series?this.state.series.exprs[this.state.expr_id].expr:'?'}$$</div>
           <div id="math">
             <span id="math-preview"></span>
