@@ -59,6 +59,7 @@
   var InterExpr = React.createClass({
     getInitialState: function() {
       return {
+        running: true,
         text: "",
         score: undefined,
         series: false,
@@ -71,8 +72,13 @@
         return this.state.series.config.point_duration;
       if (what == 'points')
         return this.state.series.exprs[this.state.expr_id].points;
-      if (what == 'expr')
-        return this.state.series.exprs[this.state.expr_id].expr;
+      if (what == 'expr') {
+        if (this.state.running) {
+          return this.state.series.exprs[this.state.expr_id].expr;
+        } else {
+          return '';
+        }
+      }
     },
     componentDidMount: function() {
       $.get('series/' + series_id + '.json', function(result) {
@@ -101,6 +107,7 @@
       }
     },
     checkExpr: function() {
+      if (!this.state.running) return;
       var expected_input = this.state.series.exprs[this.state.expr_id].expr;
       var normalized_input =
           this.state.text.replace(/[\n ]+/g, ' ')  // singlify whitespace
@@ -111,12 +118,17 @@
       if (normalized_input === expected_input) {
         this.setState({
           text: '',
-          score: this.state.score + this.inSeriesGet('points'),
-          expr_id: this.state.expr_id + 1});
+          score: this.state.score + this.inSeriesGet('points')});
         $('#math-preview').text('');
         $('#math-buffer').text('');
         $('#math-input').val('');
         $('#math-input').keyup();
+        var it_was_the_last = (this.state.expr_id == this.state.series.exprs.length - 1);
+        if (it_was_the_last) {
+          this.setState({running: false});
+        } else {
+          this.setState({expr_id: this.state.expr_id + 1});
+        }
       } else {
         alert("Essaie encore !");
       }
@@ -129,13 +141,15 @@
         <div className="well clearfix">
           <h1>{this.state.series.title}</h1>
           <div id="score" className="pull-right">{this.state.score} points</div>
-          <div id="target">$${this.lisp2latex(this.inSeriesGet('expr'))}$$</div>
+          <div id="target">$$ {this.lisp2latex(this.inSeriesGet('expr'))} $$</div>
           <div id="math">
             <span id="math-preview"></span>
             <span id="math-buffer"></span>
           </div>
           <span>{this.state.text.length === 0 ?
-                 "Tapez votre expression ci-dessous, puis validez avec OK." :
+                 (this.state.running ?
+                   "Tapez votre expression ci-dessous, puis validez avec OK ou Ctrl+Enter." :
+                   "Voilà, c’est fini.") :
                  " "}</span>
           <div id="lisp-error"></div>
           <textarea className="form-control" id="math-input"
@@ -143,7 +157,7 @@
                     onKeyDown={this.handleKeyDown}></textarea>
           <br/>
           <button className="btn btn-primary pull-right"
-                  disabled={this.state.text.length === 0}
+                  disabled={!this.state.running || this.state.text.length === 0}
                   onClick={this.checkExpr}>OK</button>
           <p>Vous jouez pour {this.inSeriesGet('points')} point{this.inSeriesGet('points') > 1 ? "s" : ""}.
              Vous perdez un point toutes les {this.inSeriesGet('point_duration')} secondes.</p>
