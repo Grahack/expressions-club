@@ -65,6 +65,11 @@
         expr_id: 0
       };
     },
+    inSeriesGet: function(what) {
+      if (!this.state.series) return "???";
+      if (what == 'expr')
+        return this.state.series.exprs[this.state.expr_id].expr;
+    },
     componentDidMount: function() {
       $.get('series/' + series_id + '.json', function(result) {
         if (this.isMounted()) {
@@ -120,7 +125,7 @@
         <div className="well clearfix">
           <h1>{this.state.series.title}</h1>
           <div id="score" className="pull-right">{this.state.score} points</div>
-          <div id="target">$${this.state.series?this.state.series.exprs[this.state.expr_id].expr:'?'}$$</div>
+          <div id="target">$${this.inSeriesGet('expr')}$$</div>
           <div id="math">
             <span id="math-preview"></span>
             <span id="math-buffer"></span>
