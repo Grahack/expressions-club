@@ -129,7 +129,7 @@
         <div className="well clearfix">
           <h1>{this.state.series.title}</h1>
           <div id="score" className="pull-right">{this.state.score} points</div>
-          <div id="target">$${this.inSeriesGet('expr')}$$</div>
+          <div id="target">$${this.lisp2latex(this.inSeriesGet('expr'))}$$</div>
           <div id="math">
             <span id="math-preview"></span>
             <span id="math-buffer"></span>
@@ -149,6 +149,22 @@
              Vous perdez un point toutes les {this.inSeriesGet('point_duration')} secondes.</p>
         </div>
       );
+    },
+    lisp2latex: function(src) {
+      var latex = ''
+      try {
+        latex = EMULISP_CORE.eval(src).toString();
+      } catch(e) {
+        latex = "Error with lisp source: " + src;
+      }
+      // Do not display NIL.
+      if (latex == "NIL") latex = "";
+      // If surrounded with ", remove these.
+      if (latex.match(/^".*"$/)) latex = latex.slice(1, -1);
+      // Work around PicoLisp transients.
+      latex = latex.replace(/\\\\/g, "\\");
+      latex = latex.replace(/\\\^/g, "^");
+      return latex;
     }
   });
   React.render(
