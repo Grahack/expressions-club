@@ -84,6 +84,27 @@
       this.setState({ text: event.target.value });
       MathPreview.Update();
     },
+    checkExpr: function() {
+      var expected_input = this.state.series.exprs[this.state.expr_id].expr;
+      var normalized_input =
+          this.state.text.replace(/[\n ]+/g, ' ')  // singlify whitespace
+                         .replace('( ', '(')       // if whitespace after paren
+                         .replace(' )', ')')       // if whitespace before paren
+      console.log('expected:   ' + expected_input);
+      console.log('normalized: ' + normalized_input);
+      if (normalized_input === expected_input) {
+        this.setState({
+          text: '',
+          score: this.state.score + this.state.series.exprs[this.state.expr_id].points,
+          expr_id: this.state.expr_id + 1});
+        $('#math-preview').text('');
+        $('#math-buffer').text('');
+        $('#math-input').val('');
+        $('#math-input').keyup();
+      } else {
+        alert("Essaie encore !");
+      }
+    },
     tick: function() {
         this.setState({score: this.state.score - 1});
     },
@@ -105,7 +126,8 @@
                     onChange={this.handleChange}></textarea>
           <br/>
           <button className="btn btn-primary pull-right"
-                  disabled={this.state.text.length === 0}>OK</button>
+                  disabled={this.state.text.length === 0}
+                  onClick={this.checkExpr}>OK</button>
         </div>
       );
     }
