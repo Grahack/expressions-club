@@ -60,7 +60,8 @@
     getInitialState: function() {
       return {
         text: "",
-        series: {}
+        series: false,
+        expr_id: 0
       };
     },
     componentDidMount: function() {
@@ -78,6 +79,7 @@
       return (
         <div className="well clearfix">
           <h1>{this.state.series.title}</h1>
+          <div id="target">$${this.state.series?this.state.series.exprs[this.state.expr_id].expr:'?'}$$</div>
           <div id="math">
             <span id="math-preview"></span>
             <span id="math-buffer"></span>
