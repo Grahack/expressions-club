@@ -1,5 +1,5 @@
 #math {
-  height: 150px;
+  min-height: 50px;
 }
 #math-preview, #math-buffer {
   width:100%;

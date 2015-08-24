@@ -67,6 +67,10 @@
     },
     inSeriesGet: function(what) {
       if (!this.state.series) return "???";
+      if (what == 'point_duration')
+        return this.state.series.config.point_duration;
+      if (what == 'points')
+        return this.state.series.exprs[this.state.expr_id].points;
       if (what == 'expr')
         return this.state.series.exprs[this.state.expr_id].expr;
     },
@@ -141,6 +145,8 @@
           <button className="btn btn-primary pull-right"
                   disabled={this.state.text.length === 0}
                   onClick={this.checkExpr}>OK</button>
+          <p>Vous jouez pour {this.inSeriesGet('points')} point{this.inSeriesGet('points') > 1 ? "s" : ""}.
+             Vous perdez un point toutes les {this.inSeriesGet('point_duration')} secondes.</p>
         </div>
       );
     }
