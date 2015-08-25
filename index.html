@@ -125,6 +125,10 @@
         }
       }.bind(this));
     },
+    componentDidUpdate: function (props, state, root) {
+      var elt = document.getElementById('target');
+      MathJax.Hub.Queue(['Typeset', MathJax.Hub, elt]);
+    },
     componentWillUnmount: function(){
       clearInterval(this.timer);
     },
@@ -214,7 +218,8 @@
         <div className="well clearfix">
           <h1>{this.state.series.title}</h1>
           <div id="score" className="pull-right">{this.state.score} points</div>
-          <div id="target">$$ {this.lisp2latex(this.inSeriesGet('expr'))} $$</div>
+          <div id="target"
+               dangerouslySetInnerHTML={{__html: this.mathjax_src()}}/>
           <div id="math">
             <span id="math-preview"></span>
             <span id="math-buffer"></span>
@@ -262,6 +267,9 @@
       latex = latex.replace(/\\\\/g, "\\");
       latex = latex.replace(/\\\^/g, "^");
       return latex;
+    },
+    mathjax_src: function() {
+      return"$$" + this.lisp2latex(this.inSeriesGet('expr')) + " $$"
     }
   });
   React.render(
