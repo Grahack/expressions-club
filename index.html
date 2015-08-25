@@ -95,8 +95,8 @@
     componentWillUnmount: function(){
       clearInterval(this.timer);
     },
-    handleChange: function(event) {
-      this.setState({ text: event.target.value });
+    handleChange: function() {
+      this.setState({ text: document.getElementById('math-input').value });
       MathPreview.Update();
     },
     handleKeyDown: function(event) {
