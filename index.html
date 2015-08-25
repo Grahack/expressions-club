@@ -198,6 +198,7 @@
         var it_was_the_last = (this.state.expr_id == this.state.series.exprs.length - 1);
         if (it_was_the_last) {
           this.setState({running: false});
+          clearInterval(this.timer);
         } else {
           this.setState({expr_id: this.state.expr_id + 1});
         }
