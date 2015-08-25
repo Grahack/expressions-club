@@ -159,10 +159,17 @@
           <button className="btn btn-primary pull-right"
                   disabled={!this.state.running || this.state.text.length === 0}
                   onClick={this.checkExpr}>OK</button>
-          <p>Vous jouez pour {this.inSeriesGet('points')} point{this.inSeriesGet('points') > 1 ? "s" : ""}.
-             Vous perdez un point toutes les {this.inSeriesGet('point_duration')} secondes.</p>
+          {this.infos()}
         </div>
       );
+    },
+    infos: function() {
+      if (this.state.running) {
+        var s = this.inSeriesGet('points') > 1;
+        return <p>Vous jouez pour {this.inSeriesGet('points')} point{s ? "s" : ""}.
+               Vous perdez un point toutes les
+               {this.inSeriesGet('point_duration')} secondes.</p>
+      }
     },
     lisp2latex: function(src) {
       var latex = ''
