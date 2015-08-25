@@ -218,11 +218,14 @@
             <span id="math-preview"></span>
             <span id="math-buffer"></span>
           </div>
-          <span>{this.state.text.length === 0 ?
-                 (this.state.running ?
-                   "Tapez votre expression ci-dessous, puis validez avec OK ou Ctrl+Enter." :
-                   "Voilà, c’est fini.") :
-                 " "}</span>
+          <span>
+            {!this.state.running ?
+              "Voilà, c’est fini." :
+              this.state.text.length > 0 ?
+                " " :
+                "Tapez votre expression ci-dessous, puis validez avec OK ou Ctrl+Enter."
+            }
+          </span>
           <div id="lisp-error"></div>
           <textarea className="form-control" id="math-input"
                     onChange={this.handleChange}
