@@ -44,9 +44,42 @@
         <li>pour $2x+1$, il faut taper <code>(somme (produit 2 x) 1)</code> ;</li>
         <li>pour $2×\left(x+1\right)$, il faut taper <code>(produit 2 (p (somme x 1)))</code>.</li>
       </ul>
+      <p><strong>Abréviations</strong> :</p>
+      <p>Ctrl+B déclenche l’expansion d’une abréviation :</p>
+      <ul>
+        <li>(s -> (somme |)</li>
+        <li>(d -> (diff |)</li>
+        <li>(o -> (oppose |)</li>
+        <li>(p -> (produit |)</li>
+        <li>(p. -> (produit. |)</li>
+        <li>(q -> (quotient |)</li>
+        <li>(i -> (inverse |)</li>
+        <li>(ca -> (carre |)</li>
+        <li>(r2 -> (racine2 |)</li>
+        <li>(r -> (racine |)</li>
+        <li>(ca -> (cube |)</li>
+        <li>(pu -> (puissance |)</li>
+        <li>(in -> (indice |)</li>
+        <li>(im -> (imagepar |)</li>
+      </ul>
     </div>
   </div>
   <script>
+    // http://www.sitepoint.com/jquery-set-focus-character-range/
+    $.fn.selectRange = function(start, end) {
+        return this.each(function() {
+            if (this.setSelectionRange) {
+                this.focus();
+                this.setSelectionRange(start, end);
+            } else if (this.createTextRange) {
+                var range = this.createTextRange();
+                range.collapse(true);
+                range.moveEnd('character', end);
+                range.moveStart('character', start);
+                range.select();
+            }
+        });
+    };
     EMULISP_CORE.loadLisp("picolisp.l");
     EMULISP_CORE.loadLisp("interexpr.l");
   </script>
@@ -103,6 +136,45 @@
       if (event.ctrlKey) {
         if (event.keyCode == 10 || event.keyCode == 13) {
           this.checkExpr();
+        } else if (event.keyCode == 66) {
+          event.preventDefault();
+          var elt = $('#math-input');
+          // Voir aussi dans editeurs/scite/malg_abbrev.properties.
+          var abbrevs = {
+            "(s":  "(somme |)",
+            "(d":  "(diff |)",
+            "(o":  "(oppose |)",
+            "(p":  "(produit |)",
+            "(p.": "(produit. |)",
+            "(q":  "(quotient |)",
+            "(i":  "(inverse |)",
+            "(ca": "(carre |)",
+            "(r2": "(racine2 |)",
+            "(r":  "(racine |)",
+            "(ca": "(cube |)",
+            "(pu": "(puissance |)",
+            "(in": "(indice |)",
+            "(im": "(imagepar |)"
+          };
+          // Grab content and split in 'before' and 'after' caret.
+          var src = elt.val();
+          var current_pos = elt.getCursorPosition();
+          var before = src.substring(0, current_pos);
+          var after = src.substring(current_pos, src.length);
+          // Detect a possible abbreviation: look for the previous '('.
+          var last_paren_pos = before.lastIndexOf("(");
+          if (last_paren_pos >= 0) {
+            var key = before.substring(last_paren_pos, before.length);
+            var abbrev = abbrevs[key];
+            if (typeof abbrev != 'undefined') {
+              var before_wo_abbrev = before.substring(0, before.length - key.length);
+              elt.val(before_wo_abbrev + abbrev.replace("|", "") + after);
+              // Restore caret position, according to abbrev.
+              var pos = elt.val().length + abbrev.lastIndexOf("|") + 1 - abbrev.length - after.length;
+              elt.selectRange(pos, pos);
+            }
+          }
+          this.handleChange();
         }
       }
     },
