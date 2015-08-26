@@ -144,6 +144,13 @@
           return '';
         }
       }
+      if (what == 'first_date_start') {
+        return this.state.series.exprs[0].date_start;}
+      if (what == 'last_date_end') {
+        return this.state.series.exprs[this.state.expr_id - 1].date_end;
+      }
+      if (what == 'total_time')
+        return this.inSeriesGet('last_date_end') - this.inSeriesGet('first_date_start');
     },
     componentDidMount: function() {
       $.get('series/' + series_id + '.json', function(result) {
@@ -318,6 +325,10 @@
         <p>{this.state.series.title} 
            (<a href="{window.location.toString()}">{window.location.toString()}</a>)</p>
         <p>Score : {this.state.score}</p>
+        <p>Durée totale : 
+           {(this.state.expr_id>0)?
+            (this.inSeriesGet('total_time')/1000 | 0) + "s":
+            "en cours…"}</p>
         <ol>{
           this.state.series.exprs.map(function(elt, index) {
             return <li>{elt.expr} : 
