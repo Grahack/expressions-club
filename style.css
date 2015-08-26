@@ -5,3 +5,8 @@
 #doc {
     padding: 3em;
 }
+#report {
+	background: white;
+	padding: 1em;
+	border: solid 1px black;
+}
