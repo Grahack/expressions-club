@@ -93,6 +93,7 @@
     getInitialState: function() {
       return {
         running: true,
+        rapport: false,
         text: "",
         score: undefined,
         series: false,
@@ -122,6 +123,8 @@
               });
           this.timer = setInterval(this.tick,
                                    this.state.series.config.point_duration * 1000);
+          this.state.series.exprs[0].date_start = Date.now();
+          this.state.series.exprs[0].score_start = this.state.score;
         }
       }.bind(this));
     },
@@ -192,23 +195,31 @@
       console.log('expected:   ' + expected_input);
       console.log('normalized: ' + normalized_input);
       if (normalized_input === expected_input) {
+        var new_score = this.state.score + this.inSeriesGet('points');
         this.setState({
           text: '',
-          score: this.state.score + this.inSeriesGet('points')});
+          score: new_score});
         $('#math-preview').text('');
         $('#math-buffer').text('');
         $('#math-input').val('');
         $('#math-input').keyup();
+        this.state.series.exprs[this.state.expr_id].date_end = Date.now();
+        this.state.series.exprs[this.state.expr_id].score_end = new_score;
         var it_was_the_last = (this.state.expr_id == this.state.series.exprs.length - 1);
         if (it_was_the_last) {
           this.setState({running: false});
           clearInterval(this.timer);
         } else {
           this.setState({expr_id: this.state.expr_id + 1});
+          this.state.series.exprs[this.state.expr_id+1].date_start = Date.now();
+          this.state.series.exprs[this.state.expr_id+1].score_start = new_score;
         }
       } else {
         alert("Essaie encore !");
       }
+    },
+    handleRapport: function() {
+      this.setState({rapport: !this.state.rapport});
     },
     tick: function() {
         this.setState({score: this.state.score - 1});
@@ -241,6 +252,8 @@
                   disabled={!this.state.running || this.state.text.length === 0}
                   onClick={this.checkExpr}>OK</button>
           {this.infos()}
+          <p><a onClick={this.handleRapport}>{this.state.rapport? "fermer le rapport":"rapport"}</a></p>
+          {this.rapport()}
         </div>
       );
     },
@@ -251,6 +264,22 @@
                Vous perdez un point toutes les
                {this.inSeriesGet('point_duration')} secondes.</p>
       }
+    },
+    rapport: function() {
+      if (!this.state.rapport) return;
+      return <div>
+        <h1>Rapport</h1>
+        <p>{this.state.series.title} 
+           (<a href="{window.location.toString()}">{window.location.toString()}</a>)</p>
+        <p>Score : {this.state.score}</p>
+        <ol>{
+          this.state.series.exprs.map(function(elt, index) {
+            return <li>{elt.expr} : 
+             {elt.date_end? <span>{elt.score_end - elt.score_start} pts
+                            en {(elt.date_end - elt.date_start)/1000 | 0}s</span>:"en cours…"}</li>;
+          })
+        }</ol>
+        </div>;
     },
     lisp2latex: function(src) {
       var latex = ''
