@@ -229,6 +229,7 @@
       return (
         <div className="well clearfix">
           <h1>{this.state.series.title}</h1>
+          <p>{this.intro()}</p>
           <div id="score" className="pull-right">{this.state.score} points</div>
           <div id="target"
                dangerouslySetInnerHTML={{__html: this.mathjax_src()}}/>
@@ -257,6 +258,20 @@
           {this.rapport()}
         </div>
       );
+    },
+    intro: function() {
+      if (this.state.series_id == 'default') {
+        return <div>
+                 <p>Tentez de reconstituer des expressions en tapant des
+                 commandes. Quelques exemples :</p>
+                 <ul>
+                   <li>pour $2+2$, il faut taper <code>(somme 2 2)</code> ;</li>
+                   <li>pour $2×x+1$, il faut taper <code>(somme (produit 2 x) 1)</code> ;</li>
+                   <li>pour $2×\left(x+1\right)$, il faut taper <code>(produit 2 (p (somme x 1)))</code>.</li>
+                 </ul>
+                 <p>Voici l’expression à reconstituer :</p>
+               </div>;
+      }
     },
     infos: function() {
       if (this.state.running) {
