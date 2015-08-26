@@ -133,6 +133,8 @@
     },
     inSeriesGet: function(what) {
       if (!this.state.series) return "???";
+      if (what == 'initial_score')
+        return this.state.series.config.initial_score;
       if (what == 'point_duration')
         return this.state.series.config.point_duration;
       if (what == 'points')
@@ -262,9 +264,16 @@
     tick: function() {
         this.setState({score: this.state.score - 1});
     },
+    warningColor: function() {
+      var value = 127 + 127 * this.state.score / this.inSeriesGet('initial_score');
+      value = Math.floor(value);
+      value = Math.max(160, value);
+      value = Math.min(255, value);
+      return 'rgb(255,' + value + ',' + value + ')';
+    },
     render: function() {
       return (
-        <div className="well clearfix">
+        <div className="well clearfix" style={{background: this.warningColor()}}>
           <h1>{this.state.series.title}</h1>
           <p>{this.intro()}</p>
           <div id="score" className="pull-right">{this.state.score} points</div>
