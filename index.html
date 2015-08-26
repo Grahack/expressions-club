@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<!-- Thx to http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/ -->
 <head>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="jquery.min.js"><\/script>')</script>
@@ -62,6 +61,35 @@
         <li>(in -> (indice |)</li>
         <li>(im -> (imagepar |)</li>
       </ul>
+      <h2>Vos séries</h2>
+      <p>Si vous voulez utiliser ce site avec vos propres séries d’expressions,
+      vous pouvez <a href="mailto:profgra.org@gmail.com">me contacter</a>.
+      Il vous suffit de préparer un fichier contenant par exemple :</p>
+      <pre><code>{
+    "title": "Titre de la série",
+    "config": {
+        "initial_score": 100,
+        "point_duration": 15
+    },
+    "exprs": [
+        {"expr": "(somme 2 2)",
+         "points": 1
+        },
+        {"expr": "(somme (produit 2 x) 1)",
+         "points": 2
+        },
+        {"expr": "(produit 2 (p (somme x 1)))",
+         "points": 2
+        }
+    ]
+}</code></pre>
+      <h2>Crédits</h2>
+      <p>Site réalisé par <a href="http://profgra.org/lycee/">Prof Gra</a> grâce à
+      <a href="http://facebook.github.io/react/">React</a>
+      (et <a href="Thx to http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/">ce tuto</a>),
+      <a href="https://www.mathjax.org/">MathJax</a>,
+      <a href="http://emulisp.js.org/">EmuLisp</a>,
+      <a href="http://getbootstrap.com/">Bootstrap</a>…</p>
     </div>
   </div>
   <script>
