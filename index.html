@@ -84,7 +84,8 @@
     EMULISP_CORE.loadLisp("interexpr.l");
   </script>
   <script type="text/jsx">
-  var series_id = '';
+  var url = window.location.toString();
+  var series_id = url.substring(url.indexOf('?') + 1);
   // Only allow alphanum chars, - and _ and non empty strings.
   if (!series_id.match(/^[a-z0-9-_]+$/i)) {
       series_id = 'default';
