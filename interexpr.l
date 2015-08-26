@@ -19,7 +19,7 @@
     )
     (def (car arg-list) (eval (cadr arg-list)) (eval (caddr arg-list)))
 )
-(setq cmds_list '(p somme diff oppose produit produit. quotient inverse carre racine2 racine cube puissance indice imagepar))
+(setq cmds_list '(p somme diff oppose produit produit. quotient inverse carre racine2 racine cube puissance indice imagepar cos sin))
 
 (de p (x) (pack "\\left( " x " \\right)"))
 (de somme @ (glue "+" (rest)))
@@ -36,3 +36,5 @@
 (de puissance (x y) (pack "{" x "}\^{" y "}"))
 (de indice (x y) (pack "{" x "}_{" y "}"))
 (de imagepar (f x) (pack f " " (p x)))
+(de cos (x) (pack "\\cos" (p x)))
+(de sin (x) (pack "\\sin" (p x)))
