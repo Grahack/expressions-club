@@ -41,9 +41,21 @@
          <span id="cmds-list"></span>.</p>
       <p><strong>Exemples</strong> :</p>
       <ul>
-        <li>pour $2+2$, il faut taper <code>(somme 2 2)</code> ;</li>
-        <li>pour $2x+1$, il faut taper <code>(somme (produit 2 x) 1)</code> ;</li>
-        <li>pour $2×\left(x+1\right)$, il faut taper <code>(produit 2 (p (somme x 1)))</code>.</li>
+        <li>pour $2+2$, les commandes sont
+            <code>(somme 2 2)</code> ;</li>
+        <li>pour $2x+1$, les commandes sont
+            <code>(somme (produit 2 x) 1)</code> ;</li>
+        <li>pour $2×\left(x+1\right)$, les commandes sont
+            <code>(produit 2 (p (somme x 1)))</code>.</li>
+      </ul>
+      <p>Il faut savoir que :</p>
+      <ul>
+        <li>Les parenthèses que vous tapez ne font que délimiter les commandes.
+            Pour ajouter des parenthèses à vos expressions, il faut utiliser
+            la commande <code>p</code>, sauf pour les images par une fonction,
+            car la commande <code>imagepar</code> les inclut.</li>
+        <li>$\frac{1}{x}$ peut être obtenue avec <code>(quotient 1 x)</code>,
+            mais aussi avec <code>(inverse x)</code>.</li>
       </ul>
       <h2>Abréviations</h2>
       <p>Ctrl+B déclenche l’expansion d’une abréviation :</p>
@@ -321,7 +333,9 @@
               "Voilà, c’est fini." :
               this.state.text.length > 0 ?
                 " " :
-                "Tapez vos commandes ci-dessous, puis validez avec OK ou Ctrl+Enter."
+                "Entrez vos commandes ci-dessous, " +
+                "avec les blocs ou en le tapant vous-même, " +
+                "puis validez avec OK ou Ctrl+Enter."
             }
           </span>
           <div id="lisp-error"></div>
@@ -344,11 +358,15 @@
                  <p>Tentez de reconstituer des expressions en tapant des
                  commandes. Quelques exemples :</p>
                  <ul>
-                   <li>pour $2+2$, il faut taper <code>(somme 2 2)</code> ;</li>
-                   <li>pour $2×x+1$, il faut taper <code>(somme (produit 2 x) 1)</code> ;</li>
-                   <li>pour $2×\left(x+1\right)$, il faut taper <code>(produit 2 (p (somme x 1)))</code>.</li>
+                   <li>pour $2+2$, les commandes sont
+                       <code>(somme 2 2)</code> ;</li>
+                   <li>pour $2×x+1$, les commandes sont
+                       <code>(somme (produit 2 x) 1)</code> ;</li>
+                   <li>pour $2×\left(x+1\right)$, les commandes sont
+                       <code>(produit 2 (p (somme x 1)))</code>.</li>
                  </ul>
-                 <p>Voici l’expression à reconstituer :</p>
+                 <p>Voir plus bas pour des détails concernant les commandes.
+                   <br />Voici l’expression à reconstituer :</p>
                </div>;
       }
     },
