@@ -15,3 +15,6 @@
 	padding: 1em;
 	border: solid 1px black;
 }
+#blockly {
+    height: 200px;
+}
