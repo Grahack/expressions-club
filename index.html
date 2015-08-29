@@ -256,8 +256,8 @@
           this.state.text.replace(/[\n ]+/g, ' ')  // singlify whitespace
                          .replace('( ', '(')       // if whitespace after paren
                          .replace(' )', ')')       // if whitespace before paren
-      console.log('expected:   ' + expected_input);
-      console.log('normalized: ' + normalized_input);
+      console.log('expected:   |' + expected_input + '|');
+      console.log('normalized: |' + normalized_input + '|');
       if (normalized_input === expected_input) {
         var new_score = this.state.score + this.inSeriesGet('points');
         this.setState({
