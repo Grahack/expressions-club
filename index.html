@@ -300,13 +300,19 @@
         <div className="well clearfix" style={{background: this.warningColor()}}>
           <h1>{this.state.series.title}</h1>
           <p>{this.intro()}</p>
-          <div id="score" className="pull-right">{this.state.score} points</div>
-          <div id="target"
-               dangerouslySetInnerHTML={{__html: this.mathjax_src()}}/>
-          <div id="math">
-            <span id="math-preview"></span>
-            <span id="math-buffer"></span>
+          <div id="target-container">
+            <span id="target-title">Attendue :</span>
+            <div id="target"
+                 dangerouslySetInnerHTML={{__html: this.mathjax_src()}}/>
           </div>
+          <div id="math-container">
+            <div id="math-title">Votre tentative :</div>
+            <div id="math">
+              <span id="math-preview"></span>
+              <span id="math-buffer"></span>
+            </div>
+          </div>
+          <div id="score" className="pull-right">{this.state.score} points</div>
           <span>
             {!this.state.running ?
               "Voilà, c’est fini." :
