@@ -31,7 +31,7 @@ Blockly.Msg.RENAME_VARIABLE_TITLE = "Renommer toutes les variables '%1' en :";
 
 Blockly.Expressions = new Blockly.Generator('Expressions');
 Blockly.Expressions.INDENT = '  ';
-Blockly.Expressions.addReservedWords('p, somme, diff, oppose, produit, produit., quotient, inverse, carre, racine2, racine, cube, puissance, indice, imagepar, cos, sin');
+Blockly.Expressions.addReservedWords('p, somme, diff, oppose, produitx, produit, produit., quotient, inverse, carre, racine2, racine, cube, puissance, indice, imagepar, cos, sin');
 
 // La suite, jusqu’au commentaire de fin, n’a pas été modifiée.
 // Sauf la suppression du prologue de définition des variables.
@@ -414,6 +414,28 @@ Blockly.Expressions['oppose'] = function(block) {
   var x = Blockly.Expressions.statementToCode(block, 'X') || '';
   return '(oppose ' + x.trim() + ')';
 };
+
+// Bloc produitx
+Blockly.Blocks['produitx'] = {
+  init: function() {
+    this.setHelpUrl(help_url_prefix + '-produitx');
+    this.setColour(colour);
+    this.appendValueInput('ITEM0')
+        .appendField('produit×');
+    this.appendValueInput('ITEM1');
+    this.setOutput(true);
+    this.setMutator(new Blockly.Mutator(['nb_params_item']));
+    this.setTooltip('Résultat de la multiplication.');
+    this.itemCount_ = 2;
+  },
+  mutationToDom: Blockly.mutationToDom,
+  domToMutation: Blockly.domToMutationGen('produitx'),
+  decompose: Blockly.decompose,
+  compose: Blockly.composeGen('produitx'),
+  saveConnections: Blockly.saveConnections
+};
+// Gen produitx
+Blockly.Expressions['produitx'] = Blockly.multiArgGenGen('produitx');
 
 // Bloc produit
 Blockly.Blocks['produit'] = {
