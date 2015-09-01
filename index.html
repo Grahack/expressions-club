@@ -216,10 +216,6 @@
     },
     inSeriesGet: function(what) {
       if (!this.state.series) return "???";
-      if (what == 'initial_score')
-        return this.state.series.config.initial_score;
-      if (what == 'point_duration')
-        return this.state.series.config.point_duration;
       if (what == 'points')
         return this.state.series.exprs[this.state.expr_id].points;
       if (what == 'expr') {
@@ -236,6 +232,8 @@
       }
       if (what == 'total_time')
         return this.inSeriesGet('last_date_end') - this.inSeriesGet('first_date_start');
+      if (what == 'config')
+        return this.state.series.config;
     },
     componentDidMount: function() {
       $.get('series/' + series_id + '.json', function(result) {
@@ -351,7 +349,7 @@
         this.setState({score: this.state.score - 1});
     },
     warningColor: function() {
-      var value = 127 + 127 * this.state.score / this.inSeriesGet('initial_score');
+      var value = 127 + 127 * this.state.score / this.inSeriesGet('config').initial_score;
       value = Math.floor(value);
       value = Math.max(160, value);
       value = Math.min(255, value);
@@ -423,7 +421,7 @@
         var s = this.inSeriesGet('points') > 1;
         return <p>Vous jouez pour {this.inSeriesGet('points')} point{s ? "s" : ""}.
                Vous perdez un point toutes
-               les{this.inSeriesGet('point_duration')>1?" "+this.inSeriesGet('point_duration'):""} secondes.</p>
+               les{this.inSeriesGet('config').point_duration>1?" "+this.inSeriesGet('config').point_duration:""} secondes.</p>
       }
     },
     rapport: function() {
