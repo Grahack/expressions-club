@@ -399,7 +399,7 @@
           <button className="btn btn-primary pull-right"
                   disabled={!this.state.running || this.state.text.length === 0}
                   onClick={this.checkExpr}>OK</button>
-          {this.infos()}
+          <div>{this.infos()}</div>
           <p><a onClick={this.handleRapport}>{this.state.rapport? "fermer le rapport":"rapport"}</a></p>
           <div>{this.rapport()}</div>
         </div>
@@ -431,7 +431,7 @@
       }
     },
     infos: function() {
-      if (this.state.running) {
+      if (this.state.running && this.inSeriesGet('config').display_score) {
         var s = this.inSeriesGet('points') > 1;
         return <p>Vous jouez pour {this.inSeriesGet('points')} point{s ? "s" : ""}.
                Vous perdez un point toutes
@@ -444,7 +444,8 @@
         <h1>Rapport</h1>
         <p>{this.state.series.title} 
            (<a href="{window.location.toString()}">{window.location.toString()}</a>)</p>
-        <p>Score : {this.state.score}</p>
+        <p>{(!this.state.running || this.inSeriesGet('config').display_score)?
+           "Score : " + this.state.score : ''}</p>
         <p>Durée totale : 
            {(this.state.expr_id>0)?
             (this.inSeriesGet('total_time')/1000 | 0) + "s":
