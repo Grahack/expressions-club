@@ -453,6 +453,7 @@
       if (!this.state.rapport) return;
       return <div id="report">
         <h1>Rapport</h1>
+        <p>{this.rapport_mailto()}</p>
         <p>{this.state.series.title} 
            (<a href="{window.location.toString()}">{window.location.toString()}</a>)</p>
         <p>{(!this.state.running || this.inSeriesGet('config').display_score)?
@@ -469,6 +470,30 @@
           })
         }</ol>
         </div>;
+    },
+    rapport_txt: function() {
+      return this.state.series.title +
+        " (" + window.location.toString() + ")\n\n" +
+        ((!this.state.running || this.inSeriesGet('config').display_score)?
+          "Score : " + this.state.score : '') + "\n" +
+        "Durée totale : " +
+        ((this.state.expr_id>0)?
+          (this.inSeriesGet('total_time')/1000 | 0) + "s":
+          "en cours…") + "\n" +
+        this.state.series.exprs.map(function(elt, index) {
+          return "\n* " + elt.expr + " : " +
+            (elt.date_end?
+              (elt.score_end - elt.score_start) + " pts en " +
+                ((elt.date_end - elt.date_start)/1000 | 0) + "s" :
+              "en cours…");
+        });
+    },
+    rapport_mailto: function() {
+      return <div dangerouslySetInnerHTML={{__html:
+        '<a href="mailto:?subject=Rapport%20Expressions%20' +
+        encodeURIComponent(this.state.series.title) +
+        '&body=' + encodeURIComponent(this.rapport_txt()) + '">Envoyer</a>'
+      }}/>;
     },
     lisp2latex: function(src) {
       var latex = ''
