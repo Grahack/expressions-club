@@ -394,7 +394,7 @@
                   onClick={this.checkExpr}>OK</button>
           {this.infos()}
           <p><a onClick={this.handleRapport}>{this.state.rapport? "fermer le rapport":"rapport"}</a></p>
-          {this.rapport()}
+          <div>{this.rapport()}</div>
         </div>
       );
     },
