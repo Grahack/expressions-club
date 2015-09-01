@@ -2,7 +2,9 @@
     "title": "Bienvenue au club !",
     "config": {
         "initial_score": 100,
-        "point_duration": 15
+        "point_duration": 15,
+        "display_score": true,
+        "display_weakness_indicator": true
     },
     "exprs": [
         {"expr": "(somme 2 2)",

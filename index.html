@@ -152,7 +152,9 @@
     "title": "Titre de la série",
     "config": {
         "initial_score": 100,
-        "point_duration": 15
+        "point_duration": 15,
+        "display_score": true,
+        "display_weakness_indicator": true
     },
     "exprs": [
         {"expr": "(somme 2 2)",
@@ -349,11 +351,16 @@
         this.setState({score: this.state.score - 1});
     },
     warningColor: function() {
-      var value = 127 + 127 * this.state.score / this.inSeriesGet('config').initial_score;
-      value = Math.floor(value);
-      value = Math.max(160, value);
-      value = Math.min(255, value);
-      return 'rgb(255,' + value + ',' + value + ')';
+      if (this.inSeriesGet('config').display_weakness_indicator) {
+        var initial_score = this.inSeriesGet('config').initial_score;
+        var value = 127 + 127 * this.state.score / initial_score;
+        value = Math.floor(value);
+        value = Math.max(160, value);
+        value = Math.min(255, value);
+        return 'rgb(255,' + value + ',' + value + ')';
+      } else {
+        return '#eee';
+      }
     },
     render: function() {
       return (
@@ -372,7 +379,7 @@
               <span id="math-buffer"></span>
             </div>
           </div>
-          <div id="score" className="pull-right">{this.state.score} points</div>
+          <div>{this.score()}</div>
           <span>
             {!this.state.running ?
               "Voilà, c’est fini." :
@@ -414,6 +421,13 @@
                  <p>Voir plus bas pour des détails concernant les commandes.
                    <br />Voici l’expression à reconstituer :</p>
                </div>;
+      }
+    },
+    score: function() {
+      if (this.inSeriesGet('config').display_score) {
+        return <div id="score" className="pull-right">
+                 {this.state.score} points
+               </div>
       }
     },
     infos: function() {
