@@ -3,6 +3,7 @@
 (setq k "k" K "K" l "l" L "L" m "m" M "M" n "n" N "N" o "o" O "O")
 (setq p "p" P "P" q "q" Q "Q" r "r" R "R" s "s" S "S" t "t")' # T protected
 (setq u "u" U "U" v "v" V "V" w "w" W "W" x "x" X "X" y "y" Y "Y" z "z" Z "Z")
+(setq pi "\\pi" Pi "\\Pi")
 
 (de ma-def arg-list
     (let (
