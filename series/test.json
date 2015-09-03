@@ -9,10 +9,10 @@
         "display_weakness_indicator": false
     },
     "exprs": [
-        {"expr": "(produit 2 (p (somme x 1)))",
+        {"expr": "(produit 2 (somme x 1))",
          "points": 10
         },
-        {"expr": "(oppose (quotient (diff (produit. a (racine2 b)) (imagepar f (inverse c))) (carre (p (somme x y z)))))",
+        {"expr": "(oppose (quotient (diff (produit. a (racine2 b)) (imagepar f (inverse c))) (carre (somme x y z))))",
          "points": 50
         }
     ]
