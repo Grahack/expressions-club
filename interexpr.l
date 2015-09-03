@@ -22,9 +22,9 @@
 )
 (setq cmds_list '(p somme diff oppose produitx produit produit. quotient inverse carre racine2 racine cube puissance indice imagepar cos sin))
 
-(put 'precedence 'diff      10)
-(put 'precedence 'oppose    11)
 (put 'precedence 'somme     12)
+(put 'precedence 'diff      13)
+(put 'precedence 'oppose    14)
 (put 'precedence 'inverse    0)
 (put 'precedence 'quotient   0)
 (put 'precedence 'produit   20)
