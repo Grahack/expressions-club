@@ -501,7 +501,7 @@
     lisp2latex: function(src) {
       var latex = ''
       try {
-        latex = EMULISP_CORE.eval(src).toString();
+        latex = EMULISP_CORE.eval('(add_p ' + src + ')').toString();
       } catch(e) {
         latex = "\\text{Error with lisp source: " + src + "}";
         console.log(e);

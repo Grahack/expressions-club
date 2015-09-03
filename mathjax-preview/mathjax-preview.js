@@ -29,7 +29,7 @@ MathPreview = {
     if (this.mjRunning) return;
     var latex = ''
     try {
-        latex = EMULISP_CORE.eval(this.math_input.value).toString();
+        latex = EMULISP_CORE.eval('(add_p ' + this.math_input.value + ')').toString();
         this.error.innerHTML = '&nbsp;';
     } catch(e) {
         latex = "";
