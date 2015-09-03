@@ -469,9 +469,10 @@
             "en cours…"}</p>
         <ol>{
           this.state.series.exprs.map(function(elt, index) {
-            return <li>{elt.expr} : 
-             {elt.date_end? <span>{elt.score_end - elt.score_start} pts
-                            en {(elt.date_end - elt.date_start)/1000 | 0}s</span>:"en cours…"}</li>;
+            return <li>{elt.date_end?
+             <span>{elt.expr} : {elt.score_end - elt.score_start} pts
+                   en {(elt.date_end - elt.date_start)/1000 | 0}s</span>:
+             "en cours…"}</li>;
           })
         }</ol>
         </div>;
