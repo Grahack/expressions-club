@@ -1,0 +1,28 @@
+{
+    "title": "Une première série pour se chauffer",
+    "config": {
+        "email": "profgra.org@gmail.com",
+        "initial_score": 600,
+        "point_duration": 1,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false
+    },
+    "exprs": [
+        {"expr": "(produit (somme (produit 3 x) 1) (diff 2 (produit 5 x)))",
+         "points": 50
+        },
+        {"expr": "(somme (produit 2 (carre x)) (produit 3 x) 5)",
+         "points": 50
+        },
+        {"expr": "(produit 2 (somme x 1) (diff 3 (carre x)))",
+         "points": 50
+        },
+        {"expr": "(oppose (quotient x (somme x 2)))",
+         "points": 50
+        },
+        {"expr": "(oppose (quotient (diff (produit. a (racine2 b)) (imagepar f (inverse c))) (carre (somme x y z))))",
+         "points": 200
+        }
+    ]
+}
