@@ -1,8 +1,11 @@
 {
     "title": "Test",
     "config": {
+        "email": "profgra.org@gmail.com",
         "initial_score": 1000,
-        "point_duration": 1
+        "point_duration": 1,
+        "display_score": true,
+        "display_weakness_indicator": false
     },
     "exprs": [
         {"expr": "(produit 2 (p (somme x 1)))",
