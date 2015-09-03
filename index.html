@@ -165,6 +165,7 @@
         "email": "destinataire-rapport@example.com",
         "initial_score": 100,
         "point_duration": 15,
+        "code_with_blocks": true,
         "display_score": true,
         "display_weakness_indicator": true
     },
@@ -403,7 +404,7 @@
             }
           </span>
           <div id="lisp-error"></div>
-          <div id="blockly"></div>
+          <div style={{display: this.blockly_display()}} id="blockly"></div>
           <textarea className="form-control" id="math-input"
                     onChange={this.handleChange}
                     onKeyDown={this.handleKeyDown}></textarea>
@@ -416,6 +417,9 @@
           <div>{this.rapport()}</div>
         </div>
       );
+    },
+    blockly_display: function() {
+      return this.inSeriesGet('config').code_with_blocks ? '' : 'none';
     },
     intro: function() {
       if (this.state.series_id == 'default') {

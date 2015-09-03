@@ -4,6 +4,7 @@
         "email": "profgra.org@gmail.com",
         "initial_score": 1000,
         "point_duration": 1,
+        "code_with_blocks": false,
         "display_score": true,
         "display_weakness_indicator": false
     },
