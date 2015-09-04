@@ -25,20 +25,20 @@
 (put 'precedence 'somme     12)
 (put 'precedence 'diff      13)
 (put 'precedence 'oppose    14)
-(put 'precedence 'inverse    0)
-(put 'precedence 'quotient   0)
 (put 'precedence 'produit   20)
 (put 'precedence 'produit.  21)
 (put 'precedence 'produitx  22)
 (put 'precedence 'carre     30)
 (put 'precedence 'puissance 30)
 (put 'precedence 'cube      30)
-(put 'precedence 'racine2   30)
-(put 'precedence 'racine    30)
-(put 'precedence 'imagepar   0)
-(put 'precedence 'cos       50)
-(put 'precedence 'sin       50)
-(put 'precedence 'indice    70)
+(put 'precedence 'racine2  NIL)
+(put 'precedence 'racine   NIL)
+(put 'precedence 'inverse  NIL)
+(put 'precedence 'quotient NIL)
+(put 'precedence 'imagepar NIL)
+(put 'precedence 'cos      NIL)
+(put 'precedence 'sin      NIL)
+(put 'precedence 'indice   NIL)
 
 (de add_p prg
   (glue "\\text{ ? }" (mapcar 'add_p_rec prg)))
@@ -52,7 +52,8 @@
            (let (children_with_p
                   (mapcar '((term) (add_p_rec term current_precedence))
                           terms))
-                (if (and parent_precedence
+                (if (and current_precedence
+                         parent_precedence
                          (> parent_precedence current_precedence))
                     (p (apply op children_with_p))
                     (apply op children_with_p)
