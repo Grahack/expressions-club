@@ -532,8 +532,11 @@
   createRichInput("#math-input");
   $("#math-input").focus();
   var cmds_list = EMULISP_CORE.eval('cmds_list').toString();
-  var cmds = cmds_list.slice(1, -1).split(' ');
-  $("#cmds-list").text(cmds.join(", "));
+  var cmds = cmds_list
+                     .slice(1, -1)
+                     .split(' ')
+                     .map(function (x) {return '<code>' + x + '</code>'})
+  $("#cmds-list").html(cmds.join(", "));
   </script>
 </body>
 </html>
