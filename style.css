@@ -1,3 +1,17 @@
+code {
+    margin: 0 2px;
+    padding: 1px 2px;
+    border: 1px solid #BBB;
+    color: black;
+    background-color: #DDD;
+    border-radius: 3px;
+    white-space: nowrap;
+}
+pre code {
+    display: block;
+    white-space: pre;
+    position: relative;
+}
 #target-container, #math-container {
 	border: solid 1px black;
     margin: 1em;
