@@ -56,7 +56,7 @@
                           terms))
                 (if (and current_precedence
                          parent_precedence
-                         (> parent_precedence current_precedence))
+                         (>= parent_precedence current_precedence))
                     (p (apply op children_with_p))
                     (apply op children_with_p)
                 )
@@ -91,7 +91,7 @@
 (de cube (x) (pack "{" x "}\^3"))
 (de puissance (x y) (pack "{" x "}\^{" y "}"))
 (de indice (x y) (pack "{" x "}_{" y "}"))
-(de imagepar (f x) (pack f " " (p x)))
+(de imagepar (f x) (pack f "  \\left( " x " \\right)"))  # spaces for distinction with produit
 (de cos (x) (pack "\\cos" (p x)))
 (de sin (x) (pack "\\sin" (p x)))
 (de exp (x) (pack "\\exp" x))

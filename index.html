@@ -343,16 +343,11 @@
     },
     checkExpr: function() {
       if (!this.state.running) return;
-      var expected_input = this.state.series.exprs[this.state.expr_id].expr;
-      var normalized_input =
-          this.state.text.replace(/[\n ]+/g, ' ')  // singlify whitespace
-                         .replace(/[  ]+/g, ' ')   // again, 2nde pass
-                         .replace('( ', '(')       // if whitespace after paren
-                         .replace(' )', ')')       // if whitespace before paren
-                         .trim()                   // trim
-      console.log('expected:   |' + expected_input + '|');
-      console.log('normalized: |' + normalized_input + '|');
-      if (normalized_input === expected_input) {
+      var expected = this.lisp2latex(this.state.series.exprs[this.state.expr_id].expr);
+      var attempt  = this.lisp2latex(this.state.text);
+      console.log('expected: |' + expected + '|');
+      console.log('attempt : |' + attempt  + '|');
+      if (attempt === expected) {
         var new_score = this.state.score + this.inSeriesGet('points');
         this.setState({
           text: '',
