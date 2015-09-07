@@ -56,7 +56,7 @@
                           terms))
                 (if (and current_precedence
                          parent_precedence
-                         (> parent_precedence current_precedence))
+                         (>= parent_precedence current_precedence))
                     (p (apply op children_with_p))
                     (apply op children_with_p)
                 )
