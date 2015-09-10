@@ -283,7 +283,7 @@
           this.state.series.exprs[0].date_start = Date.now();
           this.state.series.exprs[0].score_start = this.state.score;
         }
-      }.bind(this));
+      }.bind(this)).fail(function () {alert("Pas de série " + series_id + ".")});
     },
     componentDidUpdate: function (props, state, root) {
       var elt = document.getElementById('target');
