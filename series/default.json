@@ -17,6 +17,9 @@
         },
         {"expr": "(produit 2 (somme x 1))",
          "points": 2
+        },
+        {"expr": "(somme a b c)",
+         "points": 1
         }
     ]
 }
