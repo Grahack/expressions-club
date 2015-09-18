@@ -336,26 +336,26 @@ Blockly.multiArgGenGen = function(block_type) {
 };
 
 // Bloc p
-Blockly.Blocks['p'] = {
+Blockly.Blocks['par'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-p');
+    this.setHelpUrl(help_url_prefix + '-par');
     this.setColour(colour);
     this.appendValueInput('VALUE')
-        .appendField('p');
+        .appendField('par');
     this.setOutput(true);
     this.setTooltip('Parentheses');
   }
 };
 // Gen p
-Blockly.Expressions['p'] = function(block) {
+Blockly.Expressions['par'] = function(block) {
   var arg = Blockly.Expressions.statementToCode(block, 'VALUE') || '';
-  if (arg === '') return '(p)';
+  if (arg === '') return '(par)';
   var num_lines = arg.split('\n').length;
   if (num_lines == 1) {
     // Prevent indentation if we only have one line.
-    return '(p ' + arg.substring(Blockly.Expressions.INDENT.length) + ')';
+    return '(par ' + arg.substring(Blockly.Expressions.INDENT.length) + ')';
   } else {
-    return '(p\n' + arg + '\n)';
+    return '(par\n' + arg + '\n)';
   }
 };
 

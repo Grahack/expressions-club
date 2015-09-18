@@ -20,7 +20,7 @@
     )
     (def (car arg-list) (eval (cadr arg-list)) (eval (caddr arg-list)))
 )
-(setq cmds_list '(p somme diff oppose produitx produit produit. quotient inverse carre racine2 racine cube puissance indice imagepar cos sin ln exp))
+(setq cmds_list '(par somme diff oppose produitx produit produit. quotient inverse carre racine2 racine cube puissance indice imagepar cos sin ln exp))
 
 (put 'precedence 'somme     12)
 (put 'precedence 'diff      13)
@@ -57,7 +57,7 @@
                 (if (and current_precedence
                          parent_precedence
                          (>= parent_precedence current_precedence))
-                    (p (apply op children_with_p))
+                    (par (apply op children_with_p))
                     (apply op children_with_p)
                 )
            )
@@ -78,7 +78,7 @@
 )
 (de ? (x) (if x @ "?"))
 
-(de p (x) (pack "\\left( " (? x) " \\right)"))
+(de par (x) (pack "\\left( " (? x) " \\right)"))
 (de somme @ (opglue "+" (rest)))
 (de diff (x y) (pack (? x) " - " (? y)))
 (de oppose (x) (pack "-" (? x)))
@@ -94,7 +94,7 @@
 (de puissance (x y) (pack "{" (? x) "}\^{" (? y) "}"))
 (de indice (x y) (pack "{" (? x) "}_{" (? y) "}"))
 (de imagepar (f x) (pack (? f) "  \\left( " (? x) " \\right)"))  # spaces for distinction with produit
-(de cos (x) (pack "\\cos" (p (? x))))
-(de sin (x) (pack "\\sin" (p (? x))))
+(de cos (x) (pack "\\cos" (par (? x))))
+(de sin (x) (pack "\\sin" (par (? x))))
 (de exp (x) (pack "\\exp" (? x)))
 (de ln (x)  (pack "\\ln"  (? x)))
