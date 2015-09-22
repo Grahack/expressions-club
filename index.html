@@ -480,7 +480,9 @@
       if (!this.state.rapport) return;
       return <div id="report">
         <h1>Rapport</h1>
-        <p>{this.rapport_mailto()}</p>
+        <p>{this.rapport_mailto()} - Si un courrier électronique prérempli
+           n’apparaît pas, merci de copier-coller ce rapport dans un nouvel
+           email et d’indiquer un destinataire à la main.</p>
         <p>{this.state.series.title} 
            (<a href="{window.location.toString()}">{window.location.toString()}</a>)</p>
         <p>{(!this.state.running || this.inSeriesGet('config').display_score)?
