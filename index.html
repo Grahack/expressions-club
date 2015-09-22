@@ -366,10 +366,12 @@
         if (it_was_the_last) {
           this.setState({running: false});
           clearInterval(this.timer);
+          alert("Bravo ! Voilà, c’est fini !");
         } else {
           this.setState({expr_id: this.state.expr_id + 1});
           this.state.series.exprs[this.state.expr_id+1].date_start = Date.now();
           this.state.series.exprs[this.state.expr_id+1].score_start = new_score;
+          alert("Bravo ! Une autre !");
         }
       } else {
         alert("Essaie encore !");
