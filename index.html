@@ -520,7 +520,7 @@
     },
     rapport_mailto: function() {
       var email = this.inSeriesGet('config').email;
-      return <div dangerouslySetInnerHTML={{__html:
+      return <span dangerouslySetInnerHTML={{__html:
         '<a href="mailto:' + ((typeof email == 'undefined')? '':email) +
         '?subject=Rapport%20Expressions%20' +
         encodeURIComponent(this.state.series.title) +
