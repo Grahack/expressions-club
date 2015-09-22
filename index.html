@@ -366,13 +366,15 @@
         if (it_was_the_last) {
           this.setState({running: false});
           clearInterval(this.timer);
+          alert("Bravo ! Voilà, c’est fini !");
         } else {
           this.setState({expr_id: this.state.expr_id + 1});
           this.state.series.exprs[this.state.expr_id+1].date_start = Date.now();
           this.state.series.exprs[this.state.expr_id+1].score_start = new_score;
+          alert("Bravo ! Une autre !");
         }
       } else {
-        alert("Essaie encore !");
+        alert("Essayez encore !");
       }
     },
     handleRapport: function() {
@@ -413,7 +415,7 @@
           <div>{this.score()}</div>
           <span>
             {!this.state.running ?
-              "Voilà, c’est fini." :
+              "Merci. Cliquez maintenant sur le lien « Rapport » ci-dessous." :
               this.state.text.length > 0 ?
                 " " :
                 "Entrez vos commandes ci-dessous, " +
@@ -478,7 +480,9 @@
       if (!this.state.rapport) return;
       return <div id="report">
         <h1>Rapport</h1>
-        <p>{this.rapport_mailto()}</p>
+        <p>{this.rapport_mailto()} - Si un courrier électronique prérempli
+           n’apparaît pas, merci de copier-coller ce rapport dans un nouvel
+           email et d’indiquer un destinataire à la main.</p>
         <p>{this.state.series.title} 
            (<a href="{window.location.toString()}">{window.location.toString()}</a>)</p>
         <p>{(!this.state.running || this.inSeriesGet('config').display_score)?
