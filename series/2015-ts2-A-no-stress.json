@@ -6,7 +6,8 @@
         "point_duration": 1,
         "code_with_blocks": false,
         "display_score": false,
-        "display_weakness_indicator": false
+        "display_weakness_indicator": false,
+        "report_success_only": false
     },
     "exprs": [
         {"expr": "(produit (somme (produit 3 x) 1) (diff 2 (produit 5 x)))",
