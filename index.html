@@ -269,8 +269,13 @@
       if (what == 'last_date_end') {
         return this.state.series.exprs[this.state.expr_id - 1].date_end;
       }
-      if (what == 'total_time')
-        return this.inSeriesGet('last_date_end') - this.inSeriesGet('first_date_start');
+      if (what == 'total_time') {
+        if (this.state.expr_id == 0) {
+          return 0;
+        } else {
+          return this.inSeriesGet('last_date_end') - this.inSeriesGet('first_date_start');
+        }
+      }
       if (what == 'config')
         return this.state.series.config;
     },
