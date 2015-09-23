@@ -6,7 +6,8 @@
         "point_duration": 15,
         "code_with_blocks": true,
         "display_score": true,
-        "display_weakness_indicator": true
+        "display_weakness_indicator": true,
+        "report_success_only": false
     },
     "exprs": [
         {"expr": "(somme 2 2)",
