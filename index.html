@@ -168,7 +168,8 @@
         "point_duration": 15,
         "code_with_blocks": true,
         "display_score": true,
-        "display_weakness_indicator": true
+        "display_weakness_indicator": true,
+        "report_success_only": false
     },
     "exprs": [
         {"expr": "(somme 2 2)",
@@ -477,6 +478,7 @@
       }
     },
     rapport: function() {
+      var self = this;
       if (!this.state.rapport) return;
       return <div id="report">
         <h1>Rapport</h1>
@@ -487,35 +489,35 @@
            (<a href="{window.location.toString()}">{window.location.toString()}</a>)</p>
         <p>{(!this.state.running || this.inSeriesGet('config').display_score)?
            "Score : " + this.state.score : ''}</p>
-        <p>Durée totale : 
-           {(this.state.expr_id>0)?
-            (this.inSeriesGet('total_time')/1000 | 0) + "s":
-            "en cours…"}</p>
+        <p>{(this.inSeriesGet('config').report_success_only)?
+            "":
+            ("Durée totale : " +
+             (this.state.expr_id>0)?
+              (this.inSeriesGet('total_time')/1000 | 0) + "s":
+              "en cours…")}</p>
         <ol>{
           this.state.series.exprs.map(function(elt, index) {
-            return <li>{elt.date_end?
-             <span>{elt.expr} : {elt.score_end - elt.score_start} pts
-                   en {(elt.date_end - elt.date_start)/1000 | 0}s</span>:
-             "en cours…"}</li>;
+            return <li>{elt.date_end ? self.elt_stats(elt) : "en cours…"}</li>;
           })
         }</ol>
         </div>;
     },
     rapport_txt: function() {
+      var self = this;
       return this.state.series.title +
         " (" + window.location.toString() + ")\n\n" +
         ((!this.state.running || this.inSeriesGet('config').display_score)?
           "Score : " + this.state.score : '') + "\n" +
-        "Durée totale : " +
-        ((this.state.expr_id>0)?
-          (this.inSeriesGet('total_time')/1000 | 0) + "s":
-          "en cours…") + "\n" +
+        ((!this.inSeriesGet('config').report_success_only)?
+          "":
+          "Durée totale : " +
+          ((this.state.expr_id>0)?
+            (this.inSeriesGet('total_time')/1000 | 0) + "s":
+            "en cours…") + "\n"
+        ) +
         this.state.series.exprs.map(function(elt, index) {
           return "\n* " + elt.expr + " : " +
-            (elt.date_end?
-              (elt.score_end - elt.score_start) + " pts en " +
-                ((elt.date_end - elt.date_start)/1000 | 0) + "s" :
-              "en cours…");
+            (elt.date_end ? self.elt_stats(elt) : "en cours…");
         });
     },
     rapport_mailto: function() {
@@ -526,6 +528,14 @@
         encodeURIComponent(this.state.series.title) +
         '&body=' + encodeURIComponent(this.rapport_txt()) + '">Envoyer</a>'
       }}/>;
+    },
+    elt_stats: function(elt) {
+      if (this.inSeriesGet('config').report_success_only) {
+        return "OK";
+      } else {
+        return <span>{elt.expr} : {elt.score_end - elt.score_start} pts
+               en {(elt.date_end - elt.date_start)/1000 | 0}s</span>
+      }
     },
     lisp2latex: function(src) {
       var latex = ''
