@@ -16,10 +16,10 @@
         {"expr": "(produitx 2 1)",
          "points": 10
         },
-        {"expr": "(produit 2 x)",
+        {"expr": "(produitx 2 x)",
          "points": 10
         },
-        {"expr": "(produitx 2 x)",
+        {"expr": "(produit 2 x)",
          "points": 10
         },
         {"expr": "(diff 2 x)",
