@@ -244,6 +244,9 @@
     getInitialState: function() {
       return {
         series_id: series_id,
+        user_id: (series_id != 'default' ?
+                    window.prompt("Votre identifiant SVP ?", ''):
+                    ''),
         running: true,
         rapport: false,
         text: "",
@@ -367,6 +370,23 @@
         Blockly.mainWorkspace.clear();
         this.state.series.exprs[this.state.expr_id].date_end = Date.now();
         this.state.series.exprs[this.state.expr_id].score_end = new_score;
+        // post to a Google Form
+        var data = {
+          "entry.1707225462" : this.inSeriesGet('config').email,
+          "entry.1168558699" : this.state.series.title,
+          "entry.1880354594" : this.state.user_id,
+          "entry.1638124843" : this.inSeriesGet('expr'),
+          "entry.1932553614" : "score",
+          "entry.512306975"  : "temps"};
+        $.ajax({
+          url: "https://docs.google.com/a/expressions.club/forms/d/1lT0Am8T3AYUvuJ53xbpukS6nT96anHC7_pDuQ23os2M/formResponse",
+          data: data,
+          type: "POST",
+          dataType: "xml",
+          statusCode: {
+              0: function () { console.log(data); }
+          }
+        });
         var it_was_the_last = (this.state.expr_id == this.state.series.exprs.length - 1);
         if (it_was_the_last) {
           this.setState({running: false});
