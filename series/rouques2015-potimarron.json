@@ -1,0 +1,37 @@
+{
+    "title": "Série « potimarron »",
+    "config": {
+        "email": "jean-philippe.rouques@ac-nantes.fr",
+        "initial_score": 500,
+        "point_duration": 10,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true
+    },
+    "exprs": [
+        {"expr": "(carre n)",
+         "points": 10
+        },
+        {"expr": "(carre (diff n 1))",
+         "points": 10
+        },
+        {"expr": "(terme_indice 0 u)",
+         "points": 10
+        },
+        {"expr": "(terme_indice (somme n 1) u)",
+         "points": 20
+        },
+        {"expr": "(somme (terme_indice n u) 1)",
+         "points": 20
+        },
+        {"expr": "(diff (terme_indice n u) (terme_indice (diff n 1) u))",
+         "points": 30
+        }
+    ]
+}
+
+
+
+
+
