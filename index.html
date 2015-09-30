@@ -89,7 +89,7 @@
           oppose, inverse, carre, racine2, cube, cos, sin, exp, ln, par
         </li>
         <li>Commandes requérant deux arguments :<br />
-          diff, quotient, racine, puissance, indice, imagepar
+          diff, quotient, racine, puissance, terme_indice, image_par
         </li>
         <li>Commandes pouvant accepter plus de deux arguments :<br />
           somme, produitx, produit, produit.
@@ -111,7 +111,7 @@
         <li>Les parenthèses que vous tapez ne font que délimiter les commandes.
             Pour ajouter des parenthèses à vos expressions, il faut utiliser
             la commande <code>par</code>, sauf pour les images par une fonction,
-            car la commande <code>imagepar</code> les inclut.</li>
+            car la commande <code>image_par</code> les inclut.</li>
         <li>$\frac{1}{x}$ peut être obtenue avec <code>(quotient 1 x)</code>,
             mais aussi avec <code>(inverse x)</code>.</li>
       </ul>
@@ -131,8 +131,8 @@
         <li>(r -> (racine |)</li>
         <li>(ca -> (cube |)</li>
         <li>(pu -> (puissance |)</li>
-        <li>(in -> (indice |)</li>
-        <li>(im -> (imagepar |)</li>
+        <li>(t -> (terme_indice |)</li>
+        <li>(im -> (image_par |)</li>
       </ul>
       <h2 id="fonctionnalites">Fonctionnalités</h2>
       <ul>
@@ -328,8 +328,8 @@
             "(r":  "(racine |)",
             "(ca": "(cube |)",
             "(pu": "(puissance |)",
-            "(in": "(indice |)",
-            "(im": "(imagepar |)"
+            "(t":  "(terme_indice |)",
+            "(im": "(image_par |)"
           };
           // Grab content and split in 'before' and 'after' caret.
           var src = elt.val();

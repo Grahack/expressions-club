@@ -20,7 +20,7 @@
     )
     (def (car arg-list) (eval (cadr arg-list)) (eval (caddr arg-list)))
 )
-(setq cmds_list '(somme diff oppose produitx produit produit. quotient inverse carre racine2 racine cube puissance indice imagepar cos sin ln exp par))
+(setq cmds_list '(somme diff oppose produitx produit produit. quotient inverse carre racine2 racine cube puissance terme_indice image_par cos sin ln exp par))
 
 (put 'precedence 'somme     12)
 (put 'precedence 'diff      13)
@@ -37,10 +37,10 @@
 (put 'precedence 'racine   NIL)
 (put 'precedence 'inverse  NIL)
 (put 'precedence 'quotient NIL)
-(put 'precedence 'imagepar NIL)
+(put 'precedence 'image_par NIL)
 (put 'precedence 'cos      NIL)
 (put 'precedence 'sin      NIL)
-(put 'precedence 'indice   NIL)
+(put 'precedence 'terme_indice   NIL)
 
 (de add_p prg
   (glue "\\text{ ? }" (mapcar 'add_p_rec prg)))
@@ -92,8 +92,8 @@
 (de racine (n x) (pack "\\sqrt\[" (? n) "\]{" (? x) "}"))
 (de cube (x) (pack "{" (? x) "}\^3"))
 (de puissance (x y) (pack "{" (? x) "}\^{" (? y) "}"))
-(de indice (x y) (pack "{" (? x) "}_{" (? y) "}"))
-(de imagepar (f x) (pack (? f) "  \\left( " (? x) " \\right)"))  # spaces for distinction with produit
+(de terme_indice (x y) (pack "{" (? y) "}_{" (? x) "}"))
+(de image_par (f x) (pack (? f) "  \\left( " (? x) " \\right)"))  # spaces for distinction with produit
 (de cos (x) (pack "\\cos" (par (? x))))
 (de sin (x) (pack "\\sin" (par (? x))))
 (de exp (x) (pack "\\exp" (? x)))
