@@ -242,11 +242,19 @@
       series_id = 'default';
   }
   var InterExpr = React.createClass({
+    getUserId: function() {
+      var user_id = '';
+      var msg = "Votre identifiant SVP ? (ex: classe et nom)";
+      while (user_id == null || user_id.trim() == '') {
+        user_id = window.prompt(msg, '');
+      }
+      return user_id;
+    },
     getInitialState: function() {
       return {
         series_id: series_id,
         user_id: (series_id != 'default' ?
-                    window.prompt("Votre identifiant SVP ?", ''):
+                    this.getUserId():
                     ''),
         running: true,
         rapport: false,
