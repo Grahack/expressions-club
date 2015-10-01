@@ -478,8 +478,6 @@
                   disabled={!this.state.running || this.state.text.length === 0}
                   onClick={this.checkExpr}>OK</button>
           <div>{this.infos()}</div>
-          <p><a onClick={this.handleRapport}>{this.state.rapport? "Fermer le rapport":"Rapport"}</a></p>
-          <div>{this.rapport()}</div>
         </div>
       );
     },
