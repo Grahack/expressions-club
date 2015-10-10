@@ -1,0 +1,43 @@
+{
+    "title": "Série « pomme & poire »",
+    "config": {
+        "email": "jean-philippe.rouques@ac-nantes.fr",
+        "initial_score": 500,
+        "point_duration": 10,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true
+    },
+    "exprs": [
+        {"expr": "(produit x (somme x 3))",
+         "points": 20
+        },
+        {"expr": "(diff 3 (diff 2 x))",
+         "points": 20
+        },
+        {"expr": "(produitx 3 (somme x y))",
+         "points": 20
+        },
+        {"expr": "(carre (somme a b))",
+         "points": 20
+        },
+        {"expr": "(diff (produit 8 x) (somme x 1))",
+         "points": 30
+        },
+        {"expr": "(produit 3 (somme (produit 2 x) 1))",
+         "points": 40
+        },
+        {"expr": "(somme (diff x y) 4)",
+         "points": 20
+        },
+        {"expr": "(diff 10 (produit 2 (somme x 3)))",
+         "points": 40
+        }
+    ]
+}
+
+
+
+
+
