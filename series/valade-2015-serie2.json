@@ -1,0 +1,39 @@
+{
+    "title": "Série 2",
+    "config": {
+        "email": "laetitia.valade@ac-nantes.fr",
+        "initial_score": 500,
+        "point_duration": 10,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true
+    },
+    "exprs": [
+        {"expr": "(carre x)",
+         "points": 10
+        },
+        {"expr": "(produit 3 (carre x))",
+         "points": 20
+        },
+        {"expr": "(carre (produit 3 x))",
+         "points": 20
+        },
+        {"expr": "(somme 1 (carre x))",
+         "points": 20
+        },
+        {"expr": "(carre (somme 1 x))",
+         "points": 20
+        },
+        {"expr": "(somme 1 (produit 4 x) (produit 4 (carre x)))",
+         "points": 40
+        },
+        {"expr": "(diff 25 (produit 9 (carre x)))",
+         "points": 40
+        },
+        {"expr": "(somme (produit 2 (carre x)) (quotient 1 x))",
+         "points": 50
+        }
+    ]
+}
+
