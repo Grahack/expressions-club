@@ -379,8 +379,8 @@
     },
     checkExpr: function() {
       if (!this.state.running) return;
-      var expected = this.lisp2latex(this.state.series.exprs[this.state.expr_id].expr);
-      var attempt  = this.lisp2latex(this.state.text);
+      var expected = this.lisp2latex(this.inSeriesGet('expr'), 'expected');
+      var attempt  = this.lisp2latex(this.state.text, 'attempt');
       console.log('expected: |' + expected + '|');
       console.log('attempt : |' + attempt  + '|');
       if (attempt === expected) {
@@ -584,7 +584,7 @@
                en {(elt.date_end - elt.date_start)/1000 | 0}s</span>
       }
     },
-    lisp2latex: function(src) {
+    lisp2latex: function(src, type) {
       var latex = ''
       try {
         latex = EMULISP_CORE.eval('(add_p ' + src + ')').toString();
@@ -618,7 +618,7 @@
       return latex;
     },
     mathjax_src: function() {
-      return"$$" + this.lisp2latex(this.inSeriesGet('expr')) + " $$"
+      return "$$" + this.lisp2latex(this.inSeriesGet('expr'), 'mj_src') + " $$"
     }
   });
   interexpr = React.render(
