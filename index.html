@@ -401,7 +401,7 @@
         // post to a Google Form
         var data = {
           "entry.1707225462" : this.inSeriesGet('config').email,
-          "entry.1168558699" : this.state.series.series_id,
+          "entry.1168558699" : this.state.series_id,
           "entry.1880354594" : this.state.user_id,
           "entry.1716353797" : this.state.expr_id + 1,
           "entry.1638124843" : this.inSeriesGet('expr'),
@@ -601,7 +601,7 @@
         if (type === 'mj_src') {
           var data = {
             "entry.1707225462" : this.inSeriesGet('config').email,
-            "entry.1168558699" : this.state.series.series_id,
+            "entry.1168558699" : this.state.series_id,
             "entry.1880354594" : this.state.user_id,
             "entry.1638124843" : this.inSeriesGet('expr'),
             "entry.1932553614" : "bug",
