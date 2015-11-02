@@ -322,8 +322,8 @@
       }.bind(this)).fail(function () {alert("Pas de série " + series_id + ".")});
     },
     componentDidUpdate: function (props, state, root) {
-      var elt = document.getElementById('target');
-      MathJax.Hub.Queue(['Typeset', MathJax.Hub, elt]);
+      var target = document.getElementById('target');
+      MathJax.Hub.Queue(['Typeset', MathJax.Hub, target]);
     },
     componentWillUnmount: function(){
       clearInterval(this.timer);
