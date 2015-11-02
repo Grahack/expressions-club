@@ -183,6 +183,7 @@
         "initial_score": 100,
         "point_duration": 15,
         "code_with_blocks": true,
+        "non_interactive": false,
         "display_score": true,
         "display_weakness_indicator": true,
         "report_success_only": false
@@ -329,7 +330,9 @@
     },
     handleChange: function() {
       this.setState({ text: document.getElementById('math-input').value });
-      MathPreview.Update();
+      if (!this.state.series.config.non_interactive) {
+        MathPreview.Update();
+      }
     },
     handleKeyDown: function(event) {
       if (event.ctrlKey) {
@@ -425,6 +428,9 @@
           alert("Bravo ! Une autre !");
         }
       } else {
+        if (this.state.series.config.non_interactive) {
+          MathPreview.Update();
+        }
         alert("Essayez encore !");
       }
     },
