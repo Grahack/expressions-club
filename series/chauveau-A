@@ -1,0 +1,35 @@
+{
+    "title": "Seconde: série A",
+    "config": {
+        "email": "mathilde.chauveau@ac-nantes.fr",
+        "initial_score": 500,
+        "point_duration": 10,
+        "code_with_blocks": true,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true
+    },
+    "exprs": [
+        {"expr": "(somme x 1)",
+         "points": 10
+        },
+        {"expr": "(produit 2 x)",
+         "points": 10
+        },
+        {"expr": "(produit 2 (somme x 1))",
+         "points": 20
+        },
+        {"expr": "(carre x)",
+         "points": 10
+        },
+        {"expr": "(somme (carre x) 1)",
+         "points": 20
+        },
+        {"expr": "(produit (somme x 1) (somme x 2))",
+         "points": 30
+        },
+        {"expr": "(carre (somme x 1))",
+         "points": 30
+        }
+    ]
+}
