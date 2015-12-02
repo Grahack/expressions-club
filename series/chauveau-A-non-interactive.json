@@ -5,6 +5,7 @@
         "initial_score": 500,
         "point_duration": 10,
         "code_with_blocks": true,
+        "non_interactive": true,
         "display_score": false,
         "display_weakness_indicator": false,
         "report_success_only": true
