@@ -307,8 +307,8 @@ Blockly.twoArgsGenGen = function(block_type) {
     var num_lines = (a + b).split('\n').length;
     if (num_lines == 1) {
       // Prevent indentation if we only have one line.
-      return '(' + cmd + a.substring(Blockly.Expressions.INDENT.length) +
-                   ' ' + b.substring(Blockly.Expressions.INDENT.length) + ')';
+      return '(' + cmd + ' ' + a.substring(Blockly.Expressions.INDENT.length) +
+                         ' ' + b.substring(Blockly.Expressions.INDENT.length) + ')';
     } else {
       return '(' + cmd + '\n' + a + '\n' + b + '\n)';
     }
