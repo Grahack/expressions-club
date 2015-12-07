@@ -1,4 +1,4 @@
-var help_url_prefix = 'http://expressions.club/#blocs';
+var help_url_prefix = 'http://expressions.club/';
 var colour = 160;
 
 // Un extrait des messages originaux:
@@ -137,10 +137,35 @@ Blockly.Generator.prototype.prefixLines = function(text, prefix) {
 // http://code.google.com/p/blockly/source/browse/trunk/blocks
 // http://code.google.com/p/blockly/source/browse/trunk/generators/python
 
+// Bloc Expression
+Blockly.Blocks['expression'] = {
+  init: function() {
+    this.setHelpUrl(help_url_prefix + '#bloc-expression');
+    this.setColour(colour);
+    this.appendValueInput('VALUE')
+        .appendField('Expression :');
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
+    this.setTooltip('Bloc d’accueil pour l’expression.');
+    this.setDeletable(false);
+  }
+};
+
+// Gen Programme
+Blockly.Expressions['expression'] = function(block) {
+  var arg = Blockly.Expressions.statementToCode(block, 'VALUE') || '';
+  // Le slice neutralise l’indentation,
+  // et on passe à la ligne entre les ) et les (.
+  var src = arg.substring(2).replace(/\)\(/gm, ')\n(');
+  // Ensuite on marque le début et la fin histoire de ne garder que le code des
+  // blocs situés dans Programme.
+  return '««««««««««' + src + '»»»»»»»»»»';
+};
+
 // Bloc nombre
 Blockly.Blocks['nombre'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '#nombresavecblockly');
+    this.setHelpUrl(help_url_prefix + '#bloc-nombres');
     this.setColour(colour);
     this.appendDummyInput()
         .appendField(new Blockly.FieldTextInput('0',
@@ -159,7 +184,7 @@ Blockly.Expressions['nombre'] = function(block) {
 // https://github.com/google/blockly/blob/master/blocks/variables.js
 Blockly.Blocks['variable'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '#variables');
+    this.setHelpUrl(help_url_prefix + '#bloc-variables');
     this.setColour(colour);
     this.appendDummyInput()
     .appendField(new Blockly.FieldVariable('x'), 'VAR');
@@ -338,7 +363,7 @@ Blockly.multiArgGenGen = function(block_type) {
 // Bloc p
 Blockly.Blocks['par'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-par');
+    this.setHelpUrl(help_url_prefix + '#bloc-par');
     this.setColour(colour);
     this.appendValueInput('VALUE')
         .appendField('par');
@@ -362,7 +387,7 @@ Blockly.Expressions['par'] = function(block) {
 // Bloc somme
 Blockly.Blocks['somme'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-somme');
+    this.setHelpUrl(help_url_prefix + '#bloc-somme');
     this.setColour(colour);
     this.appendValueInput('ITEM0')
         .appendField('somme');
@@ -384,7 +409,7 @@ Blockly.Expressions['somme'] = Blockly.multiArgGenGen('somme');
 // Bloc diff
 Blockly.Blocks['diff'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-diff');
+    this.setHelpUrl(help_url_prefix + '#bloc-diff');
     this.setColour(colour);
     this.appendValueInput('A')
         .appendField('diff');
@@ -400,7 +425,7 @@ Blockly.Expressions['diff'] = Blockly.twoArgsGenGen('diff');
 // Bloc oppose
 Blockly.Blocks['oppose'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-oppose');
+    this.setHelpUrl(help_url_prefix + '#bloc-oppose');
     this.setColour(colour);
     this.appendValueInput('X')
         .appendField('oppose');
@@ -418,7 +443,7 @@ Blockly.Expressions['oppose'] = function(block) {
 // Bloc produitx
 Blockly.Blocks['produitx'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-produitx');
+    this.setHelpUrl(help_url_prefix + '#bloc-produitx');
     this.setColour(colour);
     this.appendValueInput('ITEM0')
         .appendField('produit×');
@@ -440,7 +465,7 @@ Blockly.Expressions['produitx'] = Blockly.multiArgGenGen('produitx');
 // Bloc produit
 Blockly.Blocks['produit'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-produit');
+    this.setHelpUrl(help_url_prefix + '#bloc-produit');
     this.setColour(colour);
     this.appendValueInput('ITEM0')
         .appendField('produit');
@@ -462,7 +487,7 @@ Blockly.Expressions['produit'] = Blockly.multiArgGenGen('produit');
 // Bloc produit.
 Blockly.Blocks['produit.'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-produit.');
+    this.setHelpUrl(help_url_prefix + '#bloc-produit.');
     this.setColour(colour);
     this.appendValueInput('ITEM0')
         .appendField('produit.');
@@ -484,7 +509,7 @@ Blockly.Expressions['produit.'] = Blockly.multiArgGenGen('produit.');
 // Bloc quotient
 Blockly.Blocks['quotient'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-quotient');
+    this.setHelpUrl(help_url_prefix + '#bloc-quotient');
     this.setColour(colour);
     this.appendValueInput('A')
         .appendField('quotient');
@@ -500,7 +525,7 @@ Blockly.Expressions['quotient'] = Blockly.twoArgsGenGen('quotient');
 // Bloc inverse
 Blockly.Blocks['inverse'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-inverse');
+    this.setHelpUrl(help_url_prefix + '#bloc-inverse');
     this.setColour(colour);
     this.appendValueInput('X')
         .appendField('inverse');
@@ -518,7 +543,7 @@ Blockly.Expressions['inverse'] = function(block) {
 // Bloc carre
 Blockly.Blocks['carre'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-carre');
+    this.setHelpUrl(help_url_prefix + '#bloc-carre');
     this.setColour(colour);
     this.appendValueInput('X')
         .appendField('carre');
@@ -536,7 +561,7 @@ Blockly.Expressions['carre'] = function(block) {
 // Bloc racine2
 Blockly.Blocks['racine2'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '-racine2');
+    this.setHelpUrl(help_url_prefix + '#bloc-racine2');
     this.setColour(colour);
     this.appendValueInput('X')
         .appendField('racine2');

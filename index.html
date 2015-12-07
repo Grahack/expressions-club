@@ -39,10 +39,17 @@
            comments: false,
            disable: false,
            toolbox: document.getElementById('toolbox')});
+      var xml_text = '<xml xmlns="http://www.w3.org/1999/xhtml">' +
+                     '<block type="expression"><value name="VALUE">' +
+                     '</value></block></xml>';
+      var xml = Blockly.Xml.textToDom(xml_text);
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
       Blockly.addChangeListener(function () {
           var raw_src = Blockly.Expressions.workspaceToCode();
+          // Ne garder que le code entre les marqueurs:
+          var src = /.*««««««««««([^]*)»»»»»»»»»».*/.exec(raw_src)[1];
           var textarea = $('#math-input');
-          textarea.val(raw_src);
+          textarea.val(src);
           // Trigger a parenedit redraw.
           textarea.click();
           // Trigger an expr redraw.
@@ -172,6 +179,22 @@
           téléphone…) ?</li>
         <li>Une copie écran si un message spécial apparaît.</li>
       </ul>
+      <h2 id="blocs">Aide sur les blocs</h2>
+      <div id="bloc-expression"></div>
+      <div id="bloc-nombres"></div>
+      <div id="bloc-variables"></div>
+      <div id="bloc-par"></div>
+      <div id="bloc-somme"></div>
+      <div id="bloc-diff"></div>
+      <div id="bloc-oppose"></div>
+      <div id="bloc-produitx"></div>
+      <div id="bloc-produit"></div>
+      <div id="bloc-produit."></div>
+      <div id="bloc-quotient"></div>
+      <div id="bloc-inverse"></div>
+      <div id="bloc-carre"></div>
+      <div id="bloc-racine2"></div>
+      <p>En cours de rédaction…</p>
       <h2 id="vos-series">Vos séries</h2>
       <p>Une série est décrite par un fichier contenant par exemple :</p>
       <pre><code>{
