@@ -137,6 +137,31 @@ Blockly.Generator.prototype.prefixLines = function(text, prefix) {
 // http://code.google.com/p/blockly/source/browse/trunk/blocks
 // http://code.google.com/p/blockly/source/browse/trunk/generators/python
 
+// Bloc Expression
+Blockly.Blocks['expression'] = {
+  init: function() {
+    this.setHelpUrl(help_url_prefix + '#bloc-expression');
+    this.setColour(colour);
+    this.appendValueInput('VALUE')
+        .appendField('Expression :');
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
+    this.setTooltip('Bloc d’accueil pour l’expression.');
+    this.setDeletable(false);
+  }
+};
+
+// Gen Programme
+Blockly.Expressions['expression'] = function(block) {
+  var arg = Blockly.Expressions.statementToCode(block, 'VALUE') || '';
+  // Le slice neutralise l’indentation,
+  // et on passe à la ligne entre les ) et les (.
+  var src = arg.substring(2).replace(/\)\(/gm, ')\n(');
+  // Ensuite on marque le début et la fin histoire de ne garder que le code des
+  // blocs situés dans Programme.
+  return '««««««««««' + src + '»»»»»»»»»»';
+};
+
 // Bloc nombre
 Blockly.Blocks['nombre'] = {
   init: function() {
