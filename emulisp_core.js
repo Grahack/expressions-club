@@ -56,7 +56,7 @@ function lispToStr(x) {
 }
 
 function unknown(x) {
-	if (!confirm("Unknown Lisp type: " + x)) throw new Error("unknown aborted");
+	// if (!confirm("Unknown Lisp type: " + x)) throw new Error("unknown aborted");
 	return "???";
 }
 

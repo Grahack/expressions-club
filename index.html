@@ -297,6 +297,7 @@
         running: true,
         rapport: false,
         text: "",
+        last_text: "",
         score: 0,
         series: false,
         expr_id: 0
@@ -355,10 +356,21 @@
       clearInterval(this.timer);
     },
     handleChange: function() {
-      this.setState({ text: document.getElementById('math-input').value });
+      var math_input = document.getElementById('math-input').value;
+      this.setState({text: math_input});
       if (!this.state.series.config.non_interactive) {
         MathPreview.Update();
       }
+      var expr_nature_attempt = this.get_expr_nature(math_input);
+      var expr_nature_target = this.get_expr_nature(this.inSeriesGet('expr'));
+      if (this.state.series.config.check_nature &&
+          math_input != this.state.last_text &&
+          expr_nature_attempt &&
+          this.available_natures.indexOf(expr_nature_attempt) > -1 &&
+          expr_nature_attempt != expr_nature_target) {
+          alert("La nature de l’expression n’est pas correcte.");
+      }
+      this.setState({last_text: math_input});
     },
     handleKeyDown: function(event) {
       if (event.ctrlKey) {
@@ -485,6 +497,36 @@
       } else {
         return '#eee';
       }
+    },
+    available_natures: [
+      'oppose',
+      'somme',
+      'diff',
+      'produit',
+      'produit.',
+      'produitx',
+      'exp',
+      'ln',
+      'carre',
+      'puissance',
+      'cube',
+      'racine2',
+      'racine',
+      'inverse',
+      'quotient',
+      'image_par',
+      'cos',
+      'sin',
+      'terme_indice',
+      ''
+      ],
+    get_expr_nature: function (expr) {
+      // returns the car of the expr or an empty string (with a regex, sorry)
+      var nature_match = expr.match(/^ *\( *([^ \)]+).*$/);
+      if (nature_match) {
+        return nature_match[1].trim();
+      }
+      return null;
     },
     render: function() {
       return (
