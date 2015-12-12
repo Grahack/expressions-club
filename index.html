@@ -33,17 +33,20 @@
   <script type="text/javascript" src="blockly_expressions.js"></script>
   <script>
     var interexpr = undefined;
+    function blockly_reset() {
+      Blockly.mainWorkspace.clear();
+      var xml_text = '<xml xmlns="http://www.w3.org/1999/xhtml">' +
+                     '<block type="expression"><value name="VALUE">' +
+                     '</value></block></xml>';
+      var xml = Blockly.Xml.textToDom(xml_text);
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+    }
     function blockly_init() {
       Blockly.inject(document.getElementById('blockly'),
           {path: "blockly/",
            comments: false,
            disable: false,
            toolbox: document.getElementById('toolbox')});
-      var xml_text = '<xml xmlns="http://www.w3.org/1999/xhtml">' +
-                     '<block type="expression"><value name="VALUE">' +
-                     '</value></block></xml>';
-      var xml = Blockly.Xml.textToDom(xml_text);
-      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
       Blockly.addChangeListener(function () {
           var raw_src = Blockly.Expressions.workspaceToCode();
           // Ne garder que le code entre les marqueurs:
@@ -57,6 +60,7 @@
               interexpr.handleChange();
           }
       });
+      blockly_reset();
     }
   </script>
 </head>
@@ -473,7 +477,7 @@
         $('#math-buffer').text('');
         $('#math-input').val('');
         $('#math-input').keyup();
-        Blockly.mainWorkspace.clear();
+        blockly_reset();
         this.state.series.exprs[this.state.expr_id].date_end = Date.now();
         this.state.series.exprs[this.state.expr_id].score_end = new_score;
         // post to a Google Form
