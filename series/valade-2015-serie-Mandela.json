@@ -1,0 +1,42 @@
+{
+    "title": "Série Mandela",
+    "config": {
+        "email": "laetitia.valade@ac-nantes.fr",
+        "initial_score": 500,
+        "point_duration": 10,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true
+    },
+    "exprs": [
+        {"expr": "(somme 2 3)",
+         "points": 10
+        },
+        {"expr": "(produit 2 x)",
+         "points": 10
+        },
+        {"expr": "(quotient 5 x)",
+         "points": 10
+        },
+        {"expr": "(racine2 x)",
+         "points": 10
+        },
+        {"expr": "(somme 5 (produit 2 x))",
+         "points": 20
+        },
+        {"expr": "(diff 3 (racine2 x))",
+         "points": 20
+        },
+        {"expr": "(somme (quotient 5 x) 4)",
+         "points": 20
+        },
+        {"expr": "(racine2 (diff (produit 2 x) 8))",
+         "points": 50
+        },
+        {"expr": "(inverse (somme (produit -2 x) 4))",
+         "points": 50
+        }
+    ]
+}
+
