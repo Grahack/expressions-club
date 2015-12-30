@@ -106,24 +106,114 @@
       </ul>
       <p><strong>Exemples</strong> :</p>
       <ul>
-        <li>pour 2+2, les commandes sont
+        <li>pour 2+2, le code est
             <code>(somme 2 2)</code> ;</li>
-        <li>pour 2×X+1, les commandes sont
+        <li>pour 2×X+1, le code est
             <code>(somme (produitx 2 X) 1)</code> ;</li>
-        <li>pour 2(x+1), les commandes sont
+        <li>pour 2(x+1), le code est
             <code>(produit 2 (somme x 1))</code> ;</li>
-        <li>pour a+b+c, les commandes sont
+        <li>pour a+b+c, le code est
             <code>(somme a b c)</code>.</li>
       </ul>
-      <p>Il faut savoir que :</p>
+      <h2 id="idees-intro">Présentation</h2>
+      <p>Voici une liste de points qui présente le Club.</p>
+      <p>Cette liste pourra aussi vous aider à présenter le Club à vos élèves.
+      Tous ces points ne correspondront peut être pas à votre pratique (par
+      exemple si vous n’utilisez pas les blocs), mais ils peuvent vous donner
+      quelques idées.</p>
       <ul>
-        <li>Les parenthèses que vous tapez ne font que délimiter les commandes.
-            Pour ajouter des parenthèses à vos expressions, il faut utiliser
-            la commande <code>par</code>, sauf pour les images par une fonction,
-            car la commande <code>image_par</code> les inclut.</li>
-        <li>Une fraction ayant 1 pour dénominateur peut être obtenue avec
-            <code>(quotient 1 x)</code>, mais aussi avec
-            <code>(inverse x)</code>.</li>
+        <li>Le Club des Expressions vous propose de reconstituer des
+          expressions mathématiques avec un langage qui se
+          rapproche du français.</li>
+        <li>Quelques exemples :
+          <ul>
+            <li>x+1 peut être lu ainsi: « la somme de x et de 1 ».</li>
+            <li>En langage du Club: <code>(somme x 1)</code>.</li>
+            <li>(x+1)² peut être lu ainsi: « le carré de la somme de x et 1 ».</li>
+            <li>En langage du Club: <code>(carre (somme x 1))</code>.</li>
+          </ul>
+        <li>On voit que les expressions peuvent s’emboîter les unes dans les
+          autres, comme en maths.</li>
+        </li>
+        <li>À l’écran
+          <ul>
+            <li>Démonstration sur <a href="http://expressions.club/">http://expressions.club/</a>.</li>
+            <li>La tentative de l’utilisateur est en dessous de l’expression à
+              reconstituer.</li>
+            <li>La tentative est mise à jour en temps réel, sauf en mode
+              non interactif.</li>
+          </ul>
+        <li>Blocs
+          <ul>
+            <li>Le langage du Club peut être tapé au clavier, mais aussi organisé
+              à l’aide de blocs, comme un puzzle.</li>
+            <li>L’emboîtement des opérations peut aussi bien sûr se faire
+              avec les blocs, c’est même plus naturel.</li>
+            <li>Si vous utilisez les blocs, vous les trouvez dans les catégories
+              sur la gauche. Si vous ne trouvez pas un bloc, pensez à regarder
+              plus bas (« ascenceur » gris).</li>
+            <li>Il faut cliquer sur l’étoile bleue du bloc «somme» pour faire
+              apparaître d’autres emplacements, en glissant un petit bloc
+              « un terme » sous les autres.</li>
+          </ul>
+        </li>
+        <li>Parenthèses
+          <ul>
+            <li>Des parenthèses sont ajoutées automatiquement dans les expressions
+              pour gérer les règles de priorité.</li>
+            <li>Si vous tapez le code, attention à vos parenthèses, elles
+              n’ont pas le même sens qu’en maths.
+              Les parenthèses que vous tapez ne font que délimiter les commandes.
+              Elles n’ont rien à voir avec les parenthèses qui apparaîtront
+              dans la tentative de l’utilisateur.</li>
+          </ul>
+        </li>
+        <li>Qu’est-ce qu’une bonne reconstitution
+          <ul>
+            <li>Le but est seulement de reconstituer «graphiquement» les
+              expressions.</li>
+            <li>Il ne faut pas simplifier les expressions.</li>
+            <li>a+b doit être codé <code>(somme a b)</code> et non
+              <code>(somme b a)</code>.</li>
+            <li>Nous félicitons les élèves qui maîtrisent (ou abusent de) la
+              commutativité et nous leur expliquons que le Club est exigeant et
+              que les valeurs doivent être codées dans l’ordre.</li>
+            <li>Une fraction ayant 1 pour dénominateur peut être obtenue avec
+                    <code>(quotient 1 x)</code>, mais aussi avec
+                    <code>(inverse x)</code>.</li>
+            <li>Dans « x+1 », l’opération (addition) est entre le x et le 1.
+            Avec le Club, on parle du résultat de l’opération donc on utilise
+            le mot « somme » et on le met devant le x et le 1 (code et blocs).<br>
+            Donc pas de <code>(x somme 1)</code> avec le code, ni de
+            <code>[x][somme][1]</code> avec les blocs.</li>
+          </ul>
+        </li>
+        <li>Résultats (le système du score et de l’écran rouge est facultatif)
+          <ul>
+            <li>Quand une expression est correctement reconstituée, le Club
+              enregistre qui, quand quoi.</li>
+            </li>
+            <li>On part avec un certain nombre de points, nombre qui diminue avec
+            le temps.</li>
+            <li>On gagne des points en réussissant à reconstituer les expressions
+            proposées. Les expressions plus difficiles rapportent plus de
+            points.</li>
+            <li>L’écran se colore progressivement en rouge pour repérer les élèves
+            en difficulté d’un seul coup d’œil.</li>
+          </ul>
+        </li>
+        <li>Pour démarrer
+          <ul>
+            <li>Les adresses des séries sont de la forme :
+              <code>http://expressions.club/?test</code>, mais il suffit de taper
+              dans la barre d’adresse (pas la barre de recherche) :
+              <code>expressions.club?test</code>.</li>
+            <li>À part pour la série de la page d’accueil, il faut se présenter en
+              donnant sa classe et son nom.<br>
+              Exemple : <code>2nde1 Prénom Nom</code>.</li>
+          </ul>
+        </li>
+        <li>Amusez-vous bien.</li>
       </ul>
       <h2 id="abreviations">Abréviations</h2>
       <p>Ctrl+B déclenche l’expansion d’une abréviation :</p>
@@ -143,30 +233,6 @@
         <li>(pu -> (puissance |)</li>
         <li>(t -> (terme_indice |)</li>
         <li>(im -> (image_par |)</li>
-      </ul>
-      <h2 id="fonctionnalites">Fonctionnalités</h2>
-      <ul>
-        <li>On part avec un certain nombre de points, nombre qui diminue avec
-        le temps.</li>
-        <li>On gagne des points en réussissant à reconstituer les expressions
-        proposées. Les expressions plus difficiles rapportent plus de
-        points.</li>
-        <li>L’écran se colore progressivement en rouge pour repérer les élèves
-        en difficulté d’un seul coup d’œil.</li>
-        <li>Un système de rapport permet d’avoir le bilan d’une partie.</li>
-        <li>Pour les enseignants :
-          <ul>
-            <li>Le bilan peut être copié-collé dans un mail, pour étude
-                    ultérieure ou le travail est fait à la maison.</li>
-            <li>Vous pouvez fournir des séries, qui seront accessibles à des
-                    adresses du genre:
-                    <a href="http://expressions.club/?test">http://expressions.club/?test</a>
-                    (cliquez pour voir).<br />
-                    Rassurez-vous, il suffit de taper
-                    <code>expressions.club?test</code> dans la barre d’adresse
-                    du navigateur.</li>
-          </ul>
-        </li>
       </ul>
       <h2 id="bug">En cas de problème</h2>
       <p>Si le problème arrive au premier chargement de la page, un simple
@@ -245,43 +311,6 @@
       votre série apparaisse, comme par exemple
       <a href="http://expression.club?test">expressions.club?test</a> et au
       titre qui apparaîtra en tête de page.</p>
-      <h2 id="idees-intro"></h2>
-      <p>Voici une liste de points qui pourront vous aider à présenter le
-      Club à vos élèves.</p>
-      <p>Tous les points ne correspondront peut être pas à votre pratique (par
-      exemple si vous n’utilisez pas les blocs), mais ils peuvent vous donner
-      quelques idées.</p>
-      <ul>
-        <li>Le Club des Expressions vous propose de reconstituer des
-          expressions mathématiques avec un langage qui se
-          rapproche du français.</li>
-        <li>x+1 peut être lu ainsi: la somme de x et de 1.</li>
-        <li>En langage du Club: (somme x 1).</li>
-        <li>(x+1)² peut être lu ainsi: le carré de la somme de x et 1.</li>
-        <li>En langage du Club: (carre (somme x 1)).</li>
-        <li>On voit que les parenthèses peuvent s’emboîter, comme les expressions.</li>
-        <li>Démo sur http://expressions.club/.</li>
-        <li>L’expression à reconstituer est au-dessus de la tentative.</li>
-        <li>La tentative est mise à jour en temps réel, sauf en mode
-          non interactif.</li>
-        <li>Le langage peut être tapé au clavier, mais aussi organisé
-          à l’aide de blocs, comme un puzzle.</li>
-        <li>L’emboîtement des opérations peut bien sûr aussi se faire
-          avec les blocs.</li>
-        <li>Des parenthèses sont ajoutées automatiquement.</li>
-        <li>Si vous tapez le code, attention à vos parenthèses, elles
-          n’ont pas le même sens qu’en maths.</li>
-        <li>Si vous utilisez les blocs, vous les trouvez dans les catégories
-          sur la gauche. Si vous ne trouvez pas un bloc, pensez à regarder
-          plus bas (« ascenceur » gris).</li>
-        <li>Dans «x+1», l’opération (addition) est entre le x et le 1.
-          Avec le club, on parle du résultat de l’opération donc on utilise
-          le mot «somme» et on le met devant le x et le 1 (code et blocs).
-          Donc pas de (x somme 1) ni de [x][somme][1].</li>
-        <li>À part pour la série de la page d’accueil, il faut se présenter en
-          donnant sa classe et son nom: 2nde1 Prénom Nom.</li>
-        <li>Amusez-vous bien.</li>
-      </ul>
       <h2 id="credits">Crédits</h2>
       <p>Site réalisé par <a href="http://profgra.org/lycee/">Prof Gra</a> grâce à
       <a href="http://facebook.github.io/react/">React</a>
