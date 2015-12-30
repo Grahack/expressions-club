@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Club des Expressions</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="jquery.min.js"><\/script>')</script>
+  <script src="react/react.min.js"></script>
+  <script src="react/JSXTransformer.js"></script>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      extensions: ["tex2jax.js","fp.js"],
+      MathMenu: {
+          showLocale: false,
+      },
+      jax: ["input/TeX","output/HTML-CSS"],
+      tex2jax: {
+          inlineMath: [['$','$']],
+          displayMath: [['$$','$$']],
+          }
+      });
+  </script>
+  <script type="text/javascript" src="mathjax/MathJax.js?locale=fr"></script>
+  <script src="int.js" type="text/javascript"></script>
+  <script src="emulisp_core.js" type="text/javascript"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div class="well clearfix">
+    <div id="jsx">Ça charge… Si les symptômes persistent,
+      c’est que vous n’avez peut-être pas activé JavaScript.
+      Voir <a href="http://enable-javascript.com/fr/">comment activer Javascript</a>.</div>
+  </div>
+  <script>
+    EMULISP_CORE.loadLisp("picolisp.l");
+    EMULISP_CORE.loadLisp("interexpr.l");
+    function lisp2latex(src) {
+      var latex = ''
+      try {
+        latex = EMULISP_CORE.eval('(add_p ' + src + ')').toString();
+      } catch(e) {
+        latex = "\\text{Error with lisp source: " + src + "}";
+        console.log(e);
+      }
+      // Do not display NIL.
+      if (latex == "NIL") latex = "";
+      // If surrounded with ", remove these.
+      if (latex.match(/^".*"$/)) latex = latex.slice(1, -1);
+      // Work around PicoLisp transients.
+      latex = latex.replace(/\\\\/g, "\\");
+      latex = latex.replace(/\\\^/g, "^");
+      return latex;
+    }
+  </script>
+  <script type="text/jsx">
+  var url = window.location.toString();
+  var series_id = url.substring(url.indexOf('?') + 1);
+  if (series_id == url) {
+    alert("Fournir un id de série après 'test.html?'.");
+  } else if (!series_id.match(/^[a-z0-9-_]+$/i)) {
+    // Only allow alphanum chars, - and _ and non empty strings.
+    alert("Mauvais identifiant de série : " + series_id);
+  }
+  var InterExpr = React.createClass({
+    getInitialState: function() {
+      return {
+        series_id: series_id,
+        series: false,
+        expr_id: 0
+      };
+    },
+    componentDidMount: function() {
+      $.get('series/' + series_id + '.json', function(result) {
+        if (this.isMounted()) {
+          this.setState({
+              series: result,
+              score: result.config.initial_score
+              });
+          this.timer = setInterval(this.tick,
+                                   this.state.series.config.point_duration * 1000);
+          this.state.series.exprs[0].date_start = Date.now();
+          this.state.series.exprs[0].score_start = this.state.score;
+          if (this.state.series.config.non_interactive) {
+            var msg = " Mode non interactif ! Votre tentative apparaîtra ";
+            msg += "après avoir appuyé une première fois sur [OK].";
+            $('#math-preview').text(msg);
+          }
+        }
+      }.bind(this)).fail(function () {alert("Pas de série " + series_id + ".")});
+    },
+    componentDidUpdate: function (props, state, root) {
+      var target = document.getElementById('target');
+      MathJax.Hub.Queue(['Typeset', MathJax.Hub, target]);
+    },
+    inSeriesGet: function(what) {
+      if (!this.state.series) return "???";
+      if (what == 'points')
+        return this.state.series.exprs[this.state.expr_id].points;
+      if (what == 'expr') {
+        if (this.state.running) {
+          return this.state.series.exprs[this.state.expr_id].expr;
+        } else {
+          return '';
+        }
+      }
+      if (what == 'first_date_start') {
+        return this.state.series.exprs[0].date_start;}
+      if (what == 'last_date_end') {
+        return this.state.series.exprs[this.state.expr_id - 1].date_end;
+      }
+      if (what == 'total_time') {
+        if (this.state.expr_id == 0) {
+          return 0;
+        } else {
+          return this.inSeriesGet('last_date_end') - this.inSeriesGet('first_date_start');
+        }
+      }
+      if (what == 'config')
+        return this.state.series.config;
+    },
+    handleChange: function() {
+      var math_input = document.getElementById('math-input').value;
+      this.setState({text: math_input});
+      if (!this.state.series.config.non_interactive) {
+        MathPreview.Update();
+      }
+      var expr_nature_attempt = this.get_expr_nature(math_input);
+      var expr_nature_target = this.get_expr_nature(this.inSeriesGet('expr'));
+      if (this.state.series.config.check_nature &&
+          math_input != this.state.last_text &&
+          expr_nature_attempt &&
+          this.available_natures.indexOf(expr_nature_attempt) > -1 &&
+          expr_nature_attempt != expr_nature_target) {
+          alert("La nature de l’expression n’est pas correcte.");
+      }
+      this.setState({last_text: math_input});
+    },
+    array_of_expr_as_li: function() {
+      //return <li>yo</li>;
+      if(this.state.series.exprs) {
+        return this.state.series.exprs.map(function(expr) {
+          return <li>
+              <span
+                 dangerouslySetInnerHTML={{__html: "$" + lisp2latex(expr.expr) + " $"}}/>
+              <span> dont le code est </span><code>{expr.expr}</code>
+                <span> et qui vaut {expr.points} points.</span>
+              </li>;
+        });
+      } else return "Ça arrive…";
+    },
+    render: function() {
+      var config = this.inSeriesGet('config');
+      return (
+        <div className="well clearfix">
+          <h1>Série « {this.state.series.title} »</h1>
+          <h2>Configuration</h2>
+          <ul>
+            <li>Contact : {config.email}</li>
+            <li>Score initial : {config.initial_score} pts</li>
+            <li>-{config.point_duration} pt(s) par seconde</li>
+            <li>Blocs {config.code_with_blocks?"visibles":"cachés"}</li>
+            <li>{config.non_interactive?"Non interactive":"Interactive"}</li>
+            <li>Score {config.display_score?"visible":"caché"}</li>
+            <li>Fond {config.display_weakness_indicator?"rouge progressif":"fixe"}</li>
+            <li>Score dans rapport : {config.report_success_only?"Non":"Oui"}</li>
+          </ul>
+          <h2>Expressions</h2>
+          <div id="target-container">
+            <ol>{this.array_of_expr_as_li()}</ol>
+          </div>
+          <div id="lisp-error"></div>
+        </div>
+      );
+    }
+  });
+  interexpr = React.render(
+    <InterExpr />,
+    document.getElementById('jsx')
+  );
+  </script>
+</body>
+</html>
