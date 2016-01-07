@@ -170,7 +170,7 @@
         </li>
         <li>Qu’est-ce qu’une bonne reconstitution
           <ul>
-            <li>Le but est seulement de reconstituer «graphiquement» les
+            <li>Le but est seulement de reconstituer « graphiquement » les
               expressions.</li>
             <li>Il ne faut pas simplifier les expressions.</li>
             <li>a+b doit être codé <code>(somme a b)</code> et non
@@ -366,6 +366,7 @@
                     ''),
         running: true,
         rapport: false,
+        msg: "",
         text: "",
         last_text: "",
         score: 0,
@@ -438,7 +439,9 @@
           expr_nature_attempt &&
           this.available_natures.indexOf(expr_nature_attempt) > -1 &&
           expr_nature_attempt != expr_nature_target) {
-          alert("La nature de l’expression n’est pas correcte.");
+        this.setState({msg: "La nature de l’expression n’est pas correcte."});
+      } else {
+        this.setState({msg: " "});
       }
       this.setState({last_text: math_input});
     },
@@ -626,7 +629,8 @@
                 "puis validez avec OK ou Ctrl+Enter."
             }
           </span>
-          <div id="lisp-error"></div>
+          <div id="lisp-error" className="error"></div>
+          <div className="error">{this.state.msg}</div>
           <div style={{display: this.blockly_display()}} id="blockly"></div>
           <textarea className="form-control" id="math-input"
                     onChange={this.handleChange}

@@ -28,7 +28,7 @@ pre code {
 #target-title, #math-title {
     float: left;
 }
-#lisp-error {
+.error {
   text-align: center;
   color: red;
 }
