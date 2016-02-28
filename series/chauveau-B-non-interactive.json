@@ -1,0 +1,54 @@
+{
+    "title": "Seconde: série B",
+    "config": {
+        "email": "mathilde.chauveau@ac-nantes.fr",
+        "initial_score": 500,
+        "point_duration": 10,
+        "code_with_blocks": true,
+        "non_interactive": true,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true
+    },
+    "exprs": [
+        {"expr": "(somme (oppose x) 3)",
+         "points": 10
+        },
+        {"expr": "(diff (produit 1.25 x) 0.75)",
+         "points": 10
+        },
+        {"expr": "(produit -2 (diff 3 x))",
+         "points": 10
+        },
+        {"expr": "(produit -0.25 (diff 3 (produit 5 x)))",
+         "points": 10
+        },
+        {"expr": "(quotient (somme 7 (produit 2 x)) 4)",
+         "points": 10
+        },
+        {"expr": "(oppose (quotient (somme 3 (produit 5 x)) 4))",
+         "points": 10
+        },
+        {"expr": "(quotient (somme -3 (produit 5 x)) 4)",
+         "points": 10
+        },
+        {"expr": "(diff (produit -5 (quotient x 4)) (quotient 3 4))",
+         "points": 10
+        },
+        {"expr": "(oppose (produit (inverse 4) (somme 3 (produit 5 x))))",
+         "points": 10
+        },
+        {"expr": "(diff (quotient 3 (produit 4 x)) (quotient 5 4))",
+         "points": 10
+        },
+        {"expr": "(quotient (diff 3 (produit 5 x)) (oppose 4))",
+         "points": 10
+        },
+        {"expr": "(somme (quotient (oppose 3) 4) (produit 5 x))",
+         "points": 10
+        },
+        {"expr": "(quotient (oppose 4) (diff (produit 5 x) 3))",
+         "points": 10
+        }
+    ]
+}
