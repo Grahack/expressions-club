@@ -31,7 +31,7 @@ Blockly.Msg.RENAME_VARIABLE_TITLE = "Renommer toutes les variables '%1' en :";
 
 Blockly.Expressions = new Blockly.Generator('Expressions');
 Blockly.Expressions.INDENT = '  ';
-Blockly.Expressions.addReservedWords('p, somme, diff, oppose, produitx, produit, produit., quotient, inverse, carre, racine2, racine, cube, puissance, indice, imagepar, cos, sin');
+Blockly.Expressions.addReservedWords('p, somme, diff, oppose, produitx, produit, produit., quotient, inverse, carre, racine2, racine, cube, puissance, indice, image_par, cos, sin');
 
 // La suite, jusqu’au commentaire de fin, n’a pas été modifiée.
 // Sauf la suppression du prologue de définition des variables.
