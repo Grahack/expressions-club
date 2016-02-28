@@ -503,6 +503,8 @@
       }
       if (attempt === expected) {
         var new_score = this.state.score + this.inSeriesGet('points');
+        var old_start = this.state.series.exprs[this.state.expr_id].date_start;
+        var duration = parseInt((Date.now() - old_start)/1000);
         this.setState({
           text: '',
           score: new_score});
@@ -520,8 +522,8 @@
           "entry.1880354594" : this.state.user_id,
           "entry.1716353797" : this.state.expr_id + 1,
           "entry.1638124843" : this.inSeriesGet('expr'),
-          "entry.1932553614" : "score",
-          "entry.512306975"  : "temps"};
+          "entry.1932553614" : new_score,
+          "entry.512306975"  : duration};
         $.ajax({
           url: "https://docs.google.com/a/expressions.club/forms/d/1lT0Am8T3AYUvuJ53xbpukS6nT96anHC7_pDuQ23os2M/formResponse",
           data: data,
