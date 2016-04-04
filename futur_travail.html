@@ -17,18 +17,42 @@
   </div>
   <div id="reponses">
     <p>Cette expression est :</p>
+    <div class="colonnes-reponses">
     <input type="radio" id="type-somme" name="type-expr" value="type" />
     <label id="label-type-somme" for="type-somme">une somme</label><br>
     <input type="radio" id="type-difference" name="type-expr" value="type" />
     <label id="label-type-difference" for="type-difference">une différence</label><br>
+    <input type="radio" id="type-oppose" name="type-expr" value="type" />
+    <label id="label-type-oppose" for="type-oppose">un opposé</label><br>
     <input type="radio" id="type-produit" name="type-expr" value="type" />
     <label id="label-type-produit" for="type-produit">un produit</label><br>
     <input type="radio" id="type-quotient" name="type-expr" value="type" />
     <label id="label-type-quotient" for="type-quotient">un quotient</label><br>
+    <input type="radio" id="type-inverse" name="type-expr" value="type" />
+    <label id="label-type-inverse" for="type-inverse">un inverse</label><br>
+    <input type="radio" id="type-carre" name="type-expr" value="type" />
+    <label id="label-type-carre" for="type-carre">un carré</label><br>
+    <input type="radio" id="type-racine2" name="type-expr" value="type" />
+    <label id="label-type-racine2" for="type-racine2">une racine carrée</label><br>
+    </div>
+    <div class="colonnes-reponses">
+    <input type="radio" id="type-cube" name="type-expr" value="type" />
+    <label id="label-type-cube" for="type-cube">un cube</label><br>
     <input type="radio" id="type-puissance" name="type-expr" value="type" />
     <label id="label-type-puissance" for="type-puissance">une puissance</label><br>
     <input type="radio" id="type-terme" name="type-expr" value="type" />
-    <label id="label-type-terme" for="type-terme">le terme d’une suite</label><br>
+    <label id="label-type-terme" for="type-terme">un terme d’une suite</label><br>
+    <input type="radio" id="type-image" name="type-expr" value="type" />
+    <label id="label-type-image" for="type-image">une image par une fonction</label><br>
+    <input type="radio" id="type-cos" name="type-expr" value="type" />
+    <label id="label-type-cos" for="type-cos">un cosinus</label><br>
+    <input type="radio" id="type-sin" name="type-expr" value="type" />
+    <label id="label-type-sin" for="type-sin">un sinus</label><br>
+    <input type="radio" id="type-ln" name="type-expr" value="type" />
+    <label id="label-type-ln" for="type-ln">un logarithme népérien</label><br>
+    <input type="radio" id="type-exp" name="type-expr" value="type" />
+    <label id="label-type-exp" for="type-exp">une exponentielle</label><br>
+    </div>
     <input type="button" id="verif" value="Vérifier" onclick="verif();" />
   </div>
   <div id="footer">
