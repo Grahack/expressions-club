@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Futur Club</title>
+  <link rel="stylesheet" href="futur.css">
+</head>
+<body>
+  <div id="utilisateur">
+    <a href="#" class="tip" title="Menu utilisateur (déconnexion…)">John</a>
+  </div>
+  <h1>Club des Expressions</h1>
+  <h2>Puissances</h2>
+  <div id="a-reconstituer">
+    <div class="titre-a-reconstituer">Expression à reconstituer :</div>
+    <div class="expr" id="expr-a-reconstituer">3²</div>
+    <div class="titre-a-reconstituer">Votre tentative :</div>
+    <div class="expr" id="tentative">?</div>
+  </div>
+  <div id="reponses">
+    <div id="msg">&nbsp;</div>
+    <p>Cette expression est une puissance.</p>
+    <textarea id="code-club">(puissance )</textarea>
+    <input type="button" id="verif" value="Vérifier" onclick="verif();" />
+    <p>Commandes disponibles (qui ajouteront du code dans la boîte ci-dessus) :</p>
+    <p>
+      <a href="">somme</a>
+      <a href="">diff</a>
+      <a href="">oppose</a>
+      <a href="">produit</a>
+      <a href="">quotient</a>
+      <a href="">inverse</a>
+      <a href="">carre</a>
+      <a href="">racine2</a>
+      <a href="">racine</a>
+      <a href="">cube</a>
+      <a href="">puissance</a>
+      <a href="">terme_indice</a>
+      <a href="">image_par</a>
+      <a href="">cos</a>
+      <a href="">sin</a>
+      <a href="">ln</a>
+      <a href="">exp</a>
+    </p>
+  </div>
+  <div id="footer">
+    <div class="col">
+      <div class="col-title">Aide</div>
+      <div><a href="#">Exemples</a></div>
+      <div><a href="#">Documentation</a></div>
+    </div>
+    <div class="col">
+      <div class="col-title">Actualités</div>
+      <div><a href="#">Blog</a></div>
+      <div><a href="#">Twitter</a></div>
+      <div><a href="#">Dernières modifications</a></div>
+    </div>
+    <div class="col">
+      <div class="col-title">Contact</div>
+      <div><a href="#">Courriel</a></div>
+      <div><a href="#">Twitter</a></div>
+      <div><a href="#">Facebook</a></div>
+    </div>
+  </div>
+  <script>
+  function verif() {
+    var code_club = document.getElementById('code-club');
+    var msg = document.getElementById('msg');
+    if (code_club.value == '(puissance 3 2)') {
+      msg.style.setProperty('color', 'red');
+      msg.innerHTML = "Bravo !";
+      msg.style.setProperty('color', '#0D0');
+      setTimeout("window.location.replace('futur_travail.html');", 1500);
+    } else {
+      msg.innerHTML = "Essaie encore.";
+      msg.style.setProperty('color', 'red');
+      setTimeout('msg.innerHTML = "&nbsp;";', 3000);
+    }
+  }
+  </script>
+</body>
+</html>

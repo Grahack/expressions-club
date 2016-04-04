@@ -1,0 +1,57 @@
+body {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #FFFFF8;
+    color: #111111;
+}
+a, a:visited {
+    color: blue;
+}
+#utilisateur {
+    text-align: right;
+}
+.niveau {
+    border: solid 1px black;
+    margin: 0 0.5em 0 0;
+    padding: 0 1em 0 0;
+}
+.niveau-0 {
+    background-color: #F00;
+}
+.niveau-2 {
+    background-color: #FF0;
+}
+#a-reconstituer {
+    float: left;
+    width: 50%;
+}
+.expr {
+    font-size: 2em;
+    text-align: center;
+    padding-top: 1em;
+}
+#reponses {
+    float: left;
+    width: 50%;
+}
+#verif {
+    margin: 10px;
+}
+#code-club {
+    width: 100%;
+}
+#footer {
+    float: left;
+    width: 100%;
+    margin-top: 50px;
+    padding: 1em;
+    border: solid 1px black;
+    background-color: #ddd;
+}
+#footer .col {
+    float: left;
+    width: 33%;
+}
+#footer .col-title {
+    font-weight: bold;
+}
