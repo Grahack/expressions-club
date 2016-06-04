@@ -11,12 +11,6 @@
   </div>
   <h1>Club des Expressions</h1>
   <h2>Puissances</h2>
-  <div id="a-reconstituer">
-    <div class="titre-a-reconstituer">Expression à reconstituer :</div>
-    <div class="expr" id="expr-a-reconstituer">3²</div>
-    <div class="titre-a-reconstituer">Votre expression :</div>
-    <div class="expr" id="tentative">?</div>
-  </div>
   <div id="reponses">
     <div id="msg">&nbsp;</div>
     <p>Cette expression est une <strong>puissance</strong>.</p>
@@ -44,6 +38,12 @@
       <a href="">exp</a>
     </p>
   </div>
+  <div id="a-reconstituer">
+    <div class="titre-a-reconstituer">Expression à reconstituer :</div>
+    <div class="expr" id="expr-a-reconstituer">3⁴</div>
+    <div class="titre-a-reconstituer">Le résultat de votre tentative :</div>
+    <div class="expr" id="tentative">?</div>
+  </div>
   <div id="footer">
     <div class="col">
       <div class="col-title">Aide</div>
@@ -67,7 +67,7 @@
   function verif() {
     var code_club = document.getElementById('code-club');
     var msg = document.getElementById('msg');
-    if (code_club.value == '(puissance 3 2)') {
+    if (code_club.value == '(puissance 3 4)') {
       msg.style.setProperty('color', 'red');
       msg.innerHTML = "Bravo !";
       msg.style.setProperty('color', '#0D0');
