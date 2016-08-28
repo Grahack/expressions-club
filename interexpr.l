@@ -82,7 +82,7 @@
 (de ? (x) (if x @ "?"))
 
 (de par (x) (pack "\\left( " (? x) " \\right)"))
-(de somme @ (opglue "+" (rest)))
+(de somme @ (opglue " + " (rest)))
 (de diff (x y) (pack (? x) " - " (? y)))
 (de oppose (x) (pack "-" (? x)))
 (de produitx @ (opglue " \\times " (rest)))
@@ -103,7 +103,7 @@
 (de ln (x)  (pack "\\ln"  (? x)))
 
 (setq tests '(
-  ((somme a b) "a+b")
+  ((somme a b) "a + b")
   ((diff a b) "a - b")
   ) )
 
