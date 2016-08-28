@@ -101,3 +101,19 @@
 (de sin (x) (pack "\\sin" (par (? x))))
 (de exp (x) (pack "\\exp" (? x)))
 (de ln (x)  (pack "\\ln"  (? x)))
+
+(setq tests '(
+  ((somme a b) "a+b")
+  ((diff a b) "a - b")
+  ) )
+
+(de test_a_pair (pair)
+  (let (expr (car pair)
+        attempt (eval expr)
+        expected (cadr pair))
+       (ifn (= attempt expected)
+            (println expr (pack attempt "!=" expected))
+       )
+  )
+)
+(mapcar test_a_pair tests)
