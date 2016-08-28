@@ -5,6 +5,9 @@
 (setq u "u" U "U" v "v" V "V" w "w" W "W" x "x" X "X" y "y" Y "Y" z "z" Z "Z")
 (setq pi "\\pi" Pi "\\Pi")
 
+# Avoid 'redefined' message
+(setq ? NIL diff NIL)
+
 (de ma-def arg-list
     (let (
           nom (car arg-list)
