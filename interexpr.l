@@ -107,11 +107,12 @@
   (x "x")
   ((somme a b) "a + b")
   ((diff a b) "a - b")
+  ((produit 2 (somme x 1)) "2 \\left( x + 1 \\right)")
   ) )
 
 (de test_a_pair (pair)
   (let (expr (car pair)
-        attempt (eval expr)
+        attempt (add_p_rec expr)
         expected (cadr pair))
        (ifn (= attempt expected)
             (println expr (pack attempt "!=" expected))
