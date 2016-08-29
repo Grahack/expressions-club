@@ -57,11 +57,13 @@
            (let (children_with_p
                   (mapcar '((term) (add_p_rec term current_precedence))
                           terms))
-                (if (and current_precedence
-                         parent_precedence
-                         (>= parent_precedence current_precedence))
-                    (par (apply op children_with_p))
-                    (apply op children_with_p)
+                (cond
+                  ((and current_precedence
+                       parent_precedence
+                       (>= parent_precedence current_precedence))
+                    (par (apply op children_with_p)))
+                  (T
+                    (apply op children_with_p))
                 )
            )
       )
