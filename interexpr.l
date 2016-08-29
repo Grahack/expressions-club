@@ -48,16 +48,24 @@
 (de add_p prg
   (glue "\\text{ ? }" (mapcar 'add_p_rec prg)))
 
-(de add_p_rec (prg parent_precedence)
+(de add_p_rec (prg parent_op parent_precedence rank)
   (if (atom prg)
       (eval prg)
       (let (op (car prg)
             terms (cdr prg)
             current_precedence (get 'precedence op))
            (let (children_with_p
-                  (mapcar '((term) (add_p_rec term current_precedence))
-                          terms))
+                  (mapcar '((term rank) (add_p_rec term op current_precedence rank))
+                          terms
+                          (range 1 (length terms))))
                 (cond
+                  # Suppress parens of sums within sums
+                  ((= 'somme parent_op op)
+                    (apply op children_with_p))
+                  # Suppress parens around first arg of a diff
+                  ((and (= 'diff parent_op)
+                        (= rank 1))
+                    (apply op children_with_p))
                   ((and current_precedence
                        parent_precedence
                        (>= parent_precedence current_precedence))
@@ -112,9 +120,15 @@
   ((produit 2 (somme x 1)) "2 \\left( x + 1 \\right)")
   ((somme a b c) "a + b + c")
   ((somme (diff a b) c) "a - b + c")
+  ((somme (somme a b) c) "a + b + c")
+  ((somme a (somme b c)) "a + b + c")
+  ((diff (somme a b) c) "a + b - c")
   ((diff a (somme b c)) "a - \\left( b + c \\right)")
+  ((diff (diff a b) c) "a - b - c")
   ((diff a (diff b c)) "a - \\left( b - c \\right)")
+  ((somme (produit 10 a) (diff (diff b a) b)) "10 a + b - a - b")
   ((somme (produit 10 a) (diff b a)) "10 a + b - a")
+  ((diff (somme (produit 10 a) b)a) "10 a + b - a")
   ) )
 
 (de test_a_pair (pair)
