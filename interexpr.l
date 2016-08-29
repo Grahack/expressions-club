@@ -103,6 +103,8 @@
 (de ln (x)  (pack "\\ln"  (? x)))
 
 (setq tests '(
+  (a "a")
+  (x "x")
   ((somme a b) "a + b")
   ((diff a b) "a - b")
   ) )
