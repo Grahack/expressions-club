@@ -5,11 +5,9 @@
         "initial_score": 100,
         "point_duration": 15,
         "code_with_blocks": true,
-        "non_interactive": false,
         "check_nature": true,
         "display_score": true,
-        "display_weakness_indicator": true,
-        "report_success_only": false
+        "display_weakness_indicator": true
     },
     "exprs": [
         {"expr": "(somme 2 2)",

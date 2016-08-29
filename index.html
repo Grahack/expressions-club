@@ -270,14 +270,12 @@
       <pre><code>{
     "title": "Titre de la série",
     "config": {
-        "email": "destinataire-rapport@example.com",
+        "email": "createur-serie@example.com",
         "initial_score": 100,
         "point_duration": 15,
         "code_with_blocks": true,
-        "non_interactive": false,
         "display_score": true,
-        "display_weakness_indicator": true,
-        "report_success_only": false
+        "display_weakness_indicator": true
     },
     "exprs": [
         {"expr": "(somme 2 2)",
@@ -365,7 +363,7 @@
                     this.getUserId():
                     ''),
         running: true,
-        rapport: false,
+        interactive: true,
         msg: "",
         text: "",
         last_text: "",
@@ -411,7 +409,7 @@
                                    this.state.series.config.point_duration * 1000);
           this.state.series.exprs[0].date_start = Date.now();
           this.state.series.exprs[0].score_start = this.state.score;
-          if (this.state.series.config.non_interactive) {
+          if (!this.state.interactive) {
             var msg = " Mode non interactif ! Votre tentative apparaîtra ";
             msg += "après avoir appuyé une première fois sur [OK].";
             $('#math-preview').text(msg);
@@ -429,7 +427,7 @@
     handleChange: function() {
       var math_input = document.getElementById('math-input').value;
       this.setState({text: math_input});
-      if (!this.state.series.config.non_interactive) {
+      if (this.state.interactive) {
         MathPreview.Update();
       }
       var expr_nature_attempt = this.get_expr_nature(math_input);
@@ -497,7 +495,7 @@
       var attempt  = this.lisp2latex(this.state.text, 'attempt');
       console.log('expected: |' + expected + '|');
       console.log('attempt : |' + attempt  + '|');
-      if (this.state.series.config.non_interactive) {
+      if (!this.state.interactive) {
         $('#lisp-error').text('');
       }
       if (attempt === expected) {
@@ -543,20 +541,17 @@
           this.state.series.exprs[this.state.expr_id+1].score_start = new_score;
           alert("Bravo ! Une autre !");
         }
-        if (this.state.series.config.non_interactive) {
+        if (!this.state.interactive) {
           var msg = " Mode non interactif ! Votre tentative apparaîtra ";
           msg += "après avoir appuyé une première fois sur [OK].";
           $('#math-buffer').text(msg);
         }
       } else {
-        if (this.state.series.config.non_interactive) {
+        if (!this.state.interactive) {
           MathPreview.Update();
         }
         alert("Essayez encore !");
       }
-    },
-    handleRapport: function() {
-      this.setState({rapport: !this.state.rapport});
     },
     tick: function() {
         this.setState({score: this.state.score - 1});
@@ -622,9 +617,7 @@
           </div>
           <div>{this.score()}</div>
           <span>
-            {!this.state.running ?
-              "Merci. Cliquez maintenant sur le lien « Rapport » ci-dessous." :
-              this.state.text.length > 0 ?
+            {this.state.text.length > 0 ?
                 " " :
                 "Entrez vos commandes ci-dessous, " +
                 "avec les blocs ou en le tapant vous-même, " +
@@ -642,8 +635,6 @@
                   disabled={!this.state.running || this.state.text.length === 0}
                   onClick={this.checkExpr}>OK</button>
           <div>{this.infos()}</div>
-          <p><a onClick={this.handleRapport}>{this.state.rapport? "Fermer le rapport":"Rapport"}</a></p>
-          <div>{this.rapport()}</div>
         </div>
       );
     },
@@ -683,66 +674,6 @@
         return <p>Vous jouez pour {this.inSeriesGet('points')} point{s ? "s" : ""}.
                Vous perdez un point toutes
                les{this.inSeriesGet('config').point_duration>1?" "+this.inSeriesGet('config').point_duration:""} secondes.</p>
-      }
-    },
-    rapport: function() {
-      var self = this;
-      if (!this.state.rapport) return;
-      return <div id="report">
-        <h1>Rapport</h1>
-        <p>{this.rapport_mailto()} - Si un courrier électronique prérempli
-           n’apparaît pas, merci de copier-coller ce rapport dans un nouvel
-           email et d’indiquer un destinataire à la main.</p>
-        <p>{this.state.series.title} 
-           (<a href="{window.location.toString()}">{window.location.toString()}</a>)</p>
-        <p>{(!this.state.running || this.inSeriesGet('config').display_score)?
-           "Score : " + this.state.score : ''}</p>
-        <p>{(this.inSeriesGet('config').report_success_only)?
-            "":
-            ("Durée totale : " +
-             (this.state.expr_id>0)?
-              (this.inSeriesGet('total_time')/1000 | 0) + "s":
-              "en cours…")}</p>
-        <ol>{
-          this.state.series.exprs.map(function(elt, index) {
-            return <li>{elt.date_end ? self.elt_stats(elt) : "en cours…"}</li>;
-          })
-        }</ol>
-        </div>;
-    },
-    rapport_txt: function() {
-      var self = this;
-      return this.state.series.title +
-        " (" + window.location.toString() + ")\n\n" +
-        ((!this.state.running || this.inSeriesGet('config').display_score)?
-          "Score : " + this.state.score : '') + "\n" +
-        ((!this.inSeriesGet('config').report_success_only)?
-          "":
-          "Durée totale : " +
-          ((this.state.expr_id>0)?
-            (this.inSeriesGet('total_time')/1000 | 0) + "s":
-            "en cours…") + "\n"
-        ) +
-        this.state.series.exprs.map(function(elt, index) {
-          return "\n* " + elt.expr + " : " +
-            (elt.date_end ? self.elt_stats(elt) : "en cours…");
-        });
-    },
-    rapport_mailto: function() {
-      var email = this.inSeriesGet('config').email;
-      return <span dangerouslySetInnerHTML={{__html:
-        '<a href="mailto:' + ((typeof email == 'undefined')? '':email) +
-        '?subject=Rapport%20Expressions%20' +
-        encodeURIComponent(this.state.series.title) +
-        '&body=' + encodeURIComponent(this.rapport_txt()) + '">Envoyer</a>'
-      }}/>;
-    },
-    elt_stats: function(elt) {
-      if (this.inSeriesGet('config').report_success_only) {
-        return "OK";
-      } else {
-        return <span>{elt.expr} : {elt.score_end - elt.score_start} pts
-               en {(elt.date_end - elt.date_start)/1000 | 0}s</span>
       }
     },
     lisp2latex: function(src, type) {
