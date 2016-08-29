@@ -110,6 +110,11 @@
   ((somme a b) "a + b")
   ((diff a b) "a - b")
   ((produit 2 (somme x 1)) "2 \\left( x + 1 \\right)")
+  ((somme a b c) "a + b + c")
+  ((somme (diff a b) c) "a - b + c")
+  ((diff a (somme b c)) "a - \\left( b + c \\right)")
+  ((diff a (diff b c)) "a - \\left( b - c \\right)")
+  ((somme (produit 10 a) (diff b a)) "10 a + b - a")
   ) )
 
 (de test_a_pair (pair)
