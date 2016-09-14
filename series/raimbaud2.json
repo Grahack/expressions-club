@@ -1,0 +1,44 @@
+{
+    "title": "Seconde: Découverte",
+    "config": {
+        "email": "nicolas.raimbaud@ac-nantes.fr",
+        "initial_score": 100,
+        "point_duration": 12,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true
+    },
+    "exprs": [
+        {"expr": "(somme x 5)",
+         "points": 10
+        },
+        {"expr": "(produit 3 x)",
+         "points": 10
+        },
+        {"expr": "(diff (produit 3 x) 1)",
+         "points": 20
+        },
+        {"expr": "(diff (carre x) 4)",
+         "points": 20
+        },
+        {"expr": "(produit 3 (diff x 2))",
+         "points": 20
+        },
+        {"expr": "(produit (diff x 1) (somme x 3))",
+         "points": 30
+        },
+        {"expr": "(somme (carre x) (produit 2 x))",
+         "points": 30
+        },
+        {"expr": "(produit 2 (carre (diff x 1)))",
+         "points": 30
+        },
+        {"expr": "(diff (produit 2 x) (carre (somme x 3)))",
+         "points": 40
+        },
+        {"expr": "(diff (produit 2 (carre (diff x 1))) (produit 3 (somme x 2)))",
+         "points": 60
+        }
+    ]
+}
