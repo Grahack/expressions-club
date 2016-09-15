@@ -25,8 +25,11 @@
         {"expr": "(produit a (quotient b c))",
          "points": 20
         },
-        {"expr": "(diff (diff (somme (produit 10 x) y) x) y)",
+        {"expr": "(diff (somme (produit 10 x) y) x)",
          "points": 30
+        },
+        {"expr": "(diff (diff (somme (produit 10 x) y) x) y)",
+         "points": 50
         }
     ]
 }
