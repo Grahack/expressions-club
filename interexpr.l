@@ -1,9 +1,12 @@
 (setq a "a" A "A" b "b" B "B" c "c" C "C" d "d" D "D" e "e" E "E")
 (setq f "f" F "F" g "g" G "G" h "h" H "H" i "i" I "I" j "j" J "J")
 (setq k "k" K "K" l "l" L "L" m "m" M "M" n "n" N "N" o "o" O "O")
-(setq p "p" P "P" q "q" Q "Q" r "r" R "R" s "s" S "S" t "t")' # T protected
+(setq p "p" P "P" q "q" Q "Q" r "r" R "R" s "s" S "S" t "t") # T protected
 (setq u "u" U "U" v "v" V "V" w "w" W "W" x "x" X "X" y "y" Y "Y" z "z" Z "Z")
 (setq pi "\\pi" Pi "\\Pi")
+
+# Avoid 'redefined' message
+(setq ? NIL diff NIL)
 
 (de ma-def arg-list
     (let (
@@ -45,20 +48,30 @@
 (de add_p prg
   (glue "\\text{ ? }" (mapcar 'add_p_rec prg)))
 
-(de add_p_rec (prg parent_precedence)
+(de add_p_rec (prg parent_op parent_precedence rank)
   (if (atom prg)
       (eval prg)
       (let (op (car prg)
             terms (cdr prg)
             current_precedence (get 'precedence op))
            (let (children_with_p
-                  (mapcar '((term) (add_p_rec term current_precedence))
-                          terms))
-                (if (and current_precedence
-                         parent_precedence
-                         (>= parent_precedence current_precedence))
-                    (par (apply op children_with_p))
-                    (apply op children_with_p)
+                  (mapcar '((term rank) (add_p_rec term op current_precedence rank))
+                          terms
+                          (range 1 (length terms))))
+                (cond
+                  # Suppress parens of sums within sums
+                  ((= 'somme parent_op op)
+                    (apply op children_with_p))
+                  # Suppress parens around first arg of a diff
+                  ((and (= 'diff parent_op)
+                        (= rank 1))
+                    (apply op children_with_p))
+                  ((and current_precedence
+                       parent_precedence
+                       (>= parent_precedence current_precedence))
+                    (par (apply op children_with_p)))
+                  (T
+                    (apply op children_with_p))
                 )
            )
       )
@@ -79,7 +92,7 @@
 (de ? (x) (if x @ "?"))
 
 (de par (x) (pack "\\left( " (? x) " \\right)"))
-(de somme @ (opglue "+" (rest)))
+(de somme @ (opglue " + " (rest)))
 (de diff (x y) (pack (? x) " - " (? y)))
 (de oppose (x) (pack "-" (? x)))
 (de produitx @ (opglue " \\times " (rest)))
@@ -98,3 +111,33 @@
 (de sin (x) (pack "\\sin" (par (? x))))
 (de exp (x) (pack "\\exp" (? x)))
 (de ln (x)  (pack "\\ln"  (? x)))
+
+(setq tests '(
+  (a "a")
+  (x "x")
+  ((somme a b) "a + b")
+  ((diff a b) "a - b")
+  ((produit 2 (somme x 1)) "2 \\left( x + 1 \\right)")
+  ((somme a b c) "a + b + c")
+  ((somme (diff a b) c) "a - b + c")
+  ((somme (somme a b) c) "a + b + c")
+  ((somme a (somme b c)) "a + b + c")
+  ((diff (somme a b) c) "a + b - c")
+  ((diff a (somme b c)) "a - \\left( b + c \\right)")
+  ((diff (diff a b) c) "a - b - c")
+  ((diff a (diff b c)) "a - \\left( b - c \\right)")
+  ((somme (produit 10 a) (diff (diff b a) b)) "10 a + b - a - b")
+  ((somme (produit 10 a) (diff b a)) "10 a + b - a")
+  ((diff (somme (produit 10 a) b)a) "10 a + b - a")
+  ) )
+
+(de test_a_pair (pair)
+  (let (expr (car pair)
+        attempt (add_p_rec expr)
+        expected (cadr pair))
+       (ifn (= attempt expected)
+            (println expr (pack attempt "!=" expected))
+       )
+  )
+)
+(mapcar test_a_pair tests)
