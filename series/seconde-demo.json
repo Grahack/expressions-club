@@ -1,0 +1,29 @@
+{
+    "title": "Seconde: Démonstration",
+    "config": {
+        "email": "christophe.gragnic@ac-nantes.fr",
+        "initial_score": 100,
+        "point_duration": 5,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true
+    },
+    "exprs": [
+        {"expr": "(somme 1 (produit 2 x))",
+         "points": 10
+        },
+        {"expr": "(produit 5 (somme x 2))",
+         "points": 10
+        },
+        {"expr": "(diff x (somme y 1))",
+         "points": 10
+        },
+        {"expr": "(produit 2 (somme (produit 3 a) 4))",
+         "points": 30
+        },
+        {"expr": "(produit pi (quotient R 2))",
+         "points": 20
+        }
+    ]
+}
