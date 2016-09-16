@@ -10,6 +10,9 @@
         "report_success_only": true
     },
     "exprs": [
+        {"expr": "(somme x 1)",
+         "points": 5
+        },
         {"expr": "(somme 1 (produit 2 x))",
          "points": 10
         },
