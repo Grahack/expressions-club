@@ -617,7 +617,9 @@
           </div>
           <div>{this.score()}</div>
           <span>
-            {this.state.text.length > 0 ?
+            {!this.state.running ?
+              "Merci. Vous pouvez fermer." :
+              this.state.text.length > 0 ?
                 " " :
                 "Entrez vos commandes ci-dessous, " +
                 "avec les blocs ou en le tapant vous-même, " +
