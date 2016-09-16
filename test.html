@@ -77,15 +77,6 @@
               series: result,
               score: result.config.initial_score
               });
-          this.timer = setInterval(this.tick,
-                                   this.state.series.config.point_duration * 1000);
-          this.state.series.exprs[0].date_start = Date.now();
-          this.state.series.exprs[0].score_start = this.state.score;
-          if (this.state.series.config.non_interactive) {
-            var msg = " Mode non interactif ! Votre tentative apparaîtra ";
-            msg += "après avoir appuyé une première fois sur [OK].";
-            $('#math-preview').text(msg);
-          }
         }
       }.bind(this)).fail(function () {alert("Pas de série " + series_id + ".")});
     },
