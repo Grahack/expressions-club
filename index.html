@@ -411,7 +411,7 @@
           this.state.series.exprs[0].score_start = this.state.score;
           if (!this.state.interactive) {
             var msg = " Mode non interactif ! Votre tentative apparaîtra ";
-            msg += "après avoir appuyé une première fois sur [OK].";
+            msg += "après avoir appuyé une première fois sur [Tester].";
             $('#math-preview').text(msg);
           }
         }
@@ -543,7 +543,7 @@
         }
         if (!this.state.interactive) {
           var msg = " Mode non interactif ! Votre tentative apparaîtra ";
-          msg += "après avoir appuyé une première fois sur [OK].";
+          msg += "après avoir appuyé une première fois sur [Tester].";
           $('#math-buffer').text(msg);
         }
       } else {
@@ -623,7 +623,7 @@
                 " " :
                 "Entrez vos commandes ci-dessous, " +
                 "avec les blocs ou en le tapant vous-même, " +
-                "puis validez avec OK ou Ctrl+Enter."
+                "puis validez avec Tester ou Ctrl+Enter."
             }
           </span>
           <div id="lisp-error" className="error"></div>
@@ -635,7 +635,7 @@
           <br/>
           <button className="btn btn-primary pull-right"
                   disabled={!this.state.running || this.state.text.length === 0}
-                  onClick={this.checkExpr}>OK</button>
+                  onClick={this.checkExpr}>Tester</button>
           <div>{this.infos()}</div>
         </div>
       );
