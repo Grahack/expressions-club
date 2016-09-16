@@ -23,7 +23,7 @@
     )
     (def (car arg-list) (eval (cadr arg-list)) (eval (caddr arg-list)))
 )
-(setq cmds_list '(somme diff oppose produitx produit produit. quotient inverse carre racine2 racine cube puissance terme_indice image_par cos sin ln exp par))
+(setq cmds_list '(somme diff oppose produitx produit produit. quotient inverse carre racine2 racine cube puissance terme_indice image_par cos sin ln exp))
 
 (put 'precedence 'oppose    10)
 (put 'precedence 'somme     12)
