@@ -546,6 +546,7 @@
           msg += "après avoir appuyé une première fois sur [Tester].";
           $('#math-buffer').text(msg);
         }
+        $("#math-input").focus();
       } else {
         if (!this.state.interactive) {
           MathPreview.Update();
