@@ -7,7 +7,8 @@
         "code_with_blocks": false,
         "display_score": false,
         "display_weakness_indicator": false,
-        "report_success_only": true
+        "report_success_only": true,
+        "hybrid_flow": true
     },
     "exprs": [
         {"expr": "(produit 3 x)",
