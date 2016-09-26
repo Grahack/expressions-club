@@ -151,7 +151,8 @@
             <li>Score initial : {config.initial_score} pts</li>
             <li>Perte d’un point chaque {config.point_duration}s</li>
             <li>Blocs {config.code_with_blocks?"visibles":"cachés"}</li>
-            <li>{config.non_interactive?"Non interactive":"Interactive"}</li>
+            <li>{config.hybrid_flow?"Flot hybride":
+                 (config.non_interactive?"Non interactive":"Interactive")}</li>
             <li>Score {config.display_score?"visible":"caché"}</li>
             <li>Fond {config.display_weakness_indicator?"rouge progressif":"fixe"}</li>
             <li>Score dans rapport : {config.report_success_only?"Non":"Oui"}</li>

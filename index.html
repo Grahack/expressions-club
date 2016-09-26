@@ -532,16 +532,27 @@
           clearInterval(this.timer);
           alert("Bravo ! Voilà, c’est fini !");
         } else {
-          this.setState({expr_id: this.state.expr_id + 1});
-          this.state.series.exprs[this.state.expr_id+1].date_start = Date.now();
-          this.state.series.exprs[this.state.expr_id+1].score_start = new_score;
-          alert("Bravo ! Une autre !");
+          if (this.state.interactive && this.inSeriesGet('config').hybrid_flow) {
+            alert("Bravo ! La même en mode non interactif !");
+            this.setState({interactive: false});
+            var msg = " Mode non interactif ! Votre tentative apparaîtra ";
+            msg += "après avoir appuyé une première fois sur [OK].";
+            $('#math-preview').text(msg);
+            $('#math-buffer').text(msg);
+          } else {
+            this.setState({expr_id: this.state.expr_id + 1});
+            this.state.series.exprs[this.state.expr_id+1].date_start = Date.now();
+            this.state.series.exprs[this.state.expr_id+1].score_start = new_score;
+            alert("Bravo ! Une autre !");
+            if (!this.state.interactive) {
+              var msg = " Mode non interactif ! Votre tentative apparaîtra ";
+              msg += "après avoir appuyé une première fois sur [OK].";
+              $('#math-preview').text(msg);
+              $('#math-buffer').text(msg);
+            }
+          }
         }
-        if (!this.state.interactive) {
-          var msg = " Mode non interactif ! Votre tentative apparaîtra ";
-          msg += "après avoir appuyé une première fois sur [Tester].";
-          $('#math-buffer').text(msg);
-        }
+        $("#math-input").focus();
       } else {
         if (!this.state.interactive) {
           MathPreview.Update();
@@ -616,12 +627,14 @@
               this.state.text.length > 0 ?
                 " " :
                 "Entrez vos commandes ci-dessous, " +
-                "avec les blocs ou en le tapant vous-même, " +
+                (this.inSeriesGet('config').code_with_blocks ?
+                 "avec les blocs ou en le tapant vous-même, " : "") +
                 "puis validez avec Tester ou Ctrl+Enter."
             }
           </span>
           <div id="lisp-error" className="error"></div>
           <div className="error">{this.state.msg}</div>
+          <div id="too-hard-link">{this.too_hard_link()}</div>
           <div style={{display: this.blockly_display()}} id="blockly"></div>
           <textarea className="form-control" id="math-input"
                     onChange={this.handleChange}
@@ -633,6 +646,24 @@
           <div>{this.infos()}</div>
         </div>
       );
+    },
+    too_hard_link: function() {
+      if (this.inSeriesGet('config').hybrid_flow && !this.state.interactive) {
+        return <a onClick={this.too_hard}>C’est trop difficile, je veux repasser en mode interactif.</a>
+      }
+    },
+    too_hard: function() {
+      this.setState({
+        interactive: true,
+        });
+      $('#math-preview').text("");
+      var textarea = $('#math-input');
+      textarea.focus();
+      // Trigger an expr redraw.
+      if (typeof interexpr != 'undefined') {
+          interexpr.handleChange();
+      }
+      MathPreview.Update();
     },
     blockly_display: function() {
       return this.inSeriesGet('config').code_with_blocks ? '' : 'none';

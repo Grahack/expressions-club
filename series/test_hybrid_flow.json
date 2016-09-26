@@ -1,0 +1,21 @@
+{
+    "title": "Test",
+    "config": {
+        "email": "profgra.org@gmail.com",
+        "initial_score": 1000,
+        "check_nature": true,
+        "point_duration": 1,
+        "code_with_blocks": false,
+        "display_score": true,
+        "display_weakness_indicator": false,
+        "hybrid_flow": true
+    },
+    "exprs": [
+        {"expr": "(produit 2 (somme x 1))",
+         "points": 10
+        },
+        {"expr": "(oppose (quotient (diff (produit. a (racine2 b)) (image_par f (inverse c))) (carre (somme x y z))))",
+         "points": 50
+        }
+    ]
+}
