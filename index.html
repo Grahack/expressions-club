@@ -622,7 +622,8 @@
               this.state.text.length > 0 ?
                 " " :
                 "Entrez vos commandes ci-dessous, " +
-                "avec les blocs ou en le tapant vous-même, " +
+                (this.inSeriesGet('config').code_with_blocks ?
+                 "avec les blocs ou en le tapant vous-même, " : "") +
                 "puis validez avec Tester ou Ctrl+Enter."
             }
           </span>
