@@ -3,6 +3,7 @@
     "config": {
         "email": "christophe.gragnic@ac-nantes.fr",
         "initial_score": 100,
+        "check_nature": true,
         "point_duration": 5,
         "code_with_blocks": false,
         "display_score": false,
