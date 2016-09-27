@@ -410,12 +410,17 @@
           this.state.series.exprs[0].date_start = Date.now();
           this.state.series.exprs[0].score_start = this.state.score;
           if (!this.state.interactive) {
-            var msg = " Mode non interactif ! Votre tentative apparaîtra ";
-            msg += "après avoir appuyé une première fois sur [Tester].";
-            $('#math-preview').text(msg);
+            this.nonInteractiveMsgElt();
           }
         }
       }.bind(this)).fail(function () {alert("Pas de série " + series_id + ".")});
+    },
+    nonInteractiveMsgElt: function() {
+      var msg = "Mode non interactif ! Votre tentative apparaîtra ";
+      msg += "après avoir appuyé une première fois sur [Tester].";
+      msg = '<span id="non-interactive-msg">' + msg + '</span>';
+      $('#math-preview').html(msg);
+      $('#math-buffer').html(msg);
     },
     componentDidUpdate: function (props, state, root) {
       var target = document.getElementById('target');
@@ -539,20 +544,14 @@
           if (this.state.interactive && this.inSeriesGet('config').hybrid_flow) {
             alert("Bravo ! La même en mode non interactif !");
             this.setState({interactive: false});
-            var msg = " Mode non interactif ! Votre tentative apparaîtra ";
-            msg += "après avoir appuyé une première fois sur [OK].";
-            $('#math-preview').text(msg);
-            $('#math-buffer').text(msg);
+            this.nonInteractiveMsgElt();
           } else {
             this.setState({expr_id: this.state.expr_id + 1});
             this.state.series.exprs[this.state.expr_id+1].date_start = Date.now();
             this.state.series.exprs[this.state.expr_id+1].score_start = new_score;
             alert("Bravo ! Une autre !");
             if (!this.state.interactive) {
-              var msg = " Mode non interactif ! Votre tentative apparaîtra ";
-              msg += "après avoir appuyé une première fois sur [OK].";
-              $('#math-preview').text(msg);
-              $('#math-buffer').text(msg);
+              this.nonInteractiveMsgElt();
             }
           }
         }

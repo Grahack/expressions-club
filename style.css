@@ -36,6 +36,11 @@ pre code {
   text-align: right;
   padding: 0 0 1em 0;
 }
+#non-interactive-msg {
+  background-color: yellow;
+  padding: 3px;
+  margin-left: 2px;
+}
 #doc {
     padding: 3em;
 }
