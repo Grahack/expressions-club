@@ -421,7 +421,7 @@
       var target = document.getElementById('target');
       MathJax.Hub.Queue(['Typeset', MathJax.Hub, target]);
     },
-    componentWillUnmount: function(){
+    componentWillUnmount: function() {
       clearInterval(this.timer);
     },
     handleChange: function() {
