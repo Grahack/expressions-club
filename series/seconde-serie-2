@@ -1,0 +1,37 @@
+{
+    "title": "Seconde: Série 2",
+    "config": {
+        "email": "christophe.gragnic@ac-nantes.fr",
+        "initial_score": 100,
+        "check_nature": true,
+        "point_duration": 5,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true,
+        "hybrid_flow": true
+    },
+    "exprs": [
+        {"expr": "(somme (produit 2 x) 1)",
+         "points": 10
+        },
+        {"expr": "(diff 6 (somme x 6))",
+         "points": 20
+        },
+        {"expr": "(racine2 (somme 9 16))",
+         "points": 20
+        },
+        {"expr": "(somme (racine2 9) (racine2 16))",
+         "points": 20
+        },
+        {"expr": "(produit pi (carre R))",
+         "points": 20
+        },
+        {"expr": "(diff 3 (diff 3 (carre x)))",
+         "points": 30
+        },
+        {"expr": "(somme (quotient (somme (produit 6 x) 9) 3) 1)",
+         "points": 50
+        }
+    ]
+}
