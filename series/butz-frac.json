@@ -1,0 +1,41 @@
+{
+    "title": "En vue des simplifications d'écritures fractionnaires",
+    "config": {
+        "email": "frederic-pierre.butz@ac-nice.fr",
+        "initial_score": 500,
+        "point_duration": 10,
+        "code_with_blocks": true,
+        "display_score": false,
+        "display_weakness_indicator": true,
+        "report_success_only": true
+    },
+    "exprs": [
+        {"expr": "(quotient (somme (produit 2 x) 2) x)",
+         "points": 10
+        },
+        {"expr": "(quotient (produitx (produit 2 x) 2) x)",
+         "points": 10
+        },
+        {"expr": "(quotient (produitx (produit 5 x) (produit 15 x)) 5)",
+         "points": 10
+        },
+        {"expr": "(quotient (somme (produit 2 x) 2) (somme (produit 4 x) 8))",
+         "points": 10
+        },
+        {"expr": "(quotient x (somme (produit 5 x ) (carre x)))",
+         "points": 20
+        },
+        {"expr": "(quotient 3 (somme (produit 6 x ) 9))",
+         "points": 20
+        },
+        {"expr": "(quotient (somme (carre x) (produit 3 x)) (somme (produit 5 (carre x)) x))",
+         "points": 20
+        },
+        {"expr": "(quotient (produitx (produit 10 (carre x)) (produit 5 x)) (produitx 5 (produit 5 x)))",
+         "points": 50
+        },
+        {"expr": "(quotient x (produitx (produit 5 x) (carre x)))",
+         "points": 50
+        }
+    ]
+}

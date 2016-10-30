@@ -1,0 +1,40 @@
+{
+    "title": "Une seconde série (enfin !)",
+    "config": {
+        "email": "profgra.org@gmail.com",
+        "initial_score": 600,
+        "point_duration": 1,
+        "code_with_blocks": false,
+        "display_score": true,
+        "display_weakness_indicator": false,
+        "report_success_only": false
+    },
+    "exprs": [
+        {"expr": "(somme 1 (quotient 8 (quotient 4 2)))",
+         "points": 10
+        },
+        {"expr": "(somme 1 (quotient (quotient 8 4) 2))",
+         "points": 10
+        },
+        {"expr": "(exp x)",
+         "points": 10
+        },
+        {"expr": "(puissance e x)",
+         "points": 10
+        },
+        {"expr": "(produit (exp x) (exp (oppose x)))",
+         "points": 30
+        },
+        {"expr": "(puissance e (oppose (produit 2 x)))",
+         "points": 30
+        },
+        {"expr": "(puissance e (oppose (carre (quotient x 100))))",
+         "points": 50
+        },
+        {"expr": "(produit (somme (produit 3 x) 7) (puissance e (oppose (quotient x 2))))",
+         "points": 100
+        }
+    ]
+}
+
+
