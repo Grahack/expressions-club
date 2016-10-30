@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Club des Expressions</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="jquery.min.js"><\/script>')</script>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div class="well clearfix" id="target"></div>
+  <script>
+  var series = [
+    "2015-ts2-A",
+    "2015-ts2-A-no-stress",
+    "2015-ts2-B",
+    "besson-A",
+    "butz-2016",
+    "butz-frac",
+    "chauveau-A",
+    "chauveau-A-non-interactive",
+    "chauveau-B",
+    "chauveau-B-non-interactive",
+    "default",
+    "demo",
+    "raimbaud1",
+    "raimbaud2",
+    "rouques2015-poire",
+    "rouques2015-pomme",
+    "rouques2015-pomme2",
+    "rouques2015-pomme-poire",
+    "rouques2015-potimarron",
+    "seconde-demo",
+    "seconde-serie-1",
+    "seconde-serie-2",
+    "test",
+    "test_hybrid_flow",
+    "valade-2015-serie1",
+    "valade-2015-serie2",
+    "valade-2015-serie-Mandela"
+  ];
+  var url = 'http://expressions.club/test.html?';
+  var target = $('#target');
+  function display(val, idx) {
+    var a = $('<a />', {href: url+val})
+    a.html(val);
+    target.append(a);
+    target.append($('<br>'));
+  }
+  series.forEach(display);
+  </script>
+</body>
+</html>
