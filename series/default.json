@@ -13,7 +13,7 @@
         {"expr": "(somme 2 2)",
          "points": 1
         },
-        {"expr": "(somme (produitx 2 x) 1)",
+        {"expr": "(somme (produit 2 x) 1)",
          "points": 2
         },
         {"expr": "(produit 2 (somme x 1))",
