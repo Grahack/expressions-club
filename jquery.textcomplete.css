@@ -1,0 +1,35 @@
+/* Based on https://github.com/yuku-t/jquery-textcomplete/blob/master/doc/style.md */
+.textcomplete-dropdown {
+    border: 1px solid #ddd;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+}
+
+.textcomplete-dropdown li {
+    list-style: none;
+    border-top: 1px solid #ddd;
+    padding: 2px 5px;
+    margin: 0;
+}
+
+.textcomplete-dropdown li:first-child {
+    border-top: none;
+}
+
+/* Those 3 lines to counter bootstrap */
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:focus,
+.dropdown-menu > .active > a:hover,
+.textcomplete-dropdown li:hover,
+.textcomplete-dropdown .active {
+    background-color: rgb(160, 223, 160);
+}
+
+.textcomplete-dropdown a {
+    border-bottom: none;
+}
+
+.textcomplete-dropdown a:hover {
+    cursor: pointer;
+}
