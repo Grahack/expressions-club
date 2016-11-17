@@ -1,0 +1,37 @@
+{
+    "title": "Seconde: Série 3",
+    "config": {
+        "email": "christophe.gragnic@ac-nantes.fr",
+        "initial_score": 100,
+        "check_nature": true,
+        "point_duration": 5,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true,
+        "hybrid_flow": true
+    },
+    "exprs": [
+        {"expr": "(carre (diff x 4))",
+         "points": 20
+        },
+        {"expr": "(produit 3 (carre x))",
+         "points": 20
+        },
+        {"expr": "(carre (produit 3 x))",
+         "points": 20
+        },
+        {"expr": "(produit (diff a b) (somme a b))",
+         "points": 30
+        },
+        {"expr": "(somme (carre a) (produit 2 a b) (carre b))",
+         "points": 50
+        },
+        {"expr": "(quotient (carre (somme (produit 4 x) 1)) 2)",
+         "points": 80
+        },
+        {"expr": "(somme (produit 10 (somme m n)) (produit (diff 5 m) (diff 5 n)))",
+         "points": 80
+        }
+    ]
+}
