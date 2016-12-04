@@ -1,0 +1,37 @@
+{
+    "title": "AP Équations",
+    "config": {
+        "email": "mathilde.chauveau@ac-nantes.fr",
+        "initial_score": 500,
+        "point_duration": 10,
+        "check_nature": true,
+        "code_with_blocks": true,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true,
+        "hybrid_flow": true
+    },
+    "exprs": [
+        {"expr": "(somme x 3)",
+         "points": 10
+        },
+        {"expr": "(produit 3 x)",
+         "points": 10
+        },
+        {"expr": "(somme (produit -2 x) 1)",
+         "points": 20
+        },
+        {"expr": "(somme (quotient x 2) 1)",
+         "points": 20
+        },
+        {"expr": "(quotient (somme x 1) 2)",
+         "points": 20
+        },
+        {"expr": "(produit 2 (somme x 1))",
+         "points": 20
+        },
+        {"expr": "(produit (somme x 5) (diff x 1))",
+         "points": 30
+        }
+    ]
+}
