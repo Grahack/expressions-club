@@ -31,7 +31,7 @@ Blockly.Msg.RENAME_VARIABLE_TITLE = "Renommer toutes les variables '%1' en :";
 
 Blockly.Expressions = new Blockly.Generator('Expressions');
 Blockly.Expressions.INDENT = '  ';
-Blockly.Expressions.addReservedWords('p, somme, diff, oppose, produit, quotient, inverse, carre, racine2, racine, cube, puissance, indice, image_par, cos, sin');
+Blockly.Expressions.addReservedWords('p, somme, diff, oppose, produit, quotient, inverse, carre, racine, cube, puissance, indice, image_par, cos, sin');
 
 // La suite, jusqu’au commentaire de fin, n’a pas été modifiée.
 // Sauf la suppression du prologue de définition des variables.
@@ -514,20 +514,20 @@ Blockly.Expressions['carre'] = function(block) {
   return '(carre ' + x.trim() + ')';
 };
 
-// Bloc racine2
-Blockly.Blocks['racine2'] = {
+// Bloc racine
+Blockly.Blocks['racine'] = {
   init: function() {
-    this.setHelpUrl(help_url_prefix + '#bloc-racine2');
+    this.setHelpUrl(help_url_prefix + '#bloc-racine');
     this.setColour(colour);
     this.appendValueInput('X')
-        .appendField('racine2');
+        .appendField('racine');
     this.setInputsInline(true);
     this.setOutput(true);
     this.setTooltip('Racine carrée du nombre.');
   }
 };
-// Gen racine2
-Blockly.Expressions['racine2'] = function(block) {
+// Gen racine
+Blockly.Expressions['racine'] = function(block) {
   var x = Blockly.Expressions.statementToCode(block, 'X') || '';
-  return '(racine2 ' + x.trim() + ')';
+  return '(racine ' + x.trim() + ')';
 };
