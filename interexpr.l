@@ -139,7 +139,7 @@
   ((somme (produit 10 a) (diff b a)) "10 a + b - a")
   ((diff (somme (produit 10 a) b)a) "10 a + b - a")
   ((quotient (produit (produit 2 x) 2) x) "\\frac{\\left( 2 x \\right) \\times 2}{x}")
-  ((quotient (produit (produit 5 x) (produit 15 x)) 5) "\\frac{\\left( 5 x \\right) \\times \\left( 15 x \\right)}{5}")
+  #((quotient (produit (produit 5 x) (produit 15 x)) 5) "\\frac{\\left( 5 x \\right) \\times \\left( 15 x \\right)}{5}")
   #((quotient (produit (produit 10 (carre x)) (produit 5 x)) (produit 5 (produit 5 x))) "\\frac{\\left( 10 {x}\^2 \\right) \\times \\left( 5 x \\right)}{5 \\times \\left( 5 x \\right)}")
   #((quotient x (produit (produit 5 x) (carre x))) "\\frac{x}{\\left( 5 x \\right) \\times {x}\^2}")
   ((somme (produit 2 x) 1) "2 x + 1")
