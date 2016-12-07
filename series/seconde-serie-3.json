@@ -15,10 +15,10 @@
         {"expr": "(carre (diff x 4))",
          "points": 20
         },
-        {"expr": "(produit 3 (carre x))",
+        {"expr": "(carre (produit 3 x))",
          "points": 20
         },
-        {"expr": "(carre (produit 3 x))",
+        {"expr": "(produit 3 (carre x))",
          "points": 20
         },
         {"expr": "(produit (diff a b) (somme a b))",
