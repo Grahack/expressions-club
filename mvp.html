@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>MVP - Club des Expressions</title>
+        <script src="showdown.js"></script>
+        <link href="style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <noscript>
+            <div style="color:#CC0000; text-align:center">
+            Besoin de JavaScript pour afficher certaines listes.
+            </div>
+        </noscript>
+        <script type="text/markdown">
+<!--
+# MVP du Club des Expressions
+
+Aller directement à :
+
+* [Introduction](#introduction)
+* [Un utilisateur](#unutilisateur) (prof ou élève)
+    * [s’inscrit au Club](#inscriptiondunutilisateur) et
+      [complète son profil](#profilutilisateur)
+    * ou [entre dans le Club](#entredunutilisateur)
+    * [arrive sur sa page d’accueil](#accueilutilisateur)
+* [Un prof](#unprof)
+    * [définit ses groupes](#groupes)
+    * [construit des séries](#sries)
+    * [les attribue à un groupe]()
+    * [étudie les résultats]()
+* [Un élève](#unlve)
+    * [voit les séries qui lui sont assignées]()
+    * [fait la série]()
+* [Pour plus tard](#pourplustard)
+     
+# Introduction
+
+Ce document décrit le Produit Minimum Viable (MVP en anglais, voir
+[l’article Wikipedia](https://fr.wikipedia.org/wiki/Produit_minimum_viable))
+du futur Club des Expressions.
+
+Certaines des idées évoquées lors de la constitution du MVP ont été reléguées
+à la section [Pour plus tard](#pourplustard).
+
+# Un utilisateur
+
+Un utilisateur est un prof ou un élève.
+
+## Inscription d’un utilisateur
+
+Le lien « Entrer ou s’inscrire au Club » amène sur une adresse en 
+`https://clubexpressions.eu.auth0.com/…`.
+
+Si c’est une inscription, l’utilisateur est ensuite amené sur sa page
+[Profil](#profilutilisateur) et le complète.
+
+## Entrée d’un utilisateur
+
+Le lien « Entrer ou s’inscrire au Club » amène sur une adresse en 
+`https://clubexpressions.eu.auth0.com/…`.
+
+Si c’est une entrée, l’utilisateur est ensuite amené sur sa
+[page d’accueil](#accueilutilisateur).
+
+## Accueil utilisateur
+
+Les pages sont différentes selon le type de l’utilisateur.
+
+Voir la section [Accueil du prof](#accueilprof) ou la section
+[Accueil de l’élève](#accueillve).
+
+# Un prof
+
+## Accueil prof
+
+Cette page présente un tableau de bord au professeur :
+
+* liste des groupes (avec liens vers résultats récents) + bouton de gestion
+* liste des séries + bouton de gestion
+
+Les boutons « Gestion » amènent aux pages décrites par les sections
+[Groupes](#groupes) et [Séries](#sries).
+
+## Groupes
+
+Le concept de « *groupe* » recouvre les concepts de classe et de groupes dans
+une classe.
+
+Un groupe possède (en plus du prof créateur) :
+
+* un nom
+* une description
+* une liste ordonnée d’élèves
+
+Reste à trouver une interface simple et efficace pour :
+
+* créer un groupe
+* renommer un groupe
+* modifier le contenu d’un groupe
+    * ajouter un élève (qui s’est abonné au prof)
+    * retirer un élève
+    * réordonner les élèves (pouvoir les déplacer un par un suffit)
+* supprimer un groupe
+
+Pour le MVP, il ne faut pas encore trop rêver (voir la section Pour plus tard
+pour cela).
+
+## Séries
+
+Une série possède (en plus du prof créateur) :
+
+* un nom
+* une description
+* une liste ordonnée d’expressions (voir plus loin les
+  [Expressions](#expressions))
+
+Reste à trouver une interface simple et efficace pour :
+
+* créer une série
+* renommer une série
+* modifier le contenu d’une série
+    * ajouter une expression
+    * retirer une expression
+    * réordonner les expressions (pouvoir les déplacer une par une suffit)
+* supprimer une série
+
+Pour le MVP, il ne faut pas encore trop rêver (voir la section Pour plus tard
+pour cela). Néammoins, le réservoir d’expressions devra :
+
+* filtrer
+
+## Expressions
+
+# Profil utilisateur
+
+* Prénom
+* Nom
+* Établissement pour l’année scolaire
+* Prof (OUI ou NON)
+* Si pas prof, choisir un prof
+
+Retour à l’accueil.
+
+## Page de profil d’un prof
+
+Pour éviter qu’un prof ne se fasse usurper son identité, il pourra montrer à
+ses élèves son identifiant universel [\[1\]](#uuid). La première partie pourra
+suffire.
+
+Exemple : `9837a53a-7b1a-11e6-ae12-c4d987c9734a` ou simplement `9837a53a`.
+
+Il faut donc le faire apparaître sur sa page de profil.
+
+## Résultats
+
+Voir aussi la section « Pour plus tard ».
+
+# Un élève
+
+## Accueil Élève
+
+
+# Notes de bas de page
+
+## UUID
+
+Acronyme de Universal Unique Identifier. Un exemple :
+
+> 9837a53a-7b1a-11e6-ae12-c4d987c9734a
+
+Voir [l’article Wikipedia](https://fr.wikipedia.org/wiki/Universal_Unique_Identifier).
+
+# Pour plus tard
+
+## Constitution des groupes
+
+* Bouton pour classer les élèves d’un groupe dans l’ordre alphabétique.
+* Dans le réservoir d’élèves, on voit si un élève appartient déjà à un
+  groupe.
+* Un prof pourrait déclarer ses classes (des noms de groupes),
+  les élèves pourraient ainsi déclarer appartenir à tel ou tel groupe
+  directement pour éviter ce travail fastidieux au prof.
+* Pour constituer un groupe, un prof pourrait filtrer par groupe existant.
+
+## Présentation des résultats des élèves
+
+<http://bl.ocks.org/mbostock/raw/1005873/>
+
+
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+-->
+        </script>
+        <script>
+        var scripts = document.getElementsByTagName('script');
+        for (var i = 0; i < scripts.length; i++){
+            var script = scripts[i];
+            if (script.type != 'text/markdown') continue;
+            var md = script.innerHTML.replace(/^\s<!--*/, '')
+                .replace(/-->\s*$/, '');
+            var markup = new Showdown.converter().makeHtml(md);
+            document.write(markup);
+        }
+        </script>
+    </body>
+</html>
