@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Test expressions - Club des Expressions</title>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            extensions: ["tex2jax.js","fp.js"],
+            MathMenu: {
+                showLocale: false,
+            },
+            jax: ["input/TeX","output/HTML-CSS"],
+            tex2jax: {
+                inlineMath: [['$','$']],
+                displayMath: [['$$','$$']],
+                }
+            });
+        </script>
+        <script type="text/javascript" src="mathjax/MathJax.js?locale=fr"></script>
+    </head>
+    <body>
+        <noscript>
+            <div style="color:#CC0000; text-align:center">
+            Besoin de JavaScript pour afficher la page.
+            </div>
+        </noscript>
+        <h1>Liste des expressions officielles du Club</h1>
+        <script>
+// For convenience, definitions are done with variables.
+var a = 'c1';
+var b = 'c2';
+var c = 'c3';
+var d = 'c4';
+var x = 'x';
+var y = 'y';
+// Opérations:
+var S  = 'Somme';
+var D  = 'Diff';
+var P  = 'Produit';
+var Q  = 'Quotient';
+var O  = 'Opposé';
+var I  = 'Inverse';
+var C  = 'Carré';
+var Pu = 'Puissance';
+var R  = 'Racine';
+// Les calculs entre parenthèses sont prioritaires.
+var Pa = 'parenthèses';
+// Dans une expression sans parenthèses avec uniquement des additions et des
+// soustractions, on effectue les calculs de gauche à droite.
+var GD = 'gauche-droite';
+// Dans une expression sans parenthèses, les multiplications et les divisions
+// ont priorité sur les additions, les soustractions et les passages à l'opposé.
+var MD = 'mult-div';
+// Dans une expression sans parenthèses, l'élévation à une puissance a priorité
+// sur les quatre opérations usuelles et sur le passage à l'opposé.
+var El = 'élévation';
+// Dans une expression sans parenthèses, le passage à l'opposé a priorité sur
+// l'addition et la soustraction.
+var Op = 'opposé';
+// Devant une lettre ou une parenthèse, le signe « × » de la multiplication est
+// facultatif.
+var X = 'signeX';
+// Lorsque la division est indiquée par un trait de fraction, les parenthèses
+// autour des expressions au numérateur et au dénominateur sont facultatives.
+var F = 'fraction';
+
+// Build a random coeffs array
+// TODO: prevent duplicates
+function coeff() {return Math.floor(Math.random()*8 + 2);}
+var randomCoeffs = [coeff(), coeff(), coeff(), coeff()];
+
+// The expressions (from the boss himself)
+var exprs = [
+{"nom" : "Somme",
+ "conv": [],
+ "expr": [S,x,y]},
+{"nom" : "Différence",
+ "conv": [],
+ "expr": [D,x,y]},
+{"nom" : "Multiple",
+ "conv": [],
+ "expr": [P,a,x]},
+{"nom" : "Division par un entier",
+ "conv": [],
+ "expr": [Q,x,a]},
+{"nom" : "Carré",
+ "conv": [],
+ "expr": [C,x]},
+{"nom" : "Puissance 4",
+ "conv": [],
+ "expr": [Pu,x,4]},
+{"nom" : "Inverse",
+ "conv": [],
+ "expr": [I,x]},
+{"nom" : "Opposé",
+ "conv": [],
+ "expr": [O,x]},
+{"nom" : "Homographique séparée",
+ "conv": [F,MD],
+ "expr": [S,a,[Q,b,[S,[P,c,x],d]]]},
+    ];
+
+// Utilities
+
+// Callback for each expression
+function processExpr(expr, idx) {
+    document.write("<h2>" + (idx+1) + ". " + expr.nom + "</h2>");
+    document.write((renderExpr(recLisp, randomCoeffs))(expr.expr));
+    document.write("$$" + (renderExpr(recLaTex, randomCoeffs))(expr.expr) + "$$");
+    if (expr.conv.length) {
+        document.write("  conventions : ");
+        document.write(expr.conv.join(', '));
+    }
+    document.write("<br>");
+}
+
+// Generates a recursive function, parametrized by
+// * rec:    how to recurse (also parametrized by coeffs for recursion)
+// * coeffs: an array of numbers
+function renderExpr(rec, coeffs) {
+    return function (expr) {
+        if (typeof expr === 'object') {
+            return (rec(coeffs))(expr);
+        } else {
+            if (expr[0] === 'c') {
+                var coeffIndex = parseInt(expr[1])-1;
+                return coeffs[coeffIndex];
+            } else {
+                return expr;
+            }
+        }
+    }
+}
+
+function recLisp(coeffs) {
+    return function (expr) {
+        var args = expr.slice(1).map(renderExpr(recLisp, coeffs));
+        return '(' + expr[0] + ' ' + args.join(' ') + ')';
+    }
+}
+
+var LaTeX = {
+    'Somme'    : function (args)
+                 {return args.join('+');},
+    'Diff'     : function (args)
+                 {return args[0] + "-" + args[1]},
+    'Produit'  : function (args)
+                 {return args.join('×');},
+    'Quotient' : function (args)
+                 {return "\\frac{" + args[0] + "}{" + args[1] + "}"},
+    'Opposé'   : function (args)
+                 {return "-\\left(" + args[0] + "\\right)"},
+    'Inverse'  : function (args)
+                 {return "\\frac{1}{" + args[0] + "}"},
+    'Carré'    : function (args)
+                 {return "\\left(" + args[0] + "\\right)^2"},
+    'Puissance': function (args)
+                 {return "\\left(" + args[0] + "\\right)^" + args[1]},
+    'Racine'   : function (args)
+                 {return "\\sqrt{" + args[0] + "}"},
+}
+
+function recLaTex(coeffs) {
+    return function (expr) {
+        var args = expr.slice(1).map(renderExpr(recLaTex, coeffs));
+        return LaTeX[expr[0]](args);
+    }
+}
+
+// Iterate through expressions
+exprs.forEach(processExpr);
+        </script>
+    </body>
+</html>
