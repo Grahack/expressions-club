@@ -68,7 +68,8 @@ var F = 'fraction';
 // Callback for rendering each expression
 function processExpr(coeffs) {
   return function (expr, idx) {
-    document.write("<h2>" + (idx+1) + ". " + expr.nom + "</h2>");
+    var link = '<a href="#e' + (idx+1) + '">' + (idx+1) + '.</a>';
+    document.write('<h2 id="e' + (idx+1) + '">' + link + ' ' + expr.nom + '</h2>');
     document.write((renderExpr(recLisp, coeffs))(expr.expr));
     document.write("$$" + (renderExpr(recLaTex, coeffs))(expr.expr) + "$$");
     if (expr.conv.length) {
