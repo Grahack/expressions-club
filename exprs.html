@@ -70,8 +70,8 @@ function processExpr(coeffs) {
   return function (expr, idx) {
     var link = '<a href="#e' + (idx+1) + '">' + (idx+1) + '.</a>';
     document.write('<h2 id="e' + (idx+1) + '">' + link + ' ' + expr.nom + '</h2>');
-    document.write((renderExpr(recLisp, coeffs))(expr.expr));
-    document.write("$$" + (renderExpr(recLaTex, coeffs))(expr.expr) + "$$");
+    document.write((renderExprAsLisp(coeffs))(expr.expr));
+    document.write("$$" + (renderExprAsLaTeX(coeffs))(expr.expr) + "$$");
     if (expr.conv.length) {
         document.write("  conventions : ");
         document.write(expr.conv.join(', '));
@@ -81,45 +81,47 @@ function processExpr(coeffs) {
 }
 
 // Generates a recursive function, parametrized by
-// * rec:    how to recurse (also parametrized by coeffs for recursion)
 // * coeffs: an array of numbers
-function renderExpr(rec, coeffs) {
+function renderExprAsLisp(coeffs) {
     return function (expr) {
         if (typeof expr === 'object') {
-            return (rec(coeffs))(expr);
+            var args = expr.slice(1).map(renderExprAsLisp(coeffs));
+            return '(' + expr[0] + ' ' + args.join(' ') + ')';
         } else {
-            if (expr[0] === 'c') {
-                var coeffIndex = parseInt(expr[1])-1;
-                return coeffs[coeffIndex];
-            } else {
-                return expr;
-            }
+            return leaf(expr, coeffs);
         }
     }
 }
 
-function recLisp(coeffs) {
+// Generates a recursive function, parametrized by
+// * coeffs: an array of numbers
+function renderExprAsLaTeX(coeffs) {
     return function (expr) {
-        var args = expr.slice(1).map(renderExpr(recLisp, coeffs));
-        return '(' + expr[0] + ' ' + args.join(' ') + ')';
+        if (typeof expr === 'object') {
+            var cmd = expr[0];
+            var args = expr.slice(1).map(renderExprAsLaTeX(coeffs));
+            if (cmd === 'Somme'    ) return args.join('+');
+            if (cmd === 'Diff'     ) return args[0] + "-" + args[1]
+            if (cmd === 'Produit'  ) return args.join('×');
+            if (cmd === 'Quotient' ) return "\\frac{" + args[0] + "}{" + args[1] + "}"
+            if (cmd === 'Opposé'   ) return "-\\left(" + args[0] + "\\right)"
+            if (cmd === 'Inverse'  ) return "\\frac{1}{" + args[0] + "}"
+            if (cmd === 'Carré'    ) return "\\left(" + args[0] + "\\right)^2"
+            if (cmd === 'Puissance') return "\\left(" + args[0] + "\\right)^" + args[1]
+            if (cmd === 'Racine'   ) return "\\sqrt{" + args[0] + "}"
+            return "Unknown cmd: " + cmd;
+        } else {
+            return leaf(expr, coeffs);
+        }
     }
 }
 
-
-function recLaTex(coeffs) {
-    return function (expr) {
-        var cmd = expr[0];
-        var args = expr.slice(1).map(renderExpr(recLaTex, coeffs));
-        if (cmd === 'Somme'    ) return args.join('+');
-        if (cmd === 'Diff'     ) return args[0] + "-" + args[1]
-        if (cmd === 'Produit'  ) return args.join('×');
-        if (cmd === 'Quotient' ) return "\\frac{" + args[0] + "}{" + args[1] + "}"
-        if (cmd === 'Opposé'   ) return "-\\left(" + args[0] + "\\right)"
-        if (cmd === 'Inverse'  ) return "\\frac{1}{" + args[0] + "}"
-        if (cmd === 'Carré'    ) return "\\left(" + args[0] + "\\right)^2"
-        if (cmd === 'Puissance') return "\\left(" + args[0] + "\\right)^" + args[1]
-        if (cmd === 'Racine'   ) return "\\sqrt{" + args[0] + "}"
-        return "Unknown cmd: " + cmd;
+function leaf(expr, coeffs) {
+    if (expr[0] === 'c') {
+        var coeffIndex = parseInt(expr[1])-1;
+        return coeffs[coeffIndex];
+    } else {
+        return expr;
     }
 }
 
