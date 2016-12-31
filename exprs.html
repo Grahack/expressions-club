@@ -135,31 +135,21 @@ function recLisp(coeffs) {
     }
 }
 
-var LaTeX = {
-    'Somme'    : function (args)
-                 {return args.join('+');},
-    'Diff'     : function (args)
-                 {return args[0] + "-" + args[1]},
-    'Produit'  : function (args)
-                 {return args.join('×');},
-    'Quotient' : function (args)
-                 {return "\\frac{" + args[0] + "}{" + args[1] + "}"},
-    'Opposé'   : function (args)
-                 {return "-\\left(" + args[0] + "\\right)"},
-    'Inverse'  : function (args)
-                 {return "\\frac{1}{" + args[0] + "}"},
-    'Carré'    : function (args)
-                 {return "\\left(" + args[0] + "\\right)^2"},
-    'Puissance': function (args)
-                 {return "\\left(" + args[0] + "\\right)^" + args[1]},
-    'Racine'   : function (args)
-                 {return "\\sqrt{" + args[0] + "}"},
-}
 
 function recLaTex(coeffs) {
     return function (expr) {
+        var cmd = expr[0];
         var args = expr.slice(1).map(renderExpr(recLaTex, coeffs));
-        return LaTeX[expr[0]](args);
+        if (cmd === 'Somme'    ) return args.join('+');
+        if (cmd === 'Diff'     ) return args[0] + "-" + args[1]
+        if (cmd === 'Produit'  ) return args.join('×');
+        if (cmd === 'Quotient' ) return "\\frac{" + args[0] + "}{" + args[1] + "}"
+        if (cmd === 'Opposé'   ) return "-\\left(" + args[0] + "\\right)"
+        if (cmd === 'Inverse'  ) return "\\frac{1}{" + args[0] + "}"
+        if (cmd === 'Carré'    ) return "\\left(" + args[0] + "\\right)^2"
+        if (cmd === 'Puissance') return "\\left(" + args[0] + "\\right)^" + args[1]
+        if (cmd === 'Racine'   ) return "\\sqrt{" + args[0] + "}"
+        return "Unknown cmd: " + cmd;
     }
 }
 
