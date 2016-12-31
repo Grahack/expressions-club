@@ -65,37 +65,6 @@ var X = 'signeX';
 // autour des expressions au numérateur et au dénominateur sont facultatives.
 var F = 'fraction';
 
-// The expressions (from the boss himself)
-var exprs = [
-{"nom" : "Somme",
- "conv": [],
- "expr": [S,x,y]},
-{"nom" : "Différence",
- "conv": [],
- "expr": [D,x,y]},
-{"nom" : "Multiple",
- "conv": [],
- "expr": [P,a,x]},
-{"nom" : "Division par un entier",
- "conv": [],
- "expr": [Q,x,a]},
-{"nom" : "Carré",
- "conv": [],
- "expr": [C,x]},
-{"nom" : "Puissance 4",
- "conv": [],
- "expr": [Pu,x,4]},
-{"nom" : "Inverse",
- "conv": [],
- "expr": [I,x]},
-{"nom" : "Opposé",
- "conv": [],
- "expr": [O,x]},
-{"nom" : "Homographique séparée",
- "conv": [F,MD],
- "expr": [S,a,[Q,b,[S,[P,c,x],d]]]},
-    ];
-
 // Callback for rendering each expression
 function processExpr(coeffs) {
   return function (expr, idx) {
@@ -152,6 +121,37 @@ function recLaTex(coeffs) {
         return "Unknown cmd: " + cmd;
     }
 }
+
+// The expressions (from the boss himself)
+var exprs = [
+{"nom" : "Somme",
+ "conv": [],
+ "expr": [S,x,y]},
+{"nom" : "Différence",
+ "conv": [],
+ "expr": [D,x,y]},
+{"nom" : "Multiple",
+ "conv": [],
+ "expr": [P,a,x]},
+{"nom" : "Division par un entier",
+ "conv": [],
+ "expr": [Q,x,a]},
+{"nom" : "Carré",
+ "conv": [],
+ "expr": [C,x]},
+{"nom" : "Puissance 4",
+ "conv": [],
+ "expr": [Pu,x,4]},
+{"nom" : "Inverse",
+ "conv": [],
+ "expr": [I,x]},
+{"nom" : "Opposé",
+ "conv": [],
+ "expr": [O,x]},
+{"nom" : "Homographique séparée",
+ "conv": [F,MD],
+ "expr": [S,a,[Q,b,[S,[P,c,x],d]]]},
+];
 
 // Build a random coefficients array (first integers shuffled)
 function coeffs() {
