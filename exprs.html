@@ -26,6 +26,7 @@
         </noscript>
         <h1>Liste des expressions officielles du Club</h1>
         <script>
+
 // For convenience, definitions are done with variables.
 var a = 'c1';
 var b = 'c2';
@@ -64,11 +65,6 @@ var X = 'signeX';
 // autour des expressions au numérateur et au dénominateur sont facultatives.
 var F = 'fraction';
 
-// Build a random coeffs array
-// TODO: prevent duplicates
-function coeff() {return Math.floor(Math.random()*8 + 2);}
-var randomCoeffs = [coeff(), coeff(), coeff(), coeff()];
-
 // The expressions (from the boss himself)
 var exprs = [
 {"nom" : "Somme",
@@ -100,18 +96,18 @@ var exprs = [
  "expr": [S,a,[Q,b,[S,[P,c,x],d]]]},
     ];
 
-// Utilities
-
-// Callback for each expression
-function processExpr(expr, idx) {
+// Callback for rendering each expression
+function processExpr(coeffs) {
+  return function (expr, idx) {
     document.write("<h2>" + (idx+1) + ". " + expr.nom + "</h2>");
-    document.write((renderExpr(recLisp, randomCoeffs))(expr.expr));
-    document.write("$$" + (renderExpr(recLaTex, randomCoeffs))(expr.expr) + "$$");
+    document.write((renderExpr(recLisp, coeffs))(expr.expr));
+    document.write("$$" + (renderExpr(recLaTex, coeffs))(expr.expr) + "$$");
     if (expr.conv.length) {
         document.write("  conventions : ");
         document.write(expr.conv.join(', '));
     }
     document.write("<br>");
+  }
 }
 
 // Generates a recursive function, parametrized by
@@ -167,8 +163,24 @@ function recLaTex(coeffs) {
     }
 }
 
+// Build a random coefficients array (first integers shuffled)
+function coeffs() {
+    var ints = [2, 3, 4, 5, 6, 7, 8, 9];
+    var counter = ints.length;
+    while (counter > 0) {
+        var index = Math.floor(Math.random() * counter);
+        counter--;
+        // swap
+        let temp = ints[counter];
+        ints[counter] = ints[index];
+        ints[index] = temp;
+    }
+    return ints;
+}
+
 // Iterate through expressions
-exprs.forEach(processExpr);
+exprs.forEach(processExpr(coeffs()));
+
         </script>
     </body>
 </html>
