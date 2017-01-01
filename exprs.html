@@ -235,6 +235,59 @@ var cexprs = exprs.map(function (expr) {
 // Iterate through expressions
 cexprs.forEach(processExpr);
 
+// Tests
+
+// First, a little Lisp parser
+// adapted from https://www.recurse.com/blog/21-little-lisp-interpreter
+// I just added «input.» and skipped categorize
+
+var tokenize = function(input) {
+  return input.replace(/\(/g, ' ( ')
+        .replace(/\)/g, ' ) ')
+        .trim()
+        .split(/\s+/);
+};
+
+var parenthesize = function(input, list) {
+  if (list === undefined) {
+    return parenthesize(input, []);
+  } else {
+    var token = input.shift();
+    if (token === undefined) {
+      return list.pop();
+    } else if (token === "(") {
+      list.push(parenthesize(input, []));
+      return parenthesize(input, list);
+    } else if (token === ")") {
+      return list;
+    } else {
+      return parenthesize(input, list.concat(token));
+    }
+  }
+};
+
+var parse = function(input) {
+  return parenthesize(tokenize(input));
+};
+
+var tests = [
+['(Somme 1 1)', '1+1'],
+['(Somme (Produit 2 x) 1)', '2x+1'],
+['0', '0'],
+];
+tests.map(function (test) {
+    var codeClubIn = test[0];
+    var cexpr = {"expr": parse(codeClubIn)};
+    // The venerable round trip
+    var codeClubOut = renderExprAsLisp(cexpr);
+    if (codeClubOut !== codeClubIn) throw codeClubOut + ' != ' + codeClubIn;
+    // LaTex test
+    var expected = test[1];
+    var rendered = renderExprAsLaTeX(cexpr);
+    if (rendered !== expected) throw rendered + ' != ' + expected;
+});
+console.log("OK");
+
         </script>
     </body>
 </html>
