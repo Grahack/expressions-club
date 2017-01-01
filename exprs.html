@@ -89,32 +89,32 @@ function prepareArgs(cexpr) {
 }
 
 function renderExprAsLisp(cexpr) {
-        if (typeof cexpr.expr === 'object') {
-            var cmd = cexpr.expr[0];
-            var args = prepareArgs(cexpr).map(renderExprAsLisp);
-            return '(' + cmd + ' ' + args.join(' ') + ')';
-        } else {
-            return leaf(cexpr);
-        }
+    if (typeof cexpr.expr === 'object') {
+        var cmd = cexpr.expr[0];
+        var args = prepareArgs(cexpr).map(renderExprAsLisp);
+        return '(' + cmd + ' ' + args.join(' ') + ')';
+    } else {
+        return leaf(cexpr);
+    }
 }
 
 function renderExprAsLaTeX(cexpr) {
-        if (typeof cexpr.expr === 'object') {
-            var cmd = cexpr.expr[0];
-            var args = prepareArgs(cexpr).map(renderExprAsLaTeX);
-            if (cmd === 'Somme'    ) return args.join('+');
-            if (cmd === 'Diff'     ) return args[0] + "-" + args[1]
-            if (cmd === 'Produit'  ) return args.join('×');
-            if (cmd === 'Quotient' ) return "\\frac{" + args[0] + "}{" + args[1] + "}"
-            if (cmd === 'Opposé'   ) return "-\\left(" + args[0] + "\\right)"
-            if (cmd === 'Inverse'  ) return "\\frac{1}{" + args[0] + "}"
-            if (cmd === 'Carré'    ) return "\\left(" + args[0] + "\\right)^2"
-            if (cmd === 'Puissance') return "\\left(" + args[0] + "\\right)^" + args[1]
-            if (cmd === 'Racine'   ) return "\\sqrt{" + args[0] + "}"
-            return "Unknown cmd: " + cmd;
-        } else {
-            return leaf(cexpr);
-        }
+    if (typeof cexpr.expr === 'object') {
+        var cmd = cexpr.expr[0];
+        var args = prepareArgs(cexpr).map(renderExprAsLaTeX);
+        if (cmd === 'Somme'    ) return args.join('+');
+        if (cmd === 'Diff'     ) return args[0] + "-" + args[1]
+        if (cmd === 'Produit'  ) return args.join('×');
+        if (cmd === 'Quotient' ) return "\\frac{" + args[0] + "}{" + args[1] + "}"
+        if (cmd === 'Opposé'   ) return "-\\left(" + args[0] + "\\right)"
+        if (cmd === 'Inverse'  ) return "\\frac{1}{" + args[0] + "}"
+        if (cmd === 'Carré'    ) return "\\left(" + args[0] + "\\right)^2"
+        if (cmd === 'Puissance') return "\\left(" + args[0] + "\\right)^" + args[1]
+        if (cmd === 'Racine'   ) return "\\sqrt{" + args[0] + "}"
+        return "Unknown cmd: " + cmd;
+    } else {
+        return leaf(cexpr);
+    }
 }
 
 function leaf(cexpr) {
