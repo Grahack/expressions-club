@@ -27,6 +27,8 @@
         <h1>Liste des expressions officielles du Club</h1>
         <script>
 
+function contains(arr, obj) {return arr.indexOf(obj) !== -1;}
+
 // For convenience, definitions are done with variables.
 var a = 'c1';
 var b = 'c2';
@@ -80,9 +82,10 @@ function processExpr(cexpr, idx) {
 
 function prepareArgs(cexpr) {
     var args = cexpr.expr.slice(1);
-    // Attach coeffs to args
+    // Attach coeffs and parent command to args
     var cargs = args.map(function(arg) {
         return {"expr": arg,
+                "parent": cexpr.expr[0],
                 "coeffs": cexpr.coeffs};
     });
     return cargs;
@@ -98,20 +101,30 @@ function renderExprAsLisp(cexpr) {
     }
 }
 
+function parens(cmd, parent_cmd) {
+    if (contains([S,D], cmd)) {
+        return contains([P], parent_cmd);
+    }
+    return false;
+}
+
 function renderExprAsLaTeX(cexpr) {
     if (typeof cexpr.expr === 'object') {
         var cmd = cexpr.expr[0];
         var args = prepareArgs(cexpr).map(renderExprAsLaTeX);
-        if (cmd === 'Somme'    ) return args.join('+');
-        if (cmd === 'Diff'     ) return args[0] + "-" + args[1]
-        if (cmd === 'Produit'  ) return args.join('×');
-        if (cmd === 'Quotient' ) return "\\frac{" + args[0] + "}{" + args[1] + "}"
-        if (cmd === 'Opposé'   ) return "-\\left(" + args[0] + "\\right)"
-        if (cmd === 'Inverse'  ) return "\\frac{1}{" + args[0] + "}"
-        if (cmd === 'Carré'    ) return "\\left(" + args[0] + "\\right)^2"
-        if (cmd === 'Puissance') return "\\left(" + args[0] + "\\right)^" + args[1]
-        if (cmd === 'Racine'   ) return "\\sqrt{" + args[0] + "}"
-        return "Unknown cmd: " + cmd;
+        var latex = '';
+        if (cmd === 'Somme'    ) latex = args.join('+');
+        if (cmd === 'Diff'     ) latex = args[0] + "-" + args[1]
+        if (cmd === 'Produit'  ) latex = args.join('×');
+        if (cmd === 'Quotient' ) latex = "\\frac{" + args[0] + "}{" + args[1] + "}"
+        if (cmd === 'Opposé'   ) latex = "-\\left(" + args[0] + "\\right)"
+        if (cmd === 'Inverse'  ) latex = "\\frac{1}{" + args[0] + "}"
+        if (cmd === 'Carré'    ) latex = "\\left(" + args[0] + "\\right)^2"
+        if (cmd === 'Puissance') latex = "\\left(" + args[0] + "\\right)^" + args[1]
+        if (cmd === 'Racine'   ) latex = "\\sqrt{" + args[0] + "}"
+        if (latex === '') return "Unknown cmd: " + cmd;
+        if (parens(cmd, cexpr.parent)) latex = '\\left(' + latex + '\\right)';
+        return latex;
     } else {
         return leaf(cexpr);
     }
