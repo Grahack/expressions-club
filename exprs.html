@@ -66,40 +66,42 @@ var X = 'signeX';
 var F = 'fraction';
 
 // Callback for rendering each expression
-function processExpr(coeffs) {
-  return function (expr, idx) {
+function processExpr(cexpr, idx) {
     var link = '<a href="#e' + (idx+1) + '">' + (idx+1) + '.</a>';
-    document.write('<h2 id="e' + (idx+1) + '">' + link + ' ' + expr.nom + '</h2>');
-    document.write((renderExprAsLisp(coeffs))(expr.expr));
-    document.write("$$" + (renderExprAsLaTeX(coeffs))(expr.expr) + "$$");
-    if (expr.conv.length) {
+    document.write('<h2 id="e' + (idx+1) + '">' + link + ' ' + cexpr.nom + '</h2>');
+    document.write(renderExprAsLisp(cexpr));
+    document.write("$$" + renderExprAsLaTeX(cexpr) + "$$");
+    if (cexpr.conv.length) {
         document.write("  conventions : ");
-        document.write(expr.conv.join(', '));
+        document.write(cexpr.conv.join(', '));
     }
     document.write("<br>");
-  }
 }
 
-// Generates a recursive function, parametrized by
-// * coeffs: an array of numbers
-function renderExprAsLisp(coeffs) {
-    return function (expr) {
-        if (typeof expr === 'object') {
-            var args = expr.slice(1).map(renderExprAsLisp(coeffs));
-            return '(' + expr[0] + ' ' + args.join(' ') + ')';
+function prepareArgs(cexpr) {
+    var args = cexpr.expr.slice(1);
+    // Attach coeffs to args
+    var cargs = args.map(function(arg) {
+        return {"expr": arg,
+                "coeffs": cexpr.coeffs};
+    });
+    return cargs;
+}
+
+function renderExprAsLisp(cexpr) {
+        if (typeof cexpr.expr === 'object') {
+            var cmd = cexpr.expr[0];
+            var args = prepareArgs(cexpr).map(renderExprAsLisp);
+            return '(' + cmd + ' ' + args.join(' ') + ')';
         } else {
-            return leaf(expr, coeffs);
+            return leaf(cexpr);
         }
-    }
 }
 
-// Generates a recursive function, parametrized by
-// * coeffs: an array of numbers
-function renderExprAsLaTeX(coeffs) {
-    return function (expr) {
-        if (typeof expr === 'object') {
-            var cmd = expr[0];
-            var args = expr.slice(1).map(renderExprAsLaTeX(coeffs));
+function renderExprAsLaTeX(cexpr) {
+        if (typeof cexpr.expr === 'object') {
+            var cmd = cexpr.expr[0];
+            var args = prepareArgs(cexpr).map(renderExprAsLaTeX);
             if (cmd === 'Somme'    ) return args.join('+');
             if (cmd === 'Diff'     ) return args[0] + "-" + args[1]
             if (cmd === 'Produit'  ) return args.join('×');
@@ -111,17 +113,16 @@ function renderExprAsLaTeX(coeffs) {
             if (cmd === 'Racine'   ) return "\\sqrt{" + args[0] + "}"
             return "Unknown cmd: " + cmd;
         } else {
-            return leaf(expr, coeffs);
+            return leaf(cexpr);
         }
-    }
 }
 
-function leaf(expr, coeffs) {
-    if (expr[0] === 'c') {
-        var coeffIndex = parseInt(expr[1])-1;
-        return coeffs[coeffIndex];
+function leaf(cexpr) {
+    if (cexpr.expr[0] === 'c') {
+        var coeffIndex = parseInt(cexpr.expr[1])-1;
+        return cexpr.coeffs[coeffIndex];
     } else {
-        return expr;
+        return cexpr.expr;
     }
 }
 
@@ -171,8 +172,14 @@ function coeffs() {
     return ints;
 }
 
+var cexprs = exprs.map(function (expr) {
+    return {"nom" : expr.nom,
+            "conv": expr.conv,
+            "expr": expr.expr,
+            "coeffs": coeffs()};
+});
 // Iterate through expressions
-exprs.forEach(processExpr(coeffs()));
+cexprs.forEach(processExpr);
 
         </script>
     </body>
