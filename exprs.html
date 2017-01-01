@@ -115,7 +115,18 @@ function renderExprAsLaTeX(cexpr) {
         var latex = '';
         if (cmd === 'Somme'    ) latex = args.join('+');
         if (cmd === 'Diff'     ) latex = args[0] + "-" + args[1]
-        if (cmd === 'Produit'  ) latex = args.join('×');
+        if (cmd === 'Produit'  ) {
+            var lastArg = args[0];
+            latex = args[0];
+            for (var i = 1; i < args.length; i++) {
+                var arg = args[i];
+                if (isNaN(parseInt(lastArg)) || isNaN(parseInt(arg)))
+                    latex = latex + arg;
+                else
+                    latex = latex + '×' + arg;
+                lastArg = arg;
+            }
+        }
         if (cmd === 'Quotient' ) latex = "\\frac{" + args[0] + "}{" + args[1] + "}"
         if (cmd === 'Opposé'   ) latex = "-\\left(" + args[0] + "\\right)"
         if (cmd === 'Inverse'  ) latex = "\\frac{1}{" + args[0] + "}"
