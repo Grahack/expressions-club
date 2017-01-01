@@ -103,7 +103,10 @@ function renderExprAsLisp(cexpr) {
 
 function parens(cmd, parent_cmd) {
     if (contains([S,D], cmd)) {
-        return contains([P,Q,C,Pu,R], parent_cmd);
+        return contains([P,Q,O,C,Pu,R], parent_cmd);
+    }
+    if (contains([P,Q,O,I], cmd)) {
+        return contains([C,Pu], parent_cmd);
     }
     return false;
 }
@@ -128,10 +131,10 @@ function renderExprAsLaTeX(cexpr) {
             }
         }
         if (cmd === 'Quotient' ) latex = "\\frac{" + args[0] + "}{" + args[1] + "}"
-        if (cmd === 'Opposé'   ) latex = "-\\left(" + args[0] + "\\right)"
+        if (cmd === 'Opposé'   ) latex = "-" + args[0]
         if (cmd === 'Inverse'  ) latex = "\\frac{1}{" + args[0] + "}"
-        if (cmd === 'Carré'    ) latex = "\\left(" + args[0] + "\\right)^2"
-        if (cmd === 'Puissance') latex = "\\left(" + args[0] + "\\right)^" + args[1]
+        if (cmd === 'Carré'    ) latex = args[0] + "^2"
+        if (cmd === 'Puissance') latex = args[0] + "^" + args[1]
         if (cmd === 'Racine'   ) latex = "\\sqrt{" + args[0] + "}"
         if (latex === '') return "Unknown cmd: " + cmd;
         if (parens(cmd, cexpr.parent)) latex = '\\left(' + latex + '\\right)';
