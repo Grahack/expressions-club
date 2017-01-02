@@ -126,7 +126,7 @@ function renderExprAsLaTeX(cexpr) {
             latex = args[0];
             for (var i = 1; i < args.length; i++) {
                 var arg = args[i];
-                if (isNaN(parseInt(lastArg)) || isNaN(parseInt(arg)))
+                if (!isNaN(parseInt(lastArg)) && isNaN(parseInt(arg)))
                     latex = latex + arg;
                 else
                     latex = latex + '×' + arg;
@@ -274,6 +274,10 @@ var tests = [
 ['(Somme 1 1)', '1+1'],
 ['(Somme (Produit 2 x) 1)', '2x+1'],
 ['(Produit 2 (Somme x 3))', '2\\left(x+3\\right)'],
+['(Produit 2 2)', '2×2'],
+['(Produit 2 x)', '2x'],
+['(Produit x 2)', 'x×2'],
+['(Produit x x)', 'x×x'],
 ['0', '0']
 ];
 tests.map(function (test) {
