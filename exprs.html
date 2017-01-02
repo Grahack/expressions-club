@@ -106,7 +106,7 @@ function renderExprAsLisp(cexpr) {
 
 function parens(cmd, parent_cmd) {
     if (contains([S,D], cmd)) {
-        return contains([D,P,Q,O,C,Pu,R], parent_cmd);
+        return contains([D,P,O,C,Pu,R], parent_cmd);
     }
     if (contains([P,Q,O,I], cmd)) {
         return contains([C,Pu], parent_cmd);
