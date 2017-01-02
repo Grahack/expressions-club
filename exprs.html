@@ -81,6 +81,9 @@ function processExpr(cexpr, idx) {
         document.write("  conventions : ");
         document.write(cexpr.conv.join(', '));
     }
+    // utility for writing tests
+    // document.write("['" + renderExprAsLisp(cexpr) + "', '" +
+    //                       renderExprAsLaTeX(cexpr) + "'],<br>");
 }
 
 function prepareArgs(cexpr) {
