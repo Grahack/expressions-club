@@ -120,7 +120,7 @@ function renderExprAsLaTeX(cexpr) {
         var args = prepareArgs(cexpr).map(renderExprAsLaTeX);
         var latex = '';
         if (cmd === 'Somme'    ) latex = args.join('+');
-        if (cmd === 'Diff'     ) latex = args[0] + "-" + args[1]
+        if (cmd === 'Diff'     ) latex = args[0] + "-" + args[1];
         if (cmd === 'Produit'  ) {
             var lastArg = args[0];
             latex = args[0];
@@ -133,12 +133,12 @@ function renderExprAsLaTeX(cexpr) {
                 lastArg = arg;
             }
         }
-        if (cmd === 'Quotient' ) latex = "\\frac{" + args[0] + "}{" + args[1] + "}"
-        if (cmd === 'Opposé'   ) latex = "-" + args[0]
-        if (cmd === 'Inverse'  ) latex = "\\frac{1}{" + args[0] + "}"
-        if (cmd === 'Carré'    ) latex = args[0] + "^2"
-        if (cmd === 'Puissance') latex = args[0] + "^" + args[1]
-        if (cmd === 'Racine'   ) latex = "\\sqrt{" + args[0] + "}"
+        if (cmd === 'Quotient' ) latex = "\\frac{" + args[0] + "}{" + args[1] + "}";
+        if (cmd === 'Opposé'   ) latex = "-" + args[0];
+        if (cmd === 'Inverse'  ) latex = "\\frac{1}{" + args[0] + "}";
+        if (cmd === 'Carré'    ) latex = args[0] + "^2";
+        if (cmd === 'Puissance') latex = args[0] + "^" + args[1];
+        if (cmd === 'Racine'   ) latex = "\\sqrt{" + args[0] + "}";
         if (latex === '') return "Unknown cmd: " + cmd;
         if (parens(cmd, cexpr.parent)) latex = '\\left(' + latex + '\\right)';
         return latex;
