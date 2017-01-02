@@ -275,12 +275,27 @@ var parse = function(input) {
 
 var tests = [
 ['(Somme 1 1)', '1+1'],
-['(Somme (Produit 2 x) 1)', '2x+1'],
-['(Produit 2 (Somme x 3))', '2\\left(x+3\\right)'],
+['(Somme x y)', 'x+y'],
+['(Diff x y)', 'x-y'],
 ['(Produit 2 2)', '2×2'],
 ['(Produit 2 x)', '2x'],
 ['(Produit x 2)', 'x×2'],
 ['(Produit x x)', 'x×x'],
+['(Produit 6 x)', '6x'],
+['(Quotient x 2)', '\\frac{x}{2}'],
+['(Carré x)', 'x^2'],
+['(Puissance x 4)', 'x^4'],
+['(Inverse x)', '\\frac{1}{x}'],
+['(Opposé x)', '-x'],
+['(Produit 4 (Somme x 9))', '4\\left(x+9\\right)'],
+['(Somme 8 (Produit 7 x))', '8+7x'],
+['(Diff (Produit 8 x) 7)', '8x-7'],
+['(Somme 2 (Quotient x 9))', '2+\\frac{x}{9}'],
+['(Diff (Opposé x) 4)', '-x-4'],
+['(Opposé (Diff x 9))', '-\\left(x-9\\right)'],
+['(Diff 5 (Somme 5 x))', '5-\\left(5+x\\right)'],
+['(Somme (Diff x 3) 7)', 'x-3+7'],
+['(Somme 7 (Quotient 8 (Somme (Produit 3 x) 4)))', '7+\\frac{8}{3x+4}'],
 ['0', '0']
 ];
 tests.map(function (test) {
