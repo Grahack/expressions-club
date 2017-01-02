@@ -27,7 +27,7 @@
         <h1>Liste des expressions officielles du Club</h1>
         <script>
 
-function contains(arr, obj) {return arr.indexOf(obj) !== -1;}
+function belongsTo(obj, arr) {return arr.indexOf(obj) !== -1;}
 
 // For convenience, definitions are done with variables.
 var a = 'c1';
@@ -105,11 +105,11 @@ function renderExprAsLisp(cexpr) {
 }
 
 function parens(cmd, parent_cmd) {
-    if (contains([S,D], cmd)) {
-        return contains([D,P,O,C,Pu,R], parent_cmd);
+    if (belongsTo(cmd, [S,D])) {
+        return belongsTo(parent_cmd, [D,P,O,C,Pu,R]);
     }
-    if (contains([P,Q,O,I], cmd)) {
-        return contains([C,Pu], parent_cmd);
+    if (belongsTo(cmd, [P,Q,O,I])) {
+        return belongsTo(parent_cmd, [C,Pu]);
     }
     return false;
 }
