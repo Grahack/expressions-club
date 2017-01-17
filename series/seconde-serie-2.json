@@ -18,10 +18,10 @@
         {"expr": "(diff 6 (somme x 6))",
          "points": 20
         },
-        {"expr": "(racine2 (somme 9 16))",
+        {"expr": "(racine (somme 9 16))",
          "points": 20
         },
-        {"expr": "(somme (racine2 9) (racine2 16))",
+        {"expr": "(somme (racine 9) (racine 16))",
          "points": 20
         },
         {"expr": "(produit pi (carre R))",
