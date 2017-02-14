@@ -1,0 +1,38 @@
+{
+    "title": "Seconde: Série 4",
+    "config": {
+        "email": "christophe.gragnic@ac-nantes.fr",
+        "initial_score": 100,
+        "check_nature": true,
+        "point_duration": 5,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "report_success_only": true,
+        "hybrid_flow": true
+    },
+    "exprs": [
+        {"expr": "(diff (produit 20 x) 5)",
+         "points": 20
+        },
+        {"expr": "(produit x (diff x 3))",
+         "points": 20
+        },
+        {"expr": "(carre (diff (produit 3 x) 10))",
+         "points": 50
+        },
+        {"expr": "(quotient (diff (produit 20 x) 5) 5)",
+         "points": 50
+        },
+        {"expr": "(diff (produit x (diff x 3)) (somme x 4))",
+         "points": 80
+        },
+        {"expr": "(produit (somme x 1.5) (diff x 2))",
+         "points": 80
+        },
+        {"expr": "(diff (diff (carre x) (produit 0.5 x)) 3)",
+         "points": 80
+        }
+    ]
+}
+
