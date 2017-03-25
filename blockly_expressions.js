@@ -346,13 +346,20 @@ Blockly.multiArgGenGen = function(block_type) {
       if (block.itemCount_ == 0) {
         code ='(' + cmd + ')';
       } else if (block.itemCount_ == 1) {
-        var argument0 = Blockly.Expressions.statementToCode(block, 'ITEM0') || '';
-        code = '(' + cmd + ' ' + argument0 + ')';
+        var arg0 = Blockly.Expressions.statementToCode(block, 'ITEM0').trim()
+                   || '';
+        code = '(' + cmd + ' ' + arg0 + ')';
+      } else if (block.itemCount_ == 2) {
+        var arg0 = Blockly.Expressions.statementToCode(block, 'ITEM0').trim()
+                   || '';
+        var arg1 = Blockly.Expressions.statementToCode(block, 'ITEM1').trim()
+                   || '';
+        code = '(' + cmd + ' ' + arg0 + ' ' + arg1 + ')';
       } else {
         var args = [];
         for (var n = 0; n < block.itemCount_; n++) {
-          args[n] = Blockly.Expressions.statementToCode(block, 'ITEM' + n) ||
-                 Blockly.Expressions.INDENT + '';
+          args[n] = Blockly.Expressions.statementToCode(block, 'ITEM' + n).trim()
+                    || Blockly.Expressions.INDENT + '';
         }
         code = '(' + cmd + '\n' + args.join('\n') + '\n)';
       }
