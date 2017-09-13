@@ -20,19 +20,19 @@
         {"expr": "(quotient 5 x)",
          "points": 10
         },
-        {"expr": "(racine2 x)",
+        {"expr": "(racine x)",
          "points": 10
         },
         {"expr": "(somme 5 (produit 2 x))",
          "points": 20
         },
-        {"expr": "(diff 3 (racine2 x))",
+        {"expr": "(diff 3 (racine x))",
          "points": 20
         },
         {"expr": "(somme (quotient 5 x) 4)",
          "points": 20
         },
-        {"expr": "(racine2 (diff (produit 2 x) 8))",
+        {"expr": "(racine (diff (produit 2 x) 8))",
          "points": 50
         },
         {"expr": "(inverse (somme (produit -2 x) 4))",
