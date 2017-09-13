@@ -22,7 +22,7 @@
         {"expr": "(oppose (quotient x (somme x 2)))",
          "points": 50
         },
-        {"expr": "(oppose (quotient (diff (produit. a (racine2 b)) (image_par f (inverse c))) (carre (somme x y z))))",
+        {"expr": "(oppose (quotient (diff (produit. a (racine b)) (image_par f (inverse c))) (carre (somme x y z))))",
          "points": 200
         }
     ]
