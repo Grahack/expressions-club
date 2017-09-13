@@ -1,0 +1,42 @@
+{
+    "title": "Série Besson B",
+    "config": {
+        "email": "christophe.besson@ac-nantes.fr",
+        "initial_score": 500,
+        "point_duration": 10,
+        "code_with_blocks": false,
+        "display_score": false,
+        "display_weakness_indicator": false,
+        "hybrid_flow": true,
+        "report_success_only": true
+    },
+    "exprs": [
+        {"expr": "(produit 2 (somme 5 (produit 3 x)))",
+         "points": 10
+        },
+        {"expr": "(quotient (diff 1 (puissance q n)) (diff 1 q))",
+         "points": 10
+        },
+        {"expr": "(somme (terme_indice (somme n 1) u) (terme_indice n u) 1)",
+         "points": 10
+        },
+        {"expr": "(somme (terme_indice (produit 2 n) u) (produit 2 n) 1)",
+         "points": 10
+        },
+        {"expr": "(quotient (diff 3 x) (somme 5 x))",
+         "points": 20
+        },
+        {"expr": "(produit (somme 2 (produit 3 x)) (diff 4 (produit 7 x)))",
+         "points": 20
+        },
+        {"expr": "(puissance (somme (carre x) (produit 3 x) 1) 4)",
+         "points": 20
+        },
+        {"expr": "(inverse (racine (somme 3 (carre x))))",
+         "points": 50
+        },
+        {"expr": "(produit (terme_indice (diff n 1) u) (diff (terme_indice n u) 1))",
+         "points": 50
+        }
+    ]
+}
