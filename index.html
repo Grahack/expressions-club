@@ -345,7 +345,7 @@
   var InterExpr = React.createClass({
     getUserId: function() {
       var user_id = '';
-      var msg = "Votre identifiant SVP ? (ex: classe et nom)";
+      var msg = "Votre identifiant SVP ? (ex: classe et nom, sinon « anonyme »)";
       while (user_id == null || user_id.trim() == '') {
         user_id = window.prompt(msg, '');
       }
