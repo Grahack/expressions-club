@@ -3,6 +3,7 @@
     "// commentaire": "Copie de valade-2015-serie-Mandela",
     "config": {
         "email": "christophe.besson@ac-nantes.fr",
+        "check_nature": true,
         "initial_score": 500,
         "point_duration": 10,
         "code_with_blocks": false,
