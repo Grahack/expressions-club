@@ -13,10 +13,10 @@
         {"expr": "(quotient (somme (produit 2 x) 2) x)",
          "points": 10
         },
-        {"expr": "(quotient (produitx (produit 2 x) 2) x)",
+        {"expr": "(quotient (produit (produit 2 x) 2) x)",
          "points": 10
         },
-        {"expr": "(quotient (produitx (produit 5 x) (produit 15 x)) 5)",
+        {"expr": "(quotient (produit (produit 5 x) (produit 15 x)) 5)",
          "points": 10
         },
         {"expr": "(quotient (somme (produit 2 x) 2) (somme (produit 4 x) 8))",
@@ -31,10 +31,10 @@
         {"expr": "(quotient (somme (carre x) (produit 3 x)) (somme (produit 5 (carre x)) x))",
          "points": 20
         },
-        {"expr": "(quotient (produitx (produit 10 (carre x)) (produit 5 x)) (produitx 5 (produit 5 x)))",
+        {"expr": "(quotient (produit (produit 10 (carre x)) (produit 5 x)) (produit 5 (produit 5 x)))",
          "points": 50
         },
-        {"expr": "(quotient x (produitx (produit 5 x) (carre x)))",
+        {"expr": "(quotient x (produit (produit 5 x) (carre x)))",
          "points": 50
         }
     ]

@@ -13,10 +13,10 @@
         {"expr": "(somme 2 1)",
          "points": 10
         },
-        {"expr": "(produitx 2 1)",
+        {"expr": "(produit 2 1)",
          "points": 10
         },
-        {"expr": "(produitx 2 x)",
+        {"expr": "(produit 2 x)",
          "points": 10
         },
         {"expr": "(produit 2 x)",
@@ -31,7 +31,7 @@
         {"expr": "(somme (produit 3 x) 4)",
          "points": 20
         },
-        {"expr": "(produitx (diff (produit 2 x) 4) 8)",
+        {"expr": "(produit (diff (produit 2 x) 4) 8)",
          "points": 50
         },
         {"expr": "(quotient (diff (produit 9 x) 6) 3)",

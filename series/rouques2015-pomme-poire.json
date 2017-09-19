@@ -16,7 +16,7 @@
         {"expr": "(diff 3 (diff 2 x))",
          "points": 20
         },
-        {"expr": "(produitx 3 (somme x y))",
+        {"expr": "(produit 3 (somme x y))",
          "points": 20
         },
         {"expr": "(carre (somme a b))",

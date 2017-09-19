@@ -16,13 +16,13 @@
         {"expr": "(carre (diff x 1))",
          "points": 20
         },
-        {"expr": "(produitx (somme x 1) 3)",
+        {"expr": "(produit (somme x 1) 3)",
          "points": 20
         },
         {"expr": "(diff (produit 9 x) (produit 2 x))",
          "points": 20
         },
-        {"expr": "(diff (produitx (somme x 3) 9) (produit 2 x))",
+        {"expr": "(diff (produit (somme x 3) 9) (produit 2 x))",
          "points": 30
         },
         {"expr": "(somme (diff (carre (diff x 1)) (carre x)) (produit 2 x))",
