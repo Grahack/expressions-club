@@ -23,7 +23,24 @@
     )
     (def (car arg-list) (eval (cadr arg-list)) (eval (caddr arg-list)))
 )
-(setq cmds_list '(somme diff oppose produit quotient inverse carre racine cube puissance terme_indice image_par cos sin ln exp))
+(setq cmds_list '(Somme Diff Oppose Produit Quotient Inverse Carre Racine Cube Puissance Terme_indice Image_par cos sin ln exp))
+
+(put 'precedence 'Oppose    10)
+(put 'precedence 'Somme     12)
+(put 'precedence 'Diff      13)
+(put 'precedence 'Produit   20)
+(put 'precedence 'Exp       25)
+(put 'precedence 'Ln        25)
+(put 'precedence 'Carre     30)
+(put 'precedence 'Puissance 30)
+(put 'precedence 'Cube      30)
+(put 'precedence 'Racine   NIL)
+(put 'precedence 'Inverse  NIL)
+(put 'precedence 'Quotient NIL)
+(put 'precedence 'Image_par NIL)
+(put 'precedence 'Cos      NIL)
+(put 'precedence 'Sin      NIL)
+(put 'precedence 'Terme_indice   NIL)
 
 (put 'precedence 'oppose    10)
 (put 'precedence 'somme     12)
@@ -133,7 +150,10 @@
 (setq Puissance puissance)
 (setq Terme_indice terme_indice)
 (setq Image_par image_par)
-# Rien pour cos sin exp ln
+(setq Cos cos)
+(setq Sin sin)
+(setq Exp exp)
+(setq Ln ln)
 
 (setq tests '(
   (a "a")
