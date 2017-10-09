@@ -95,25 +95,25 @@
          <span id="cmds-list"></span>.</p>
       <ul>
         <li>Commandes requérant un seul argument :<br />
-          oppose, inverse, carre, racine, cube, cos, sin, exp, ln
+          Opposé, Inverse, Carre, Racine, Cube, cos, sin, exp, ln
         </li>
         <li>Commandes requérant deux arguments :<br />
-          diff, quotient, puissance, terme_indice, image_par
+          Diff, Quotient, Puissance, Terme_indice, Image_par
         </li>
         <li>Commandes pouvant accepter plus de deux arguments :<br />
-          somme, produit
+          Somme, Produit
         </li>
       </ul>
       <p><strong>Exemples</strong> :</p>
       <ul>
         <li>pour 2+2, le code est
-            <code>(somme 2 2)</code> ;</li>
+            <code>(Somme 2 2)</code> ;</li>
         <li>pour 2X+1, le code est
-            <code>(somme (produit 2 X) 1)</code> ;</li>
+            <code>(Somme (Produit 2 X) 1)</code> ;</li>
         <li>pour 2(x+1), le code est
-            <code>(produit 2 (somme x 1))</code> ;</li>
+            <code>(Produit 2 (Somme x 1))</code> ;</li>
         <li>pour a+b+c, le code est
-            <code>(somme a b c)</code>.</li>
+            <code>(Somme a b c)</code>.</li>
       </ul>
       <h2 id="idees-intro">Présentation</h2>
       <p>Voici une liste de points qui présente le Club.</p>
@@ -128,9 +128,9 @@
         <li>Quelques exemples :
           <ul>
             <li>x+1 peut être lu ainsi: « la somme de x et de 1 ».</li>
-            <li>En langage du Club: <code>(somme x 1)</code>.</li>
+            <li>En langage du Club: <code>(Somme x 1)</code>.</li>
             <li>(x+1)² peut être lu ainsi: « le carré de la somme de x et 1 ».</li>
-            <li>En langage du Club: <code>(carre (somme x 1))</code>.</li>
+            <li>En langage du Club: <code>(Carre (Somme x 1))</code>.</li>
           </ul>
         <li>On voit que les expressions peuvent s’emboîter les unes dans les
           autres, comme en maths.</li>
@@ -173,8 +173,8 @@
             <li>Le but est seulement de reconstituer « graphiquement » les
               expressions.</li>
             <li>Il ne faut pas simplifier les expressions.</li>
-            <li>a+b doit être codé <code>(somme a b)</code> et non
-              <code>(somme b a)</code>.</li>
+            <li>a+b doit être codé <code>(Somme a b)</code> et non
+              <code>(Somme b a)</code>.</li>
             <li>Nous félicitons les élèves qui maîtrisent (ou abusent de) la
               commutativité et nous leur expliquons que le Club est exigeant et
               que les valeurs doivent être codées dans l’ordre.</li>
@@ -183,8 +183,8 @@
                     <code>(inverse x)</code>.</li>
             <li>Dans « x+1 », l’opération (addition) est entre le x et le 1.
             Avec le Club, on parle du résultat de l’opération donc on utilise
-            le mot « somme » et on le met devant le x et le 1 (code et blocs).<br>
-            Donc pas de <code>(x somme 1)</code> avec le code, ni de
+            le mot « Somme » et on le met devant le x et le 1 (code et blocs).<br>
+            Donc pas de <code>(x Somme 1)</code> avec le code, ni de
             <code>[x][somme][1]</code> avec les blocs.</li>
           </ul>
         </li>
@@ -218,18 +218,18 @@
       <h2 id="abreviations">Abréviations</h2>
       <p>Ctrl+B déclenche l’expansion d’une abréviation :</p>
       <ul>
-        <li>(s -> (somme |)</li>
-        <li>(d -> (diff |)</li>
-        <li>(o -> (oppose |)</li>
-        <li>(p -> (produit |)</li>
-        <li>(q -> (quotient |)</li>
-        <li>(i -> (inverse |)</li>
-        <li>(ca -> (carre |)</li>
-        <li>(r -> (racine |)</li>
-        <li>(cu -> (cube |)</li>
-        <li>(pu -> (puissance |)</li>
-        <li>(t -> (terme_indice |)</li>
-        <li>(im -> (image_par |)</li>
+        <li>(s  -> (Somme |)</li>
+        <li>(d  -> (Diff |)</li>
+        <li>(o  -> (Oppose |)</li>
+        <li>(p  -> (Produit |)</li>
+        <li>(q  -> (Quotient |)</li>
+        <li>(i  -> (Inverse |)</li>
+        <li>(ca -> (Carre |)</li>
+        <li>(r  -> (Racine |)</li>
+        <li>(cu -> (Cube |)</li>
+        <li>(pu -> (Puissance |)</li>
+        <li>(t  -> (Terme_indice |)</li>
+        <li>(im -> (Image_par |)</li>
       </ul>
       <h2 id="bug">En cas de problème</h2>
       <p>Si le problème arrive au premier chargement de la page, un simple
@@ -272,13 +272,13 @@
         "display_weakness_indicator": true
     },
     "exprs": [
-        {"expr": "(somme 2 2)",
+        {"expr": "(Somme 2 2)",
          "points": 1
         },
-        {"expr": "(somme (produit 2 x) 1)",
+        {"expr": "(Somme (Produit 2 x) 1)",
          "points": 2
         },
-        {"expr": "(produit 2 (somme x 1))",
+        {"expr": "(Produit 2 (Somme x 1))",
          "points": 2
         }
     ]
@@ -430,8 +430,9 @@
       if (this.state.interactive) {
         MathPreview.Update();
       }
-      var expr_nature_attempt = this.get_expr_nature(math_input);
-      var expr_nature_target = this.get_expr_nature(this.inSeriesGet('expr'));
+      var expr_nature_attempt = this.get_expr_nature(math_input).toLowerCase();
+      var expr = this.inSeriesGet('expr');
+      var expr_nature_target = this.get_expr_nature(expr).toLowerCase();
       if (this.state.series.config.check_nature &&
           math_input != this.state.last_text &&
           expr_nature_attempt &&
@@ -451,18 +452,18 @@
           event.preventDefault();
           var elt = $('#math-input');
           var abbrevs = {
-            "(s":  "(somme |)",
-            "(d":  "(diff |)",
-            "(o":  "(oppose |)",
-            "(p":  "(produit |)",
-            "(q":  "(quotient |)",
-            "(i":  "(inverse |)",
-            "(ca": "(carre |)",
-            "(r":  "(racine |)",
-            "(cu": "(cube |)",
-            "(pu": "(puissance |)",
-            "(t":  "(terme_indice |)",
-            "(im": "(image_par |)"
+            "(s":  "(Somme |)",
+            "(d":  "(Diff |)",
+            "(o":  "(Oppose |)",
+            "(p":  "(Produit |)",
+            "(q":  "(Quotient |)",
+            "(i":  "(Inverse |)",
+            "(ca": "(Carre |)",
+            "(r":  "(Racine |)",
+            "(cu": "(Cube |)",
+            "(pu": "(Puissance |)",
+            "(t":  "(Terme_indice |)",
+            "(im": "(Image_par |)"
           };
           // Grab content and split in 'before' and 'after' caret.
           var src = elt.val();
@@ -571,6 +572,22 @@
       }
     },
     available_natures: [
+      'Oppose',
+      'Somme',
+      'Diff',
+      'Produit',
+      'Exp',
+      'Ln',
+      'Carre',
+      'Puissance',
+      'Cube',
+      'Racine',
+      'Inverse',
+      'Quotient',
+      'Image_par',
+      'Cos',
+      'Sin',
+      'Terme_indice',
       'oppose',
       'somme',
       'diff',
@@ -669,13 +686,13 @@
                  commandes. Quelques exemples :</p>
                  <ul>
                    <li>pour $2+2$, les commandes sont
-                       <code>(somme 2 2)</code> ;</li>
+                       <code>(Somme 2 2)</code> ;</li>
                    <li>pour $2x+1$, les commandes sont
-                       <code>(somme (produit 2 x) 1)</code> ;</li>
+                       <code>(Somme (Produit 2 x) 1)</code> ;</li>
                    <li>pour $2\left(x+1\right)$, les commandes sont
-                       <code>(produit 2 (somme x 1))</code> ;</li>
+                       <code>(Produit 2 (Somme x 1))</code> ;</li>
                    <li>pour $a+b+c$, les commandes sont
-                       <code>(somme a b c)</code>.</li>
+                       <code>(Somme a b c)</code>.</li>
                  </ul>
                  <p>Voir plus bas pour des détails concernant les commandes.
                    <br />Voici l’expression à reconstituer :</p>
