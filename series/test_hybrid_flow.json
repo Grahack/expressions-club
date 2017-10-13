@@ -14,7 +14,7 @@
         {"expr": "(produit 2 (somme x 1))",
          "points": 10
         },
-        {"expr": "(oppose (quotient (diff (produit. a (racine b)) (image_par f (inverse c))) (carre (somme x y z))))",
+        {"expr": "(oppose (quotient (diff (produit a (racine b)) (image_par f (inverse c))) (carre (somme x y z))))",
          "points": 50
         }
     ]
