@@ -771,12 +771,13 @@
   var cmds_array = EMULISP_CORE.eval('cmds_list').toString()
                                                  .slice(1, -1)
                                                  .split(' ');
+  var cmds_array_lc = cmds_array.map(function (x) {return x.toLowerCase();});
   var cmds = cmds_array.map(function (x) {return '<code>' + x + '</code>'})
   $("#cmds-list").html(cmds.join(", "));
   $('#math-input').textcomplete([{
       match: /(^|\b)(\w{1,})$/,
       search: function (term, callback) {
-          callback($.map(cmds_array, function (word) {
+          callback($.map(cmds_array.concat(cmds_array_lc), function (word) {
               return word.indexOf(term) === 0 ? word : null;
           }));
       },
