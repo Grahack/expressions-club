@@ -15,10 +15,16 @@
         {"expr": "(produit 3 x)",
          "points": 10
         },
-        {"expr": "(produit 10 (diff x 1))",
+        {"expr": "(quotient R 4)",
+         "points": 10
+        },
+        {"expr": "(produit 10 (diff x 2))",
          "points": 20
         },
-        {"expr": "(somme (produit 10 x) y)",
+        {"expr": "(somme (produit 10 a) b)",
+         "points": 20
+        },
+        {"expr": "(diff 1 (opposé x))",
          "points": 20
         },
         {"expr": "(quotient (produit a b) c)",
@@ -27,10 +33,10 @@
         {"expr": "(produit a (quotient b c))",
          "points": 20
         },
-        {"expr": "(diff (somme (produit 10 x) y) x)",
+        {"expr": "(diff (somme (produit 10 a) b) a)",
          "points": 30
         },
-        {"expr": "(diff (diff (somme (produit 10 x) y) x) y)",
+        {"expr": "(diff (diff (somme (produit 10 a) b) a) b)",
          "points": 50
         }
     ]
