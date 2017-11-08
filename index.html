@@ -411,8 +411,8 @@
       }.bind(this)).fail(function () {alert("Pas de série " + series_id + ".")});
     },
     nonInteractiveMsgElt: function() {
-      var msg = "Mode non interactif ! Votre tentative apparaîtra ";
-      msg += "après avoir appuyé une première fois sur [Tester].";
+      var msg = "Mode non interactif ! Votre tentative n’apparaîtra ";
+      msg += "qu’après avoir appuyé sur [Tester].";
       msg = '<span id="non-interactive-msg">' + msg + '</span>';
       $('#math-preview').html(msg);
       $('#math-buffer').html(msg);
@@ -535,7 +535,7 @@
           alert("Bravo ! Voilà, c’est fini !");
         } else {
           if (this.state.interactive && this.inSeriesGet('config').hybrid_flow) {
-            alert("Bravo ! La même en mode non interactif !");
+            alert("Bravo ! Maintenant, refaites la même en mode non interactif !");
             this.setState({interactive: false});
             this.nonInteractiveMsgElt();
           } else {
