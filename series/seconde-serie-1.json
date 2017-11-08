@@ -24,7 +24,7 @@
         {"expr": "(somme (produit 10 a) b)",
          "points": 20
         },
-        {"expr": "(diff 1 (opposé x))",
+        {"expr": "(diff 1 (oppose x))",
          "points": 20
         },
         {"expr": "(quotient (produit a b) c)",
